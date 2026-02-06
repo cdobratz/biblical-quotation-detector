@@ -10,8 +10,10 @@ Pipeline:
 """
 
 import logging
+import re
 import time
 import sqlite3
+import unicodedata
 from typing import List, Dict, Optional, Tuple
 from dataclasses import dataclass, field
 from pathlib import Path
@@ -21,6 +23,47 @@ from dotenv import load_dotenv
 load_dotenv()
 
 logger = logging.getLogger(__name__)
+
+
+def _normalize_greek(text: str) -> str:
+    """
+    Normalize Greek text by stripping diacritics, punctuation, and lowercasing.
+
+    Uses NFKD normalization to decompose characters, then removes
+    combining marks (diacritics), strips punctuation, normalizes
+    final sigma (ς → σ), and lowercases the result.
+    """
+    nfkd = unicodedata.normalize("NFKD", text)
+    stripped = "".join(c for c in nfkd if not unicodedata.combining(c))
+    lowered = stripped.lower()
+    # Strip punctuation (keep only letters, digits, whitespace)
+    lowered = re.sub(r"[^\w\s]", "", lowered, flags=re.UNICODE)
+    # Normalize final sigma: ς → σ for consistent matching
+    lowered = lowered.replace("ς", "σ")
+    return lowered
+
+
+def _count_shared_words(text_a: str, text_b: str) -> int:
+    """
+    Count meaningful shared words between two Greek texts.
+
+    Normalizes both texts (strip diacritics, lowercase), splits into word
+    sets, filters out words with ≤2 characters (articles, particles like
+    ο, η, εν, τα), and returns the count of shared content words.
+
+    Args:
+        text_a: First text (e.g., input chunk)
+        text_b: Second text (e.g., matched biblical verse)
+
+    Returns:
+        Number of shared content words (length > 2 characters)
+    """
+    words_a = set(_normalize_greek(text_a).split())
+    words_b = set(_normalize_greek(text_b).split())
+    # Only count words with >2 characters (skip articles/particles)
+    shared = words_a & words_b
+    meaningful = {w for w in shared if len(w) > 2}
+    return len(meaningful)
 
 
 @dataclass
@@ -272,9 +315,12 @@ class QuotationDetector:
         sources: List[DetectionSource],
     ) -> DetectionResult:
         """
-        Simple heuristic classification without LLM.
+        Heuristic classification without LLM.
 
-        Uses similarity scores to estimate match type.
+        Uses combined similarity score + word overlap gate to classify matches.
+        The word overlap gate prevents false positives from the embedding model's
+        tendency to assign high similarity to all Koine Greek texts regardless
+        of actual textual correspondence.
         """
         if not candidates:
             return DetectionResult(
@@ -287,21 +333,31 @@ class QuotationDetector:
 
         top_score = candidates[0]["score"]
         best_match = sources[0] if sources else None
+        best_match_text = candidates[0].get("text", "")
 
-        # Classify based on similarity score
-        if top_score >= 0.95:
+        # Compute word overlap between input and best candidate
+        shared_words = _count_shared_words(text, best_match_text)
+        input_word_count = len(text.split())
+
+        # Gate: reject short chunks as unreliable (Option D)
+        if input_word_count < 4:
+            match_type = "non_biblical"
+            confidence = 60
+            is_quotation = False
+        # Combined classification: score + word overlap gate (Option A)
+        elif top_score >= 0.95 and shared_words >= 5:
             match_type = "exact"
             confidence = 95
             is_quotation = True
-        elif top_score >= 0.85:
+        elif top_score >= 0.90 and shared_words >= 3:
             match_type = "close_paraphrase"
             confidence = 85
             is_quotation = True
-        elif top_score >= 0.75:
+        elif top_score >= 0.85 and shared_words >= 2:
             match_type = "loose_paraphrase"
             confidence = 70
             is_quotation = True
-        elif top_score >= 0.65:
+        elif top_score >= 0.80 and shared_words >= 1:
             match_type = "allusion"
             confidence = 55
             is_quotation = True
@@ -311,7 +367,7 @@ class QuotationDetector:
             is_quotation = False
 
         explanation = (
-            f"Heuristic classification based on similarity score ({top_score:.3f}). "
+            f"Heuristic: score={top_score:.3f}, shared_words={shared_words}. "
             f"Top match: {best_match.reference if best_match else 'none'}."
         )
 
