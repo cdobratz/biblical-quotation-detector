@@ -173,8 +173,11 @@ def chunk_text(text: str, method: str = "paragraph") -> List[str]:
     cleaned = []
     for chunk in chunks:
         chunk = chunk.strip()
-        # Skip very short chunks
+        # Skip very short chunks (character minimum)
         if len(chunk) < 20:
+            continue
+        # Skip chunks with fewer than 4 words (too short to reliably classify)
+        if len(chunk.split()) < 4:
             continue
         # Skip chunks that are just punctuation/numbers
         if not any(c.isalpha() for c in chunk):
