@@ -5,9 +5,8 @@ This module provides direct vector storage using Qdrant with sentence-transforme
 embeddings, bypassing Mem0's LLM-based memory extraction for fast bulk ingestion.
 """
 
-import os
 import logging
-from typing import List, Dict, Optional, Tuple
+from typing import List, Dict, Optional
 from pathlib import Path
 
 from qdrant_client import QdrantClient
@@ -55,7 +54,9 @@ class QdrantManager:
         # Set Qdrant path
         if qdrant_path is None:
             project_root = Path(__file__).parent.parent.parent
-            self.qdrant_path = str(project_root / "data" / "processed" / "qdrant_direct")
+            self.qdrant_path = str(
+                project_root / "data" / "processed" / "qdrant_direct"
+            )
         else:
             self.qdrant_path = qdrant_path
 
@@ -93,14 +94,38 @@ class QdrantManager:
         else:
             logger.info(f"Collection {self.collection_name} already exists")
 
-    def embed_text(self, text: str) -> List[float]:
-        """Generate embedding for text."""
-        return self.embedding_model.encode(text).tolist()
+    def embed_text(self, text: str, prefix: str = "query") -> List[float]:
+        """Generate embedding for text.
 
-    def embed_texts_batch(self, texts: List[str], batch_size: int = 32) -> List[List[float]]:
-        """Generate embeddings for multiple texts efficiently."""
+        Args:
+            text: Text to embed
+            prefix: Instruction prefix for e5 models ('query' for search
+                    queries, 'passage' for stored documents). The e5 family
+                    requires these prefixes for optimal performance.
+
+        Returns:
+            List of floats representing the embedding vector
+        """
+        prefixed = f"{prefix}: {text}"
+        return self.embedding_model.encode(prefixed).tolist()
+
+    def embed_texts_batch(
+        self, texts: List[str], batch_size: int = 32, prefix: str = "passage"
+    ) -> List[List[float]]:
+        """Generate embeddings for multiple texts efficiently.
+
+        Args:
+            texts: Texts to embed
+            batch_size: Number of texts per batch
+            prefix: Instruction prefix for e5 models ('passage' for stored
+                    documents, 'query' for search queries)
+
+        Returns:
+            List of embedding vectors
+        """
+        prefixed = [f"{prefix}: {t}" for t in texts]
         return self.embedding_model.encode(
-            texts,
+            prefixed,
             batch_size=batch_size,
             show_progress_bar=True,
         ).tolist()
@@ -123,7 +148,7 @@ class QdrantManager:
             True if successful
         """
         try:
-            embedding = self.embed_text(greek_text)
+            embedding = self.embed_text(greek_text, prefix="passage")
 
             point = PointStruct(
                 id=verse_id,
@@ -166,15 +191,16 @@ class QdrantManager:
         logger.info(f"Adding {total} verses in batches of {batch_size}")
 
         for i in range(0, total, batch_size):
-            batch = verses[i:i + batch_size]
+            batch = verses[i : i + batch_size]
 
             try:
                 # Extract texts for batch embedding
                 texts = [v["text"] for v in batch]
 
                 # Generate embeddings in batch (much faster)
+                prefixed_texts = [f"passage: {t}" for t in texts]
                 embeddings = self.embedding_model.encode(
-                    texts,
+                    prefixed_texts,
                     batch_size=batch_size,
                     show_progress_bar=False,
                 )
@@ -203,7 +229,9 @@ class QdrantManager:
 
                 # Progress logging every 10 batches
                 if ((i // batch_size) + 1) % 10 == 0:
-                    logger.info(f"Progress: {i + len(batch)}/{total} verses ({(i + len(batch)) / total * 100:.1f}%)")
+                    logger.info(
+                        f"Progress: {i + len(batch)}/{total} verses ({(i + len(batch)) / total * 100:.1f}%)"
+                    )
 
             except Exception as e:
                 logger.error(f"Batch failed at index {i}: {e}")
@@ -239,8 +267,8 @@ class QdrantManager:
             List of matching verses with scores
         """
         try:
-            # Generate query embedding
-            query_embedding = self.embed_text(query)
+            # Generate query embedding (use 'query' prefix for e5 models)
+            query_embedding = self.embed_text(query, prefix="query")
 
             # Build filter if needed
             filter_conditions = []
@@ -267,18 +295,22 @@ class QdrantManager:
             # Format results
             formatted = []
             for hit in results:
-                formatted.append({
-                    "id": hit.id,
-                    "score": hit.score,
-                    "text": hit.payload.get("text", ""),
-                    "reference": hit.payload.get("reference", ""),
-                    "book": hit.payload.get("book", ""),
-                    "chapter": hit.payload.get("chapter"),
-                    "verse": hit.payload.get("verse"),
-                    "source": hit.payload.get("source", ""),
-                })
+                formatted.append(
+                    {
+                        "id": hit.id,
+                        "score": hit.score,
+                        "text": hit.payload.get("text", ""),
+                        "reference": hit.payload.get("reference", ""),
+                        "book": hit.payload.get("book", ""),
+                        "chapter": hit.payload.get("chapter"),
+                        "verse": hit.payload.get("verse"),
+                        "source": hit.payload.get("source", ""),
+                    }
+                )
 
-            logger.info(f"Search returned {len(formatted)} results for: {query[:50]}...")
+            logger.info(
+                f"Search returned {len(formatted)} results for: {query[:50]}..."
+            )
             return formatted
 
         except Exception as e:
