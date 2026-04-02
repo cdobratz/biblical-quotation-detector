@@ -11,12 +11,13 @@ Pipeline:
 4. Confidence scoring - Weighted combination of all signals
 """
 
+import json
 import logging
 import re
 import time
 import sqlite3
 import unicodedata
-from typing import List, Dict, Optional
+from typing import List, Dict, Optional, Set
 from dataclasses import dataclass, field
 from pathlib import Path
 
@@ -246,6 +247,40 @@ def _compute_multi_signal_score(
     return round(raw_score * 100)
 
 
+def _load_cross_references() -> Dict[str, Set[str]]:
+    """Load cross-reference chains from the parallel passage table.
+
+    Returns a mapping from each verse reference to the set of all
+    parallel references in its group (including itself). This allows
+    the detector and evaluator to recognize that e.g. Genesis 15:6
+    and Romans 4:3 are parallel passages quoting the same text.
+    """
+    cross_ref_path = Path(__file__).parent.parent.parent / "data" / "cross_references.json"
+    ref_map: Dict[str, Set[str]] = {}
+
+    if not cross_ref_path.exists():
+        logger.debug("No cross_references.json found; skipping cross-ref loading")
+        return ref_map
+
+    try:
+        with open(cross_ref_path, encoding="utf-8") as f:
+            data = json.load(f)
+
+        for group in data.get("parallel_passages", []):
+            refs = set(group.get("refs", []))
+            for ref in refs:
+                if ref not in ref_map:
+                    ref_map[ref] = set()
+                ref_map[ref].update(refs)
+
+        logger.info(f"Loaded cross-references: {len(ref_map)} entries across "
+                     f"{len(data.get('parallel_passages', []))} groups")
+    except Exception as e:
+        logger.warning(f"Failed to load cross-references: {e}")
+
+    return ref_map
+
+
 @dataclass
 class DetectionSource:
     """A potential biblical source match."""
@@ -325,6 +360,7 @@ class QuotationDetector:
         min_similarity: float = 0.7,
         top_k: int = 20,
         selective_llm: bool = False,
+        multi_candidate_n: int = 5,
     ):
         """
         Initialize the detector.
@@ -338,11 +374,16 @@ class QuotationDetector:
                           cases to the LLM. High-confidence and low-confidence
                           cases are decided by the heuristic alone, saving
                           ~60-70% of API calls.
+            multi_candidate_n: Number of candidates to score in multi-candidate
+                              mode (default: 5). Instead of only scoring against
+                              the #1 match, the best score across the top N
+                              candidates is used.
         """
         self.use_llm = use_llm
         self.selective_llm = selective_llm
         self.min_similarity = min_similarity
         self.top_k = top_k
+        self.multi_candidate_n = multi_candidate_n
 
         # Set database path
         if db_path is None:
@@ -351,6 +392,9 @@ class QuotationDetector:
         else:
             self.db_path = db_path
 
+        # Load cross-reference chains for parallel passage matching
+        self._cross_refs = _load_cross_references()
+
         # Initialize components lazily
         self._qdrant_manager = None
         self._claude_client = None
@@ -358,7 +402,8 @@ class QuotationDetector:
         logger.info(
             f"QuotationDetector initialized (use_llm={use_llm}, "
             f"selective_llm={selective_llm}, "
-            f"min_similarity={min_similarity}, top_k={top_k})"
+            f"min_similarity={min_similarity}, top_k={top_k}, "
+            f"multi_candidate_n={multi_candidate_n})"
         )
 
     @property
@@ -384,6 +429,8 @@ class QuotationDetector:
         text: str,
         min_confidence: int = 50,
         include_all_candidates: bool = False,
+        context_before: str = "",
+        context_after: str = "",
     ) -> DetectionResult:
         """
         Detect if text is a biblical quotation.
@@ -392,6 +439,8 @@ class QuotationDetector:
             text: Greek text to analyze
             min_confidence: Minimum confidence threshold (0-100)
             include_all_candidates: Include all candidates in results
+            context_before: Text of the preceding chunk (for context-aware scoring)
+            context_after: Text of the following chunk (for context-aware scoring)
 
         Returns:
             DetectionResult with classification and sources
@@ -399,6 +448,13 @@ class QuotationDetector:
         start_time = time.time()
 
         logger.info(f"Detecting quotation for: {text[:50]}...")
+
+        # Context-aware scoring: check adjacent chunks for quotation formulas
+        context_has_formula = False
+        if context_before:
+            context_has_formula = _detect_quotation_formula(context_before)
+        if not context_has_formula and context_after:
+            context_has_formula = _detect_quotation_formula(context_after)
 
         # Stage 1: Vector semantic search
         candidates = self._vector_search(text)
@@ -431,13 +487,17 @@ class QuotationDetector:
         # Stage 2: Classification
         if self.use_llm and self.selective_llm:
             # Selective LLM: heuristic first, only send borderline to Claude
-            result = self._selective_llm_classify(text, candidates, sources)
+            result = self._selective_llm_classify(
+                text, candidates, sources, context_has_formula
+            )
         elif self.use_llm:
             # Full LLM: send everything to Claude
             result = self._llm_verify(text, candidates, sources)
         else:
             # Pure heuristic: no LLM at all
-            result = self._heuristic_classify(text, candidates, sources)
+            result = self._heuristic_classify(
+                text, candidates, sources, context_has_formula
+            )
 
         # Filter by confidence
         if result.confidence < min_confidence:
@@ -516,7 +576,6 @@ class QuotationDetector:
                 FROM verses_fts AS fts
                 JOIN verses AS v ON v.rowid = fts.rowid
                 WHERE fts.greek_normalized MATCH ?
-                AND v.source = 'SR'
                 LIMIT ?
                 """,
                 (match_terms, limit),
@@ -586,6 +645,7 @@ class QuotationDetector:
         text: str,
         candidates: List[Dict],
         sources: List[DetectionSource],
+        context_has_formula: bool = False,
     ) -> DetectionResult:
         """
         Multi-signal heuristic classification without LLM.
@@ -597,9 +657,11 @@ class QuotationDetector:
         4. N-gram (bigram) overlap
         5. Quotation formula detection
 
-        The multi-signal approach replaces the previous rigid threshold
-        buckets with a continuous confidence score, reducing false positives
-        while catching morphological variants and quotation markers.
+        Multi-candidate scoring: Instead of only scoring against the #1 match,
+        scores against the top N candidates and uses the best result.
+
+        Context-aware scoring: If adjacent chunks contain quotation formulas,
+        the formula signal is boosted even when the current chunk lacks one.
         """
         if not candidates:
             return DetectionResult(
@@ -610,19 +672,14 @@ class QuotationDetector:
                 explanation="No candidates found.",
             )
 
-        top_score = candidates[0]["score"]
-        best_match = sources[0] if sources else None
-        best_match_text = candidates[0].get("text", "")
-
-        # Compute all signals
-        shared_words = _count_shared_words(text, best_match_text)
-        shared_lemmas = _count_shared_lemmas(text, best_match_text)
-        shared_ngrams = _count_shared_ngrams(text, best_match_text, n=2)
-        has_formula = _detect_quotation_formula(text)
         input_word_count = len(text.split())
 
         # Gate: reject short chunks as unreliable (Option D)
         if input_word_count < 4:
+            top_score = candidates[0]["score"]
+            best_match = sources[0] if sources else None
+            best_match_text = candidates[0].get("text", "")
+            shared_words = _count_shared_words(text, best_match_text)
             return DetectionResult(
                 input_text=text,
                 is_quotation=False,
@@ -637,15 +694,51 @@ class QuotationDetector:
                 ),
             )
 
-        # Compute multi-signal confidence
-        ms_confidence = _compute_multi_signal_score(
-            similarity_score=top_score,
-            shared_words=shared_words,
-            shared_lemmas=shared_lemmas,
-            shared_ngrams=shared_ngrams,
-            has_formula=has_formula,
-            input_word_count=input_word_count,
-        )
+        # Multi-candidate scoring: score against top N candidates, keep best
+        best_ms_confidence = -1
+        best_candidate_idx = 0
+        best_signals: Dict = {}
+        n_to_score = min(self.multi_candidate_n, len(candidates))
+
+        for idx in range(n_to_score):
+            candidate_text = candidates[idx].get("text", "")
+            candidate_score = candidates[idx]["score"]
+
+            shared_words = _count_shared_words(text, candidate_text)
+            shared_lemmas = _count_shared_lemmas(text, candidate_text)
+            shared_ngrams = _count_shared_ngrams(text, candidate_text, n=2)
+            has_formula = _detect_quotation_formula(text)
+
+            # Context-aware: boost formula signal if adjacent chunk has formula
+            effective_formula = has_formula or context_has_formula
+
+            ms_confidence = _compute_multi_signal_score(
+                similarity_score=candidate_score,
+                shared_words=shared_words,
+                shared_lemmas=shared_lemmas,
+                shared_ngrams=shared_ngrams,
+                has_formula=effective_formula,
+                input_word_count=input_word_count,
+            )
+
+            if ms_confidence > best_ms_confidence:
+                best_ms_confidence = ms_confidence
+                best_candidate_idx = idx
+                best_signals = {
+                    "score": candidate_score,
+                    "shared_words": shared_words,
+                    "shared_lemmas": shared_lemmas,
+                    "shared_ngrams": shared_ngrams,
+                    "has_formula": has_formula,
+                    "context_formula": context_has_formula,
+                    "effective_formula": effective_formula,
+                }
+
+        # Use best candidate's signals for classification
+        ms_confidence = best_ms_confidence
+        best_match = sources[best_candidate_idx] if best_candidate_idx < len(sources) else sources[0]
+        shared_words = best_signals.get("shared_words", 0)
+        shared_lemmas = best_signals.get("shared_lemmas", 0)
 
         # Classify based on multi-signal confidence + word overlap gate
         if ms_confidence >= 70 and shared_words >= 5:
@@ -665,11 +758,20 @@ class QuotationDetector:
             is_quotation = False
 
         # Build detailed explanation
-        formula_note = ", formula=yes" if has_formula else ""
+        formula_note = ""
+        if best_signals.get("has_formula"):
+            formula_note = ", formula=yes"
+        elif best_signals.get("context_formula"):
+            formula_note = ", context_formula=yes"
+        candidate_note = ""
+        if best_candidate_idx > 0:
+            candidate_note = f", best_candidate=#{best_candidate_idx + 1}"
         explanation = (
-            f"Heuristic: score={top_score:.3f}, shared_words={shared_words}, "
-            f"shared_lemmas={shared_lemmas}, shared_ngrams={shared_ngrams}, "
-            f"multi_signal={ms_confidence}{formula_note}. "
+            f"Heuristic: score={best_signals.get('score', 0):.3f}, "
+            f"shared_words={shared_words}, "
+            f"shared_lemmas={shared_lemmas}, "
+            f"shared_ngrams={best_signals.get('shared_ngrams', 0)}, "
+            f"multi_signal={ms_confidence}{formula_note}{candidate_note}. "
             f"Top match: {best_match.reference if best_match else 'none'}."
         )
 
@@ -688,6 +790,7 @@ class QuotationDetector:
         text: str,
         candidates: List[Dict],
         sources: List[DetectionSource],
+        context_has_formula: bool = False,
     ) -> DetectionResult:
         """
         Selective LLM classification: only send borderline cases to Claude.
@@ -704,7 +807,9 @@ class QuotationDetector:
         on the cases that actually matter.
         """
         # First, run heuristic classification
-        heuristic_result = self._heuristic_classify(text, candidates, sources)
+        heuristic_result = self._heuristic_classify(
+            text, candidates, sources, context_has_formula
+        )
 
         ms_confidence = heuristic_result.confidence
 
@@ -735,7 +840,11 @@ class QuotationDetector:
         min_confidence: int = 50,
     ) -> List[DetectionResult]:
         """
-        Detect quotations in multiple texts.
+        Detect quotations in multiple texts with context-aware scoring.
+
+        Each chunk is scored with its preceding and following chunks as
+        context, enabling detection of quotation formulas that appear
+        in adjacent chunks.
 
         Args:
             texts: List of Greek texts to analyze
@@ -745,8 +854,15 @@ class QuotationDetector:
             List of DetectionResults
         """
         results = []
-        for text in texts:
-            result = self.detect(text, min_confidence)
+        for i, text in enumerate(texts):
+            context_before = texts[i - 1] if i > 0 else ""
+            context_after = texts[i + 1] if i < len(texts) - 1 else ""
+            result = self.detect(
+                text,
+                min_confidence,
+                context_before=context_before,
+                context_after=context_after,
+            )
             results.append(result)
         return results
 

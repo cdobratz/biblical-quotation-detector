@@ -15,7 +15,7 @@ import logging
 import re
 from collections import Counter
 from pathlib import Path
-from typing import Dict, Set
+from typing import Dict, Set, Optional
 
 logging.basicConfig(
     level=logging.INFO,
@@ -26,6 +26,11 @@ logger = logging.getLogger(__name__)
 # Default ground-truth path
 DEFAULT_GROUND_TRUTH = (
     Path(__file__).parent.parent / "data" / "ground_truth" / "i_clement_quotations.json"
+)
+
+# Default cross-references path
+DEFAULT_CROSS_REFS = (
+    Path(__file__).parent.parent / "data" / "cross_references.json"
 )
 
 
@@ -83,11 +88,49 @@ def expand_verse_range(ref: str) -> Set[str]:
     return expanded
 
 
-def build_known_refs(ground_truth: Dict) -> Dict[str, Set[str]]:
+def load_cross_references(path: Optional[Path] = None) -> Dict[str, Set[str]]:
+    """Load cross-reference chains mapping each verse to its parallel passages.
+
+    Returns a dict where each key is a verse reference and the value is the
+    set of all parallel references (including itself).
+    """
+    if path is None:
+        path = DEFAULT_CROSS_REFS
+    ref_map: Dict[str, Set[str]] = {}
+
+    if not path.exists():
+        logger.debug("No cross_references.json found")
+        return ref_map
+
+    try:
+        with open(path, encoding="utf-8") as f:
+            data = json.load(f)
+        for group in data.get("parallel_passages", []):
+            refs = set(group.get("refs", []))
+            for ref in refs:
+                if ref not in ref_map:
+                    ref_map[ref] = set()
+                ref_map[ref].update(refs)
+        logger.info(f"Loaded {len(ref_map)} cross-reference entries")
+    except Exception as e:
+        logger.warning(f"Failed to load cross-references: {e}")
+
+    return ref_map
+
+
+def build_known_refs(
+    ground_truth: Dict,
+    cross_refs: Optional[Dict[str, Set[str]]] = None,
+) -> Dict[str, Set[str]]:
     """Build sets of known biblical references by match type.
 
     Verse ranges (e.g. "Matthew 7:1-2") are expanded into individual verses
     so that detecting any verse in the range counts as a match.
+
+    Cross-reference chains: If cross_refs is provided, parallel passages
+    are also added so detecting a parallel verse counts as finding the
+    ground-truth entry (e.g. detecting Genesis 15:6 counts as finding
+    Galatians 3:6 if they are in the same cross-reference group).
     """
     result = {
         "exact": set(),
@@ -101,6 +144,9 @@ def build_known_refs(ground_truth: Dict) -> Dict[str, Set[str]]:
     result["_verse_to_entry"] = {}  # verse -> original ref
     result["_entries"] = {"exact": set(), "close_paraphrase": set(), "allusion": set(), "all": set()}
 
+    if cross_refs is None:
+        cross_refs = {}
+
     for category, key in [
         ("exact_quotations", "exact"),
         ("close_paraphrases", "close_paraphrase"),
@@ -111,9 +157,16 @@ def build_known_refs(ground_truth: Dict) -> Dict[str, Set[str]]:
             result["_entries"][key].add(original_ref)
             result["_entries"]["all"].add(original_ref)
             expanded = expand_verse_range(entry["biblical_ref"])
-            result[key].update(expanded)
-            result["all_quotations"].update(expanded)
+
+            # Add cross-reference parallels for each expanded verse
+            all_refs = set(expanded)
             for v in expanded:
+                if v in cross_refs:
+                    all_refs.update(cross_refs[v])
+
+            result[key].update(all_refs)
+            result["all_quotations"].update(all_refs)
+            for v in all_refs:
                 result["_verse_to_entry"][v] = original_ref
 
     return result
@@ -130,7 +183,8 @@ def evaluate_report(
     Returns metrics dict with precision, recall, F1 at multiple levels.
     """
     results = report.get("results", [])
-    known = build_known_refs(ground_truth)
+    cross_refs = load_cross_references()
+    known = build_known_refs(ground_truth, cross_refs)
 
     # Collect detected references by match type
     detected_refs = {
@@ -178,9 +232,6 @@ def evaluate_report(
         if v in verse_to_entry:
             found_entries.add(verse_to_entry[v])
     missed_entries = all_entries - found_entries
-
-    # For display: also track which individual verses were found
-    found_known = known["all_quotations"] & all_detected
 
     total_detected_quotations = sum(1 for r in results if r.get("is_quotation", False))
     total_non_biblical = sum(1 for r in results if not r.get("is_quotation", False))
@@ -253,7 +304,7 @@ def print_metrics(metrics: Dict, verbose: bool = False) -> None:
         print(f"  {mtype:20s}: {count:4d} ({pct:.1f}%)")
 
     print("\n--- Ground Truth Evaluation ---")
-    print(f"Known quotations (NT only): {metrics['ground_truth_known_quotations']}")
+    print(f"Known quotations: {metrics['ground_truth_known_quotations']}")
     print(f"Found: {metrics['ground_truth_found']}")
     print(f"Missed: {metrics['ground_truth_missed']}")
 
