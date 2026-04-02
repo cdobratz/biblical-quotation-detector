@@ -162,14 +162,23 @@ def _detect_quotation_formula(text: str) -> bool:
     Church Fathers use stock phrases like 'γέγραπται' (it is written) or
     'λέγει κύριος' (the Lord says) to introduce biblical quotations.
 
+    The input is NFKD-decomposed before matching so that precomposed
+    characters (e.g. ὕ U+1F55) are broken into base letter + combining
+    marks, allowing the regex character classes to match correctly.
+
     Args:
         text: Greek text to scan
 
     Returns:
         True if a quotation formula is detected
     """
+    # Decompose precomposed Unicode and strip combining marks (diacritics)
+    # so that regex character classes match base letters regardless of
+    # accent/breathing marks in the source text.
+    nfkd = unicodedata.normalize("NFKD", text)
+    stripped = "".join(c for c in nfkd if not unicodedata.combining(c))
     for pattern in _QUOTATION_FORMULAS:
-        if pattern.search(text):
+        if pattern.search(stripped):
             return True
     return False
 
