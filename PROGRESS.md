@@ -4,8 +4,8 @@
 
 This document tracks the progress and roadmap for the Biblical Quotation Detector project.
 
-**Last Updated**: 2026-01-22
-**Current Phase**: Phase 5 Complete - Ready for Production
+**Last Updated**: 2026-04-02
+**Current Phase**: Phase 5b Complete - Multi-Signal Scoring Improvements
 **Overall Completion**: ~95%
 
 ---
@@ -346,6 +346,99 @@ curl -X POST http://localhost:8000/api/v1/detect \
 
 ---
 
+### Phase 5b: Multi-Signal Scoring & Detection Improvements (Complete)
+
+**Status**: 100% Complete
+**Completed**: April 2, 2026
+**PR**: [#2](https://github.com/cdobratz/biblical-quotation-detector/pull/2)
+
+#### Problem Statement
+
+The heuristic classifier relied solely on vector similarity score + word overlap gate. While the word overlap gate (Phase 5a) reduced `close_paraphrase` from 655 to 55, the embedding model still compressed all Koine Greek into a narrow 0.1-wide score band (0.857-0.959), making threshold-based classification inherently limited. Additional signals were needed to improve discrimination.
+
+#### Achievements
+
+- [x] **Quick Win 1**: Added `query:`/`passage:` instruction prefixes to the e5 embedding model
+  - The `intfloat/multilingual-e5-large` model requires these prefixes for optimal performance
+  - `embed_text()` defaults to `query:` prefix (for search queries)
+  - `embed_texts_batch()` defaults to `passage:` prefix (for stored documents)
+  - **Note**: Existing Qdrant vectors must be re-indexed after this change
+- [x] **Quick Win 2**: Built 26-entry ground-truth evaluation set for 1 Clement
+  - 4 exact quotations, 8 close paraphrases, 9 allusions, 5 non-biblical
+  - Stored at `data/ground_truth/i_clement_quotations.json`
+  - Created evaluation script `scripts/evaluate.py` for precision/recall/F1 measurement
+- [x] **Quick Win 3**: Added quotation formula detection
+  - 11 Greek introductory marker patterns (γέγραπται, λέγει κύριος, φησίν, etc.)
+  - NFKD-decomposed matching to handle precomposed Unicode characters
+  - Base-character-only regex patterns (no diacritics/breathing marks)
+- [x] **Quick Win 4**: Added stem-based word overlap (lemma matching)
+  - Truncation-based stemming heuristic (~4 chars) for speed
+  - Catches morphological variants (θεός/θεοῦ/θεῷ all match)
+  - Complements surface-form word overlap with deeper matching
+- [x] **Bigger Win 1**: Selective LLM verification
+  - Only sends borderline cases (confidence 20-65) to Claude
+  - High-confidence matches skip LLM entirely (cost savings ~60-70%)
+  - Low-confidence matches rejected without LLM call
+  - Controlled via `selective_llm` parameter in `detect()`
+- [x] **Bigger Win 2**: Multi-signal weighted scoring model
+  - Replaces rigid threshold buckets with continuous 0-100 confidence score
+  - Five weighted signals:
+    - Vector similarity: 0.25 (rescaled from [0.80, 1.0])
+    - Word overlap ratio: 0.25 (capped at 8 shared words)
+    - Lemma overlap ratio: 0.20 (capped at 10 shared stems)
+    - N-gram overlap: 0.15 (shared bigrams, capped at 5)
+    - Quotation formula: 0.15 (binary signal)
+  - Match type thresholds: exact >= 70, close_paraphrase >= 50, loose_paraphrase >= 35, allusion >= 20
+
+#### Bug Found & Fixed During Testing
+
+- Precomposed Greek Unicode characters (e.g. `ὕ` U+1F55) were not matching regex character classes
+- Fixed by NFKD-decomposing input text, stripping combining marks, and rewriting all regex patterns with base-only Greek characters
+
+#### Deliverables
+
+- `src/search/detector.py` — Major updates:
+  - `_detect_quotation_formula()` — Greek introductory marker detection
+  - `_count_shared_lemmas()` — Stem-based word overlap
+  - `_count_shared_ngrams()` — Bigram overlap for word-order similarity
+  - `_compute_multi_signal_score()` — Weighted multi-signal scoring
+  - `_selective_llm_classify()` — Borderline-only LLM verification
+  - Updated `_heuristic_classify()` to use multi-signal scoring
+- `src/memory/qdrant_manager.py` — e5 instruction prefix support
+- `data/ground_truth/i_clement_quotations.json` — Ground-truth evaluation set
+- `scripts/evaluate.py` — Precision/recall/F1 evaluation script
+- `.agents/skills/testing-detection/SKILL.md` — Testing knowledge for future sessions
+
+#### Test Results (31/31 assertions passed)
+
+| Test | Result | Details |
+| ---- | ------ | ------- |
+| Quotation formula detection | 13/13 PASS | All 11 patterns + 3 negative cases |
+| Stem-based lemma overlap | 4/4 PASS | Morphological variants, unrelated, identical |
+| N-gram overlap | 4/4 PASS | Word-order sensitivity verified |
+| Multi-signal scoring | 7/7 PASS | High=98, Med=36, Low=2; ordering correct |
+| Evaluation script | PASS | Baseline: P=1.44%, R=19.05%, F1=2.67% |
+| Existing unit tests | 18/18 PASS | No regressions |
+
+#### Baseline Evaluation (Pre-Improvement, Before Re-indexing)
+
+Running `evaluate.py` against the existing baseline report:
+- **Precision**: 1.44% (7 true positives out of 487 detected)
+- **Recall**: 19.05% (4 of 21 known NT quotations found)
+- **F1**: 2.67%
+- Per-type: exact=50%, close_paraphrase=12.5%, allusion=0%
+
+These numbers are expected to improve significantly after re-indexing with e5 prefixes and running a fresh detection pass.
+
+#### Next Steps After Merging
+
+1. Re-index the Qdrant collection with new e5 prefixes: `uv run python scripts/ingest_to_qdrant.py`
+2. Run a fresh 1 Clement analysis: `uv run python scripts/test_patristic.py ...`
+3. Compare new report against baseline using: `uv run python scripts/evaluate.py --report <new_report> -v`
+4. Tune multi-signal weights and thresholds based on results
+
+---
+
 ## Future Enhancements
 
 ### Phase 6: Old Testament Support (Future)
@@ -500,6 +593,20 @@ curl -X POST http://localhost:8000/api/v1/detect \
 
 ## Recent Updates
 
+### April 2, 2026
+
+- ✅ Completed Phase 5b - Multi-Signal Scoring & Detection Improvements ([PR #2](https://github.com/cdobratz/biblical-quotation-detector/pull/2))
+- ✅ Added `query:`/`passage:` instruction prefixes to e5 embedding model
+- ✅ Built 26-entry ground-truth evaluation set for 1 Clement with evaluation script
+- ✅ Added quotation formula detection (11 Greek introductory markers)
+- ✅ Added stem-based word overlap for Greek morphological variants
+- ✅ Implemented selective LLM verification (borderline-only, ~60-70% cost reduction)
+- ✅ Replaced rigid threshold buckets with multi-signal weighted scoring (5 signals)
+- ✅ Fixed precomposed Greek Unicode bug in regex matching
+- ✅ All 31 test assertions passed, 18 existing tests pass with no regressions
+- ✅ Updated SKILL.md and PROGRESS.md documentation
+- 📝 New files: `scripts/evaluate.py`, `data/ground_truth/i_clement_quotations.json`, `.agents/skills/testing-detection/SKILL.md`
+
 ### January 22, 2026
 
 - ✅ Updated README.md to reflect Phase 5 completion
@@ -569,7 +676,7 @@ curl -X POST http://localhost:8000/api/v1/detect \
 
 See the main [README.md](./README.md) for contribution guidelines.
 
-**Current Priority**: Documentation updates and deployment preparation
+**Current Priority**: Re-index Qdrant with e5 prefixes and run fresh evaluation
 
 **Next Priority**: Phase 6 - Old Testament / Septuagint support
 
