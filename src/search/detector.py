@@ -30,20 +30,22 @@ logger = logging.getLogger(__name__)
 # Quotation formula patterns (Quick Win 3)
 # Church Fathers typically introduce biblical quotations with stock phrases.
 # ---------------------------------------------------------------------------
+# Patterns use only base Greek characters (no diacritics/breathing marks)
+# because _detect_quotation_formula strips combining marks before matching.
 _QUOTATION_FORMULAS: List[re.Pattern] = [
-    re.compile(r"γ[εέ]γραπται", re.IGNORECASE),  # "it is written"
-    re.compile(r"λ[εέ]γει\s+(?:ὁ\s+)?κ[υύ]ριο[σς]", re.IGNORECASE),  # "the Lord says"
-    re.compile(r"λ[εέ]γει\s+(?:ἡ\s+)?γραφ[ηή]", re.IGNORECASE),  # "the Scripture says"
-    re.compile(r"φησ[ιί]ν", re.IGNORECASE),  # "he/she says"
+    re.compile(r"γεγραπται", re.IGNORECASE),  # "it is written"
+    re.compile(r"λεγει\s+(?:ο\s+)?κυριος", re.IGNORECASE),  # "the Lord says"
+    re.compile(r"λεγει\s+(?:η\s+)?γραφη", re.IGNORECASE),  # "the Scripture says"
+    re.compile(r"φησιν", re.IGNORECASE),  # "he/she says"
     re.compile(
-        r"κατ[αὰ]\s+τ[οὸ]\s+γεγραμμ[εέ]νον", re.IGNORECASE
+        r"κατα\s+το\s+γεγραμμενον", re.IGNORECASE
     ),  # "according to what is written"
-    re.compile(r"ὡς\s+ε[ιἶ]πεν", re.IGNORECASE),  # "as he said"
-    re.compile(r"ὁ\s+προφ[ηή]της\s+λ[εέ]γει", re.IGNORECASE),  # "the prophet says"
-    re.compile(r"ε[ιἶ]πεν\s+(?:ὁ\s+)?θε[οό][σς]", re.IGNORECASE),  # "God said"
-    re.compile(r"λ[εέ]γων", re.IGNORECASE),  # "saying" (introducing quotation)
-    re.compile(r"ο[υὐ]τως\s+λ[εέ]γει", re.IGNORECASE),  # "thus says"
-    re.compile(r"μαρτυρε[ιῖ]", re.IGNORECASE),  # "he testifies"
+    re.compile(r"ως\s+ειπεν", re.IGNORECASE),  # "as he said"
+    re.compile(r"ο\s+προφητης\s+λεγει", re.IGNORECASE),  # "the prophet says"
+    re.compile(r"ειπεν\s+(?:ο\s+)?θεος", re.IGNORECASE),  # "God said"
+    re.compile(r"λεγων", re.IGNORECASE),  # "saying" (introducing quotation)
+    re.compile(r"ουτως\s+λεγει", re.IGNORECASE),  # "thus says"
+    re.compile(r"μαρτυρει", re.IGNORECASE),  # "he testifies"
 ]
 
 
