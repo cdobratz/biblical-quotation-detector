@@ -323,7 +323,7 @@ class QuotationDetector:
         use_llm: bool = True,
         db_path: Optional[str] = None,
         min_similarity: float = 0.7,
-        top_k: int = 10,
+        top_k: int = 20,
         selective_llm: bool = False,
     ):
         """
@@ -459,7 +459,13 @@ class QuotationDetector:
         return result
 
     def _vector_search(self, text: str) -> List[Dict]:
-        """Perform vector semantic search."""
+        """Perform vector semantic search with FTS fallback.
+
+        Runs Qdrant vector search first, then supplements with SQLite FTS5
+        keyword search to catch cases where exact words match but embedding
+        similarity is low. Results are merged and deduplicated by reference.
+        """
+        results = []
         try:
             results = self.qdrant_manager.search(
                 query=text,
@@ -467,9 +473,72 @@ class QuotationDetector:
                 score_threshold=self.min_similarity,
             )
             logger.debug(f"Vector search returned {len(results)} candidates")
-            return results
         except Exception as e:
             logger.error(f"Vector search failed: {e}")
+
+        # FTS fallback: supplement with keyword matches
+        fts_results = self._fts_search(text, limit=10)
+        if fts_results:
+            # Deduplicate: skip FTS results whose reference is already in vector results
+            seen_refs = {r.get("reference") for r in results}
+            for fts_r in fts_results:
+                if fts_r.get("reference") not in seen_refs:
+                    results.append(fts_r)
+                    seen_refs.add(fts_r.get("reference"))
+            logger.debug(
+                f"After FTS merge: {len(results)} total candidates"
+            )
+
+        return results[:self.top_k]
+
+    def _fts_search(self, text: str, limit: int = 10) -> List[Dict]:
+        """Search SQLite FTS5 index for keyword matches.
+
+        Extracts content words from input text and runs an OR query against
+        the verses_fts table. Returns results formatted like Qdrant output.
+        """
+        try:
+            # Extract content words (>2 chars, normalized)
+            normalized = _normalize_greek(text)
+            words = [w for w in normalized.split() if len(w) > 2]
+            if not words:
+                return []
+
+            # Build FTS5 MATCH query with OR
+            # Limit to 5 terms to keep query fast
+            match_terms = " OR ".join(words[:5])
+
+            conn = sqlite3.connect(self.db_path)
+            cursor = conn.cursor()
+            cursor.execute(
+                """
+                SELECT v.reference, v.greek_text, v.book, v.chapter, v.verse, v.source
+                FROM verses_fts AS fts
+                JOIN verses AS v ON v.rowid = fts.rowid
+                WHERE fts.greek_normalized MATCH ?
+                AND v.source = 'SR'
+                LIMIT ?
+                """,
+                (match_terms, limit),
+            )
+            rows = cursor.fetchall()
+            conn.close()
+
+            results = []
+            for row in rows:
+                results.append({
+                    "reference": row[0],
+                    "text": row[1],
+                    "book": row[2],
+                    "chapter": row[3],
+                    "verse": row[4],
+                    "source": row[5],
+                    "score": 0.80,  # synthetic score for FTS results
+                })
+            logger.debug(f"FTS search returned {len(results)} results")
+            return results
+        except Exception as e:
+            logger.debug(f"FTS search failed: {e}")
             return []
 
     def _llm_verify(

@@ -123,3 +123,42 @@ The detector correctly identified 2 exact matches:
 2. Compare LLM results against known quotation lists
 3. Tune thresholds based on empirical testing
 4. Consider implementing secondary verification signals
+
+---
+
+## Update: Phase 5b — Multi-Signal Scoring (April 2, 2026)
+
+All short-term, medium-term, and long-term suggestions from the original guide have now been implemented:
+
+### Implemented Fixes
+
+| Original Suggestion | Status | Implementation |
+|---|---|---|
+| Raise similarity thresholds | ✅ Superseded | Multi-signal scoring replaced threshold-only logic |
+| Use LLM verification | ✅ Available | `--mode llm` works; selective LLM mode sends only borderline cases (conf 20-65) |
+| Add multiple signal verification | ✅ Done | 5 signals: vector sim, word overlap, lemma overlap, n-grams, quotation formula |
+| Check n-gram overlap | ✅ Done | `_count_shared_ngrams()` — shared bigrams for word-order similarity |
+| Check word-level alignment | ✅ Done | `_count_shared_words()` + `_count_shared_lemmas()` |
+| Detect quotation formulas | ✅ Done | 11 Greek markers (γέγραπται, λέγει κύριος, etc.) |
+| Hybrid detection (vector → n-gram → LLM) | ✅ Done | Vector + FTS → multi-signal scoring → selective LLM |
+| Labeled dataset of known quotations | ✅ Done | 26-entry ground truth at `data/ground_truth/i_clement_quotations.json` |
+
+### Current Results After All Improvements
+
+| Report | Date | Detected | Precision | Recall | F1 |
+|---|---|---|---|---|---|
+| `report_20260122_152324` | Jan 22 | 655/657 | ~0.3% | N/A | N/A |
+| `report_20260206_160805` | Feb 6 | 487/650 | 1.44% | 19.05% | 2.67% |
+| `report_20260402_142615` | Apr 2 (Run 0, conf=50) | 30/650 | 10.00% | 14.29% | 11.76% |
+| `report_20260402_150318` | Apr 2 (Fixed, conf=20) | 201/650 | 4.48% | 28.57% | 7.74% |
+
+### Remaining Limitation: Retrieval Ceiling
+
+15 of 21 ground-truth quotations cannot be found because the correct biblical verse never appears in search results. This is a data coverage problem — many 1 Clement quotations route through the Septuagint (OT), which is not in the current NT-only database. Requires Phase 6 (LXX support) to resolve.
+
+## Update: Phase 5c — FTS Fallback & Evaluation Fixes (April 2, 2026)
+
+- Added SQLite FTS5 keyword search as fallback after Qdrant vector search
+- Fixed evaluator to handle verse ranges (`Matthew 7:1-2` matches `Matthew 7:2`)
+- Increased top_k from 10 to 20 for better candidate coverage
+- Recovered `Matthew 7:1-2` match via FTS fallback

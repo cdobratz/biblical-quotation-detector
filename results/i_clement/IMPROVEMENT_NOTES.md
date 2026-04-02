@@ -96,3 +96,89 @@ The embedding model (`intfloat/multilingual-e5-large`) compresses all Koine Gree
 - **68% of scores fall between**: 0.879–0.905
 
 With such a narrow band, no single threshold can separate true matches from false. The word overlap gate provides the discriminating signal that the embedding model cannot.
+
+---
+
+## Update: Phase 5b — Multi-Signal Scoring (April 2, 2026)
+
+### Further Improvements Beyond Word Overlap Gate
+
+The word overlap gate (Options A+D) was a critical first step. Phase 5b replaced the threshold+gate system with a **weighted multi-signal scoring model** combining 5 independent signals:
+
+| Signal | Weight | Purpose |
+|---|---|---|
+| Vector similarity | 0.25 | Semantic match (rescaled from [0.80, 1.0]) |
+| Word overlap | 0.25 | Surface-form word matching (capped at 8) |
+| Lemma overlap | 0.20 | Stem-based matching for Greek morphology (capped at 10) |
+| N-gram overlap | 0.15 | Word-order similarity via shared bigrams (capped at 5) |
+| Quotation formula | 0.15 | Binary: Greek introductory marker detected |
+
+Classification now uses continuous confidence scores with dual gates:
+
+| Match Type | Confidence | Word Gate |
+|---|---|---|
+| exact | >= 70 | >= 5 shared words |
+| close_paraphrase | >= 50 | >= 3 |
+| loose_paraphrase | >= 35 | >= 2 |
+| allusion | >= 20 | >= 1 word OR >= 2 lemmas |
+| non_biblical | below | — |
+
+### Qdrant Re-indexing with e5 Prefixes
+
+The `intfloat/multilingual-e5-large` model requires `query:` and `passage:` instruction prefixes for optimal performance. After adding these prefixes to the code, all 77,491 vectors were re-indexed (16.7 min, 77.3 verses/sec).
+
+### Comparison Across All Phases
+
+| Phase | Report Date | Detected | close_paraphrase | non_biblical | Precision | Recall | F1 |
+|---|---|---|---|---|---|---|---|
+| Pre-improvement | Jan 22 | 655 | 655 (99.7%) | 0 (0%) | ~0.3% | N/A | N/A |
+| Option A+D | Feb 6 | 487 | 55 (8.5%) | 163 (25.1%) | 1.44% | 19.05% | 2.67% |
+| Multi-signal + e5 re-index | Apr 2 (conf=50) | 30 | 27 (4.2%) | 449 (69.1%) | 10.00% | 14.29% | 11.76% |
+| Multi-signal + e5 (conf=20) | Apr 2 | 201 | 27 (4.2%) | 449 (69.1%) | 3.48% | 23.81% | 6.08% |
+
+### Tuning Experiments (April 2, 2026)
+
+Four configurations were tested to find the precision-recall sweet spot:
+
+| Run | Config | Detected | Precision | Recall | F1 | Refs Found |
+|---|---|---|---|---|---|---|
+| Run 0 | conf=50, default weights | 30 | **10.00%** | 14.29% | **11.76%** | 3/21 |
+| Run A | conf=20, default weights | 201 | 3.48% | 23.81% | 6.08% | 5/21 |
+| Run B | conf=20, relaxed gates | 193 | 3.63% | 23.81% | 6.29% | 5/21 |
+| Run C | conf=20, rebalanced weights | 356 | 2.25% | **33.33%** | 4.17% | 7/21 |
+
+**Key finding**: Relaxing gates (Run B) barely changed results — the word overlap gates are not the bottleneck. Rebalancing weights (Run C) gets the most recall but at the cost of precision.
+
+## Update: Phase 5c — FTS Fallback & Retrieval Diagnosis (April 2, 2026)
+
+### Missed Reference Diagnostic
+
+All 15 consistently missed ground-truth references were investigated by searching Qdrant directly with the ground-truth Clement text. **All 15 are retrieval failures** — the correct biblical verse never appears in the top-k results.
+
+| Missed Reference | What Qdrant Returns Instead | Why |
+|---|---|---|
+| Romans 12:5 ("one body in Christ") | 1 Corinthians 12:27 | Same theme, different verse |
+| Matthew 26:24 ("better not born") | Mark 9:45 | Similar "better" phrasing |
+| Acts 20:35 ("giving vs receiving") | Wisdom literature | No distinctive shared vocab |
+| Hebrews 1:3-5 ("radiance of glory") | Sirach 44:2 | Both use μεγαλωσύνη |
+| Luke 6:36-38 ("be merciful") | Baruch 3:2 / Matthew 7:7 | Similar imperative structure |
+| 1 Corinthians 1:10-12 | Ephesians 1:1, Colossians 1:1 | "Paul apostle" formula |
+
+### Fixes Applied
+
+1. **FTS fallback search**: SQLite FTS5 keyword search supplements Qdrant, catching cases where exact words match but embedding similarity is low
+2. **Evaluator verse-range matching**: `Matthew 7:1-2` now matches detected `Matthew 7:2` via `expand_verse_range()` helper
+3. **Increased top_k**: 10 → 20 for better candidate coverage
+
+### Results After Fixes
+
+Best result (conf=20, FTS+top_k=20): P=4.48%, R=28.57%, F1=7.74%, 6/21 refs found.
+
+### Remaining Retrieval Ceiling
+
+15/21 ground-truth quotations are unreachable because:
+- Many 1 Clement quotations route through the **Septuagint (OT)** — database is NT-only
+- Thematic allusions share no distinctive vocabulary with the NT source verse
+- Embedding model retrieves semantically similar but wrong verses
+
+**Next step**: Phase 6 — Septuagint/LXX ingestion to break through this ceiling.

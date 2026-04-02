@@ -16,7 +16,7 @@ uv pip install pytest
 
 ### Existing Unit Tests
 ```bash
-uv run pytest tests/ -v
+uv run python -m pytest tests/ -v
 ```
 Expect 18 tests in `tests/test_word_overlap.py` covering `_normalize_greek` and `_count_shared_words`.
 
@@ -41,6 +41,8 @@ uv run python scripts/evaluate.py --report results/i_clement/report_YYYYMMDD_HHM
 ```
 Outputs precision, recall, F1, per-type breakdown, found/missed references.
 
+The evaluator supports verse-range expansion: ground-truth entries like `Matthew 7:1-2` match detected single verses like `Matthew 7:2`. Recall is counted by ground-truth entry (21 entries), not by individual expanded verses.
+
 ### Running the API Server
 ```bash
 uv run uvicorn src.api.main:app --reload
@@ -58,6 +60,13 @@ uv run python scripts/test_patristic.py \
   --chunk-size sentence \
   --output results/i_clement/
 ```
+
+### Re-indexing Qdrant Vectors
+Required after changing embedding prefixes or model:
+```bash
+uv run python scripts/ingest_to_qdrant.py --clear
+```
+Takes ~17 minutes for 77,491 verses at ~77 verses/sec.
 
 ## Known Issues & Workarounds
 
@@ -88,6 +97,16 @@ The `_count_shared_lemmas()` function uses character-truncation (~4 chars) as a 
 ### Narrow Embedding Score Band
 The e5 model compresses all Koine Greek into a narrow similarity band (0.857-0.959, stdev 0.013). Thresholds alone cannot separate true matches from false — the word overlap gate and multi-signal scoring provide the discriminating signals.
 
+### FTS Fallback Search
+The detector runs SQLite FTS5 keyword search after Qdrant vector search, merging results deduplicated by reference. FTS results get a synthetic similarity score of 0.80 and only query the `SR` source to avoid duplicates. This catches cases where exact words match but embedding similarity is low.
+
+### Retrieval Ceiling (15/21 Ground-Truth Misses)
+15 of 21 ground-truth 1 Clement quotations are unreachable with current retrieval. Root causes:
+- Many quotations route through the **Septuagint (OT)**, not the NT directly
+- Thematic allusions share no distinctive vocabulary with the source verse
+- Embedding model retrieves semantically similar but wrong verses
+This is a data coverage problem (NT-only database), not a scoring/threshold problem.
+
 ## Lint & Format
 ```bash
 ruff check src/ scripts/ tests/
@@ -117,3 +136,19 @@ black --check --target-version py311 src/ scripts/ tests/
 ### Ground Truth Dataset
 - 26 entries in `data/ground_truth/i_clement_quotations.json`
 - Distribution: 4 exact, 8 close paraphrases, 9 allusions, 5 non-biblical
+- Evaluator expands verse ranges (e.g. `Matthew 7:1-2` → `Matthew 7:1`, `Matthew 7:2`)
+- Recall denominator = 21 (original entry count, not expanded verse count)
+
+### Current Best Evaluation Results
+- **conf=50**: P=10.00%, R=14.29%, F1=11.76% (3/21 found) — best F1
+- **conf=20**: P=4.48%, R=28.57%, F1=7.74% (6/21 found) — best recall
+- Found: Acts 7:28, Galatians 3:6, 1 Corinthians 2:9, 1 Peter 4:8, 1 Peter 5:5, Matthew 7:1-2
+
+### Tuning Parameters Reference
+Key constants in `src/search/detector.py`:
+- Signal weights: sim=0.25, word=0.25, lemma=0.20, ngram=0.15, formula=0.15
+- Similarity rescale: [0.80, 1.0] → [0, 1]
+- Caps: words=8, lemmas=10, ngrams=5
+- Classification: exact>=70+5w, close>=50+3w, loose>=35+2w, allusion>=20+1w/2l
+- top_k=20, min_similarity=0.7
+- Selective LLM: high=65, low=20

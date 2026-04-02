@@ -60,8 +60,35 @@ def normalize_reference(ref: str) -> str:
     return ref
 
 
+def expand_verse_range(ref: str) -> Set[str]:
+    """Expand a verse range reference into individual verse references.
+
+    Examples:
+        "Matthew 7:1-2"       -> {"Matthew 7:1", "Matthew 7:2", "Matthew 7:1-2"}
+        "1 Corinthians 13:4-7" -> {"1 Corinthians 13:4", ..., "1 Corinthians 13:7", "1 Corinthians 13:4-7"}
+        "Romans 1:29-32"      -> {"Romans 1:29", ..., "Romans 1:32", "Romans 1:29-32"}
+        "Matthew 5:3"         -> {"Matthew 5:3"}
+    """
+    ref = normalize_reference(ref)
+    # Match pattern: "Book Chapter:Start-End"
+    m = re.match(r"^(.+\s\d+):(\d+)-(\d+)$", ref)
+    if not m:
+        return {ref}
+    prefix = m.group(1)  # e.g. "Matthew 7"
+    start = int(m.group(2))
+    end = int(m.group(3))
+    expanded = {ref}  # keep the original range too
+    for v in range(start, end + 1):
+        expanded.add(f"{prefix}:{v}")
+    return expanded
+
+
 def build_known_refs(ground_truth: Dict) -> Dict[str, Set[str]]:
-    """Build sets of known biblical references by match type."""
+    """Build sets of known biblical references by match type.
+
+    Verse ranges (e.g. "Matthew 7:1-2") are expanded into individual verses
+    so that detecting any verse in the range counts as a match.
+    """
     result = {
         "exact": set(),
         "close_paraphrase": set(),
@@ -69,21 +96,25 @@ def build_known_refs(ground_truth: Dict) -> Dict[str, Set[str]]:
         "all_quotations": set(),
         "non_biblical": set(),
     }
+    # Map each expanded verse back to its original ground-truth entry
+    # so we can count recall by entry, not by individual verse
+    result["_verse_to_entry"] = {}  # verse -> original ref
+    result["_entries"] = {"exact": set(), "close_paraphrase": set(), "allusion": set(), "all": set()}
 
-    for entry in ground_truth.get("exact_quotations", []):
-        ref = normalize_reference(entry["biblical_ref"])
-        result["exact"].add(ref)
-        result["all_quotations"].add(ref)
-
-    for entry in ground_truth.get("close_paraphrases", []):
-        ref = normalize_reference(entry["biblical_ref"])
-        result["close_paraphrase"].add(ref)
-        result["all_quotations"].add(ref)
-
-    for entry in ground_truth.get("allusions", []):
-        ref = normalize_reference(entry["biblical_ref"])
-        result["allusion"].add(ref)
-        result["all_quotations"].add(ref)
+    for category, key in [
+        ("exact_quotations", "exact"),
+        ("close_paraphrases", "close_paraphrase"),
+        ("allusions", "allusion"),
+    ]:
+        for entry in ground_truth.get(category, []):
+            original_ref = normalize_reference(entry["biblical_ref"])
+            result["_entries"][key].add(original_ref)
+            result["_entries"]["all"].add(original_ref)
+            expanded = expand_verse_range(entry["biblical_ref"])
+            result[key].update(expanded)
+            result["all_quotations"].update(expanded)
+            for v in expanded:
+                result["_verse_to_entry"][v] = original_ref
 
     return result
 
@@ -135,11 +166,21 @@ def evaluate_report(
         else:
             false_positives += 1
 
-    # Recall: how many known quotations were found?
-    all_known = known["all_quotations"]
+    # Recall: how many ground-truth entries were found?
+    # Count by original entry (not expanded verses) so ranges don't inflate denominator
+    verse_to_entry = known.get("_verse_to_entry", {})
+    all_entries = known.get("_entries", {}).get("all", set())
     all_detected = detected_refs["all_quotations"]
-    found_known = all_known & all_detected
-    missed_known = all_known - all_detected
+
+    # Map detected verses back to ground-truth entries
+    found_entries = set()
+    for v in all_detected:
+        if v in verse_to_entry:
+            found_entries.add(verse_to_entry[v])
+    missed_entries = all_entries - found_entries
+
+    # For display: also track which individual verses were found
+    found_known = known["all_quotations"] & all_detected
 
     total_detected_quotations = sum(1 for r in results if r.get("is_quotation", False))
     total_non_biblical = sum(1 for r in results if not r.get("is_quotation", False))
@@ -149,7 +190,7 @@ def evaluate_report(
         if total_detected_quotations > 0
         else 0.0
     )
-    recall = len(found_known) / len(all_known) if all_known else 0.0
+    recall = len(found_entries) / len(all_entries) if all_entries else 0.0
     f1 = (
         2 * precision * recall / (precision + recall)
         if (precision + recall) > 0
@@ -161,28 +202,36 @@ def evaluate_report(
         "total_detected_quotations": total_detected_quotations,
         "total_non_biblical": total_non_biblical,
         "match_type_distribution": dict(match_type_counts),
-        "ground_truth_known_quotations": len(all_known),
-        "ground_truth_found": len(found_known),
-        "ground_truth_missed": len(missed_known),
+        "ground_truth_known_quotations": len(all_entries),
+        "ground_truth_found": len(found_entries),
+        "ground_truth_missed": len(missed_entries),
         "true_positives": true_positives,
         "false_positives": false_positives,
         "precision": round(precision, 4),
         "recall": round(recall, 4),
         "f1": round(f1, 4),
-        "found_references": sorted(found_known),
-        "missed_references": sorted(missed_known),
+        "found_references": sorted(found_entries),
+        "missed_references": sorted(missed_entries),
     }
 
     if verbose:
-        # Per-type breakdown
+        # Per-type breakdown (count by ground-truth entry, not expanded verses)
+        entry_sets = known.get("_entries", {})
         for mtype in ["exact", "close_paraphrase", "allusion"]:
-            known_set = known.get(mtype, set())
+            known_entries_for_type = entry_sets.get(mtype, set())
             detected_set = detected_refs.get(mtype, set())
-            found = known_set & detected_set
-            metrics[f"{mtype}_known"] = len(known_set)
-            metrics[f"{mtype}_found"] = len(found)
+            # Map detected verses back to entries for this type
+            found_for_type = set()
+            for v in detected_set:
+                entry = verse_to_entry.get(v)
+                if entry and entry in known_entries_for_type:
+                    found_for_type.add(entry)
+            metrics[f"{mtype}_known"] = len(known_entries_for_type)
+            metrics[f"{mtype}_found"] = len(found_for_type)
             metrics[f"{mtype}_recall"] = (
-                round(len(found) / len(known_set), 4) if known_set else 0.0
+                round(len(found_for_type) / len(known_entries_for_type), 4)
+                if known_entries_for_type
+                else 0.0
             )
 
     return metrics
