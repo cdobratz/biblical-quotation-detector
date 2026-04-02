@@ -1,0 +1,193 @@
+{
+  "metadata": {
+    "source": "1 Clement (First Epistle of Clement to the Corinthians)",
+    "description": "Ground-truth biblical quotations in 1 Clement based on standard scholarly apparatus (Biblia Patristica, Lake's Loeb edition, Lightfoot commentary)",
+    "created": "2026-04-02",
+    "notes": "NT-only references (matching current database). OT/Septuagint quotations excluded pending Phase 6."
+  },
+  "exact_quotations": [
+    {
+      "clement_ref": "4:10",
+      "biblical_ref": "Acts 7:28",
+      "clement_text": "μὴ ἀνελεῖν με σὺ θέλεις, ὃν τρόπον ἀνεῖλες ἐχθὲς τὸν Αἰγύπτιον",
+      "match_type": "exact",
+      "notes": "Quoting Exodus 2:14 via Acts 7:28"
+    },
+    {
+      "clement_ref": "10:6",
+      "biblical_ref": "Galatians 3:6",
+      "clement_text": "ἐπίστευσεν δὲ Ἀβραὰμ τῷ θεῷ, καὶ ἐλογίσθη αὐτῷ εἰς δικαιοσύνην",
+      "match_type": "exact",
+      "notes": "Quoting Genesis 15:6 via Galatians 3:6 / Romans 4:3"
+    },
+    {
+      "clement_ref": "46:2",
+      "biblical_ref": "Matthew 26:24",
+      "clement_text": "καλὸν ἦν αὐτῷ εἰ οὐκ ἐγεννήθη, ἢ ἕνα τῶν ἐκλεκτῶν μου σκανδαλίσαι",
+      "match_type": "exact",
+      "notes": "Close to Matthew 26:24 / Mark 14:21 with Clement's addition"
+    },
+    {
+      "clement_ref": "46:8",
+      "biblical_ref": "Romans 12:5",
+      "clement_text": "ἓν σῶμα ἐσμὲν ἐν Χριστῷ",
+      "match_type": "exact",
+      "notes": "Also cf. 1 Corinthians 12:12-13"
+    }
+  ],
+  "close_paraphrases": [
+    {
+      "clement_ref": "2:1",
+      "biblical_ref": "Acts 20:35",
+      "clement_text": "ἥδιον διδόντες ἢ λαμβάνοντες",
+      "match_type": "close_paraphrase",
+      "notes": "Paraphrase of 'more blessed to give than to receive'"
+    },
+    {
+      "clement_ref": "13:1",
+      "biblical_ref": "Matthew 7:1-2",
+      "clement_text": "μὴ κρίνετε, ἵνα μὴ κριθῆτε· ἐν ᾧ μέτρῳ μετρεῖτε, μετρηθήσεται ὑμῖν",
+      "match_type": "close_paraphrase",
+      "notes": "Composite quotation from Matthew/Luke Sermon sayings"
+    },
+    {
+      "clement_ref": "13:2",
+      "biblical_ref": "Luke 6:36-38",
+      "clement_text": "ἐλεᾶτε, ἵνα ἐλεηθῆτε· ἀφίετε, ἵνα ἀφεθῇ ὑμῖν",
+      "match_type": "close_paraphrase",
+      "notes": "Sermon on the Plain material, freely quoted"
+    },
+    {
+      "clement_ref": "24:5",
+      "biblical_ref": "1 Corinthians 15:36",
+      "clement_text": "ὁ σπείρων ἐξῆλθεν καὶ ἔβαλεν εἰς τὴν γῆν",
+      "match_type": "close_paraphrase",
+      "notes": "Paraphrase of the seed/sowing metaphor"
+    },
+    {
+      "clement_ref": "34:8",
+      "biblical_ref": "1 Corinthians 2:9",
+      "clement_text": "ὀφθαλμὸς οὐκ εἶδεν καὶ οὖς οὐκ ἤκουσεν, καὶ ἐπὶ καρδίαν ἀνθρώπου οὐκ ἀνέβη",
+      "match_type": "close_paraphrase",
+      "notes": "Classic quotation also found in Isaiah 64:4"
+    },
+    {
+      "clement_ref": "36:2-5",
+      "biblical_ref": "Hebrews 1:3-5",
+      "clement_text": "ὃς ὢν ἀπαύγασμα τῆς μεγαλωσύνης αὐτοῦ",
+      "match_type": "close_paraphrase",
+      "notes": "Extended paraphrase of Hebrews 1:3-5, 7, 13"
+    },
+    {
+      "clement_ref": "49:5",
+      "biblical_ref": "1 Corinthians 13:4-7",
+      "clement_text": "ἡ ἀγάπη ... πάντα στέγει, πάντα μακροθυμεῖ",
+      "match_type": "close_paraphrase",
+      "notes": "Paraphrase of the love hymn"
+    },
+    {
+      "clement_ref": "47:1-3",
+      "biblical_ref": "1 Corinthians 1:10-12",
+      "clement_text": "ἀναλάβετε τὴν ἐπιστολὴν τοῦ μακαρίου Παύλου τοῦ ἀποστόλου",
+      "match_type": "close_paraphrase",
+      "notes": "Explicit reference to 1 Corinthians with partial quotation"
+    }
+  ],
+  "allusions": [
+    {
+      "clement_ref": "1:3",
+      "biblical_ref": "1 Peter 5:5",
+      "clement_text": "ὑποτασσόμενοι τοῖς ἡγουμένοις ὑμῶν",
+      "match_type": "allusion",
+      "notes": "Allusion to submission theme"
+    },
+    {
+      "clement_ref": "5:4",
+      "biblical_ref": "2 Corinthians 11:23-27",
+      "clement_text": "Πέτρον ... ὑπέμεινεν πόνους",
+      "match_type": "allusion",
+      "notes": "Allusion to Paul's sufferings list"
+    },
+    {
+      "clement_ref": "5:7",
+      "biblical_ref": "Romans 1:5",
+      "clement_text": "δικαιοσύνην διδάξας ὅλον τὸν κόσμον",
+      "match_type": "allusion",
+      "notes": "Paul teaching righteousness to the world"
+    },
+    {
+      "clement_ref": "20:11",
+      "biblical_ref": "Romans 11:33",
+      "clement_text": "ἀνεξιχνίαστα ... τῆς ἀβύσσου",
+      "match_type": "allusion",
+      "notes": "Allusion to the unsearchable depths"
+    },
+    {
+      "clement_ref": "32:4",
+      "biblical_ref": "Romans 3:28",
+      "clement_text": "οὐ δι' ἡμῶν αὐτῶν ... ἀλλὰ διὰ τῆς πίστεως",
+      "match_type": "allusion",
+      "notes": "Justification by faith theme"
+    },
+    {
+      "clement_ref": "35:5-6",
+      "biblical_ref": "Romans 1:29-32",
+      "clement_text": "πονηρίᾳ, πλεονεξίᾳ, ἔριδι, δόλῳ",
+      "match_type": "allusion",
+      "notes": "Vice list paralleling Romans 1"
+    },
+    {
+      "clement_ref": "37:5",
+      "biblical_ref": "1 Corinthians 12:21-22",
+      "clement_text": "οἱ μεγάλοι δίχα τῶν μικρῶν οὐ δύνανται",
+      "match_type": "allusion",
+      "notes": "Body of Christ metaphor"
+    },
+    {
+      "clement_ref": "42:1-2",
+      "biblical_ref": "Matthew 28:19",
+      "clement_text": "ἀπόστολοι ἡμῖν εὐηγγελίσθησαν ἀπὸ τοῦ κυρίου Ἰησοῦ Χριστοῦ",
+      "match_type": "allusion",
+      "notes": "Apostolic commission"
+    },
+    {
+      "clement_ref": "50:4",
+      "biblical_ref": "1 Peter 4:8",
+      "clement_text": "ἀγάπη καλύπτει πλῆθος ἁμαρτιῶν",
+      "match_type": "allusion",
+      "notes": "Love covers a multitude of sins"
+    }
+  ],
+  "non_biblical": [
+    {
+      "clement_ref": "1:1",
+      "clement_text": "Διὰ τὰς αἰφνιδίους καὶ ἐπαλλήλους γενομένας ἡμῖν συμφοράς",
+      "match_type": "non_biblical",
+      "notes": "Opening about misfortunes at Rome — purely epistolary"
+    },
+    {
+      "clement_ref": "25:1-5",
+      "clement_text": "Ἴδωμεν τὸ παράδοξον σημεῖον ... ὄρνεον ... φοίνιξ",
+      "match_type": "non_biblical",
+      "notes": "Phoenix legend — pagan natural theology illustration"
+    },
+    {
+      "clement_ref": "55:1",
+      "clement_text": "Ἵνα δὲ καὶ ὑποδείγματα ἐθνῶν ἐνέγκωμεν",
+      "match_type": "non_biblical",
+      "notes": "Transition to pagan examples"
+    },
+    {
+      "clement_ref": "63:1",
+      "clement_text": "Ἐπέμψαμεν δὲ ἄνδρας πιστούς",
+      "match_type": "non_biblical",
+      "notes": "Closing administrative notes about the envoys"
+    },
+    {
+      "clement_ref": "65:1",
+      "clement_text": "Τοὺς δὲ ἀπεσταλμένους ἀφ' ἡμῶν Κλαύδιον Ἔφηβον",
+      "match_type": "non_biblical",
+      "notes": "Names of envoys — administrative content"
+    }
+  ]
+}

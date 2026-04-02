@@ -1,0 +1,290 @@
+#!/usr/bin/env python3
+"""
+Evaluation Script for Biblical Quotation Detector
+
+Computes precision, recall, and F1 scores against a ground-truth dataset.
+
+Usage:
+    uv run python scripts/evaluate.py --report results/i_clement/report_YYYYMMDD_HHMMSS.json
+    uv run python scripts/evaluate.py --report results/i_clement/report_YYYYMMDD_HHMMSS.json --verbose
+"""
+
+import argparse
+import json
+import logging
+import re
+from collections import Counter
+from pathlib import Path
+from typing import Dict, Set
+
+logging.basicConfig(
+    level=logging.INFO,
+    format="%(asctime)s - %(levelname)s - %(message)s",
+)
+logger = logging.getLogger(__name__)
+
+# Default ground-truth path
+DEFAULT_GROUND_TRUTH = (
+    Path(__file__).parent.parent / "data" / "ground_truth" / "i_clement_quotations.json"
+)
+
+
+def load_ground_truth(path: Path) -> Dict:
+    """Load ground-truth dataset."""
+    with open(path, encoding="utf-8") as f:
+        return json.load(f)
+
+
+def load_report(path: Path) -> Dict:
+    """Load a detection report."""
+    with open(path, encoding="utf-8") as f:
+        return json.load(f)
+
+
+def extract_biblical_refs_from_result(result: Dict) -> Set[str]:
+    """Extract biblical references from a detection result."""
+    refs = set()
+    if result.get("best_match") and result["best_match"].get("reference"):
+        refs.add(normalize_reference(result["best_match"]["reference"]))
+    for src in result.get("sources", []):
+        if src.get("reference"):
+            refs.add(normalize_reference(src["reference"]))
+    return refs
+
+
+def normalize_reference(ref: str) -> str:
+    """Normalize a biblical reference for comparison."""
+    ref = ref.strip()
+    # Normalize spacing around colon
+    ref = re.sub(r"\s*:\s*", ":", ref)
+    return ref
+
+
+def build_known_refs(ground_truth: Dict) -> Dict[str, Set[str]]:
+    """Build sets of known biblical references by match type."""
+    result = {
+        "exact": set(),
+        "close_paraphrase": set(),
+        "allusion": set(),
+        "all_quotations": set(),
+        "non_biblical": set(),
+    }
+
+    for entry in ground_truth.get("exact_quotations", []):
+        ref = normalize_reference(entry["biblical_ref"])
+        result["exact"].add(ref)
+        result["all_quotations"].add(ref)
+
+    for entry in ground_truth.get("close_paraphrases", []):
+        ref = normalize_reference(entry["biblical_ref"])
+        result["close_paraphrase"].add(ref)
+        result["all_quotations"].add(ref)
+
+    for entry in ground_truth.get("allusions", []):
+        ref = normalize_reference(entry["biblical_ref"])
+        result["allusion"].add(ref)
+        result["all_quotations"].add(ref)
+
+    return result
+
+
+def evaluate_report(
+    report: Dict,
+    ground_truth: Dict,
+    verbose: bool = False,
+) -> Dict:
+    """
+    Evaluate a detection report against ground truth.
+
+    Returns metrics dict with precision, recall, F1 at multiple levels.
+    """
+    results = report.get("results", [])
+    known = build_known_refs(ground_truth)
+
+    # Collect detected references by match type
+    detected_refs = {
+        "exact": set(),
+        "close_paraphrase": set(),
+        "loose_paraphrase": set(),
+        "allusion": set(),
+        "all_quotations": set(),
+    }
+
+    true_positives = 0
+    false_positives = 0
+    match_type_counts = Counter()
+
+    for r in results:
+        match_type = r.get("match_type", "non_biblical")
+        is_quot = r.get("is_quotation", False)
+        match_type_counts[match_type] += 1
+
+        if not is_quot:
+            continue
+
+        refs = extract_biblical_refs_from_result(r)
+        detected_refs["all_quotations"].update(refs)
+
+        if match_type in detected_refs:
+            detected_refs[match_type].update(refs)
+
+        # Check if any detected ref is in ground truth
+        is_true_positive = bool(refs & known["all_quotations"])
+        if is_true_positive:
+            true_positives += 1
+        else:
+            false_positives += 1
+
+    # Recall: how many known quotations were found?
+    all_known = known["all_quotations"]
+    all_detected = detected_refs["all_quotations"]
+    found_known = all_known & all_detected
+    missed_known = all_known - all_detected
+
+    total_detected_quotations = sum(1 for r in results if r.get("is_quotation", False))
+    total_non_biblical = sum(1 for r in results if not r.get("is_quotation", False))
+
+    precision = (
+        true_positives / total_detected_quotations
+        if total_detected_quotations > 0
+        else 0.0
+    )
+    recall = len(found_known) / len(all_known) if all_known else 0.0
+    f1 = (
+        2 * precision * recall / (precision + recall)
+        if (precision + recall) > 0
+        else 0.0
+    )
+
+    metrics = {
+        "total_chunks": len(results),
+        "total_detected_quotations": total_detected_quotations,
+        "total_non_biblical": total_non_biblical,
+        "match_type_distribution": dict(match_type_counts),
+        "ground_truth_known_quotations": len(all_known),
+        "ground_truth_found": len(found_known),
+        "ground_truth_missed": len(missed_known),
+        "true_positives": true_positives,
+        "false_positives": false_positives,
+        "precision": round(precision, 4),
+        "recall": round(recall, 4),
+        "f1": round(f1, 4),
+        "found_references": sorted(found_known),
+        "missed_references": sorted(missed_known),
+    }
+
+    if verbose:
+        # Per-type breakdown
+        for mtype in ["exact", "close_paraphrase", "allusion"]:
+            known_set = known.get(mtype, set())
+            detected_set = detected_refs.get(mtype, set())
+            found = known_set & detected_set
+            metrics[f"{mtype}_known"] = len(known_set)
+            metrics[f"{mtype}_found"] = len(found)
+            metrics[f"{mtype}_recall"] = (
+                round(len(found) / len(known_set), 4) if known_set else 0.0
+            )
+
+    return metrics
+
+
+def print_metrics(metrics: Dict, verbose: bool = False) -> None:
+    """Print evaluation metrics in a readable format."""
+    print("\n" + "=" * 60)
+    print("EVALUATION RESULTS")
+    print("=" * 60)
+
+    print(f"\nTotal chunks analyzed: {metrics['total_chunks']}")
+    print(f"Detected as quotation: {metrics['total_detected_quotations']}")
+    print(f"Detected as non-biblical: {metrics['total_non_biblical']}")
+
+    print("\nMatch type distribution:")
+    for mtype, count in sorted(metrics["match_type_distribution"].items()):
+        pct = count / metrics["total_chunks"] * 100
+        print(f"  {mtype:20s}: {count:4d} ({pct:.1f}%)")
+
+    print("\n--- Ground Truth Evaluation ---")
+    print(f"Known quotations (NT only): {metrics['ground_truth_known_quotations']}")
+    print(f"Found: {metrics['ground_truth_found']}")
+    print(f"Missed: {metrics['ground_truth_missed']}")
+
+    print(f"\nTrue positives:  {metrics['true_positives']}")
+    print(f"False positives: {metrics['false_positives']}")
+
+    print(f"\nPrecision: {metrics['precision']:.2%}")
+    print(f"Recall:    {metrics['recall']:.2%}")
+    print(f"F1 Score:  {metrics['f1']:.2%}")
+
+    if metrics["missed_references"]:
+        print("\nMissed references:")
+        for ref in metrics["missed_references"]:
+            print(f"  - {ref}")
+
+    if verbose:
+        print("\n--- Per-Type Recall ---")
+        for mtype in ["exact", "close_paraphrase", "allusion"]:
+            known = metrics.get(f"{mtype}_known", 0)
+            found = metrics.get(f"{mtype}_found", 0)
+            recall = metrics.get(f"{mtype}_recall", 0.0)
+            print(f"  {mtype:20s}: {found}/{known} ({recall:.2%})")
+
+        if metrics["found_references"]:
+            print("\nFound references:")
+            for ref in metrics["found_references"]:
+                print(f"  + {ref}")
+
+    print("\n" + "=" * 60)
+
+
+def main():
+    parser = argparse.ArgumentParser(
+        description="Evaluate detection report against ground truth"
+    )
+    parser.add_argument(
+        "--report",
+        type=str,
+        required=True,
+        help="Path to detection report JSON file",
+    )
+    parser.add_argument(
+        "--ground-truth",
+        type=str,
+        default=str(DEFAULT_GROUND_TRUTH),
+        help="Path to ground-truth JSON file",
+    )
+    parser.add_argument(
+        "--verbose",
+        "-v",
+        action="store_true",
+        help="Show detailed per-type breakdown",
+    )
+    parser.add_argument(
+        "--json-output",
+        type=str,
+        help="Write metrics to JSON file",
+    )
+
+    args = parser.parse_args()
+
+    # Load data
+    ground_truth = load_ground_truth(Path(args.ground_truth))
+    report = load_report(Path(args.report))
+
+    logger.info(f"Report: {args.report}")
+    logger.info(f"Ground truth: {args.ground_truth}")
+
+    # Evaluate
+    metrics = evaluate_report(report, ground_truth, verbose=args.verbose)
+
+    # Print results
+    print_metrics(metrics, verbose=args.verbose)
+
+    # Optionally write JSON
+    if args.json_output:
+        with open(args.json_output, "w", encoding="utf-8") as f:
+            json.dump(metrics, f, indent=2, ensure_ascii=False)
+        logger.info(f"Metrics written to: {args.json_output}")
+
+
+if __name__ == "__main__":
+    main()
