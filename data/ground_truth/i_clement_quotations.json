@@ -3,7 +3,8 @@
     "source": "1 Clement (First Epistle of Clement to the Corinthians)",
     "description": "Ground-truth biblical quotations in 1 Clement based on standard scholarly apparatus (Biblia Patristica, Lake's Loeb edition, Lightfoot commentary)",
     "created": "2026-04-02",
-    "notes": "NT-only references (matching current database). OT/Septuagint quotations excluded pending Phase 6."
+    "updated": "2026-04-02",
+    "notes": "Includes both NT and OT/Septuagint references. Phase 6 expanded with LXX quotations."
   },
   "exact_quotations": [
     {
@@ -156,6 +157,69 @@
       "clement_text": "ἀγάπη καλύπτει πλῆθος ἁμαρτιῶν",
       "match_type": "allusion",
       "notes": "Love covers a multitude of sins"
+    },
+    {
+      "clement_ref": "4:1-6",
+      "biblical_ref": "Genesis 4:3-8",
+      "clement_text": "Κάιν προσήνεγκεν ἀπὸ τῶν καρπῶν τῆς γῆς θυσίαν τῷ θεῷ",
+      "match_type": "allusion",
+      "notes": "Cain and Abel narrative from Genesis LXX"
+    },
+    {
+      "clement_ref": "10:3-4",
+      "biblical_ref": "Genesis 12:1-3",
+      "clement_text": "ἔξελθε ἐκ τῆς γῆς σου",
+      "match_type": "allusion",
+      "notes": "God's call to Abraham from Genesis 12 LXX"
+    },
+    {
+      "clement_ref": "12:4-7",
+      "biblical_ref": "Joshua 2:18-19",
+      "clement_text": "κόκκινον ... διὰ τῆς θυρίδος",
+      "match_type": "allusion",
+      "notes": "Rahab and the scarlet thread from Joshua LXX"
+    },
+    {
+      "clement_ref": "34:6",
+      "biblical_ref": "Isaiah 6:3",
+      "clement_text": "ἅγιος ἅγιος ἅγιος κύριος σαβαώθ",
+      "match_type": "allusion",
+      "notes": "Trisagion from Isaiah 6:3 LXX"
+    },
+    {
+      "clement_ref": "15:2",
+      "biblical_ref": "Isaiah 29:13",
+      "clement_text": "ὁ λαὸς οὗτος τοῖς χείλεσίν με τιμᾷ",
+      "match_type": "allusion",
+      "notes": "People honor with lips from Isaiah 29:13 LXX"
+    },
+    {
+      "clement_ref": "1:3",
+      "biblical_ref": "Proverbs 3:34",
+      "clement_text": "ὑποτασσόμενοι ... τιμὴν τὴν καθήκουσαν ἀπονέμοντες",
+      "match_type": "allusion",
+      "notes": "God opposes the proud / gives grace to humble from Proverbs 3:34 LXX"
+    },
+    {
+      "clement_ref": "16:3-14",
+      "biblical_ref": "Isaiah 53:1-12",
+      "clement_text": "κύριε, τίς ἐπίστευσεν τῇ ἀκοῇ ἡμῶν",
+      "match_type": "allusion",
+      "notes": "Extended quotation of Isaiah 53 (Suffering Servant) from LXX"
+    },
+    {
+      "clement_ref": "18:2-17",
+      "biblical_ref": "Psalms 51:1-17",
+      "clement_text": "ἐλέησόν με, ὁ θεός, κατὰ τὸ μέγα ἔλεός σου",
+      "match_type": "allusion",
+      "notes": "Extended quotation of Psalm 50 LXX (51 MT), David's repentance psalm"
+    },
+    {
+      "clement_ref": "33:3",
+      "biblical_ref": "Genesis 1:26-27",
+      "clement_text": "ποιήσωμεν ἄνθρωπον κατ' εἰκόνα καὶ καθ' ὁμοίωσιν ἡμετέραν",
+      "match_type": "allusion",
+      "notes": "Creation of humanity from Genesis 1:26 LXX"
     }
   ],
   "non_biblical": [
