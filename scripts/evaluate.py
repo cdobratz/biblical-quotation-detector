@@ -139,9 +139,11 @@ def build_known_refs(
         "all_quotations": set(),
         "non_biblical": set(),
     }
-    # Map each expanded verse back to its original ground-truth entry
-    # so we can count recall by entry, not by individual verse
-    result["_verse_to_entry"] = {}  # verse -> original ref
+    # Map each expanded verse back to its original ground-truth entry(ies)
+    # so we can count recall by entry, not by individual verse.
+    # Uses sets because cross-references can cause a verse to map to
+    # multiple ground-truth entries.
+    result["_verse_to_entry"] = {}  # verse -> set of original refs
     result["_entries"] = {"exact": set(), "close_paraphrase": set(), "allusion": set(), "all": set()}
 
     if cross_refs is None:
@@ -167,7 +169,9 @@ def build_known_refs(
             result[key].update(all_refs)
             result["all_quotations"].update(all_refs)
             for v in all_refs:
-                result["_verse_to_entry"][v] = original_ref
+                if v not in result["_verse_to_entry"]:
+                    result["_verse_to_entry"][v] = set()
+                result["_verse_to_entry"][v].add(original_ref)
 
     return result
 
@@ -230,7 +234,7 @@ def evaluate_report(
     found_entries = set()
     for v in all_detected:
         if v in verse_to_entry:
-            found_entries.add(verse_to_entry[v])
+            found_entries.update(verse_to_entry[v])
     missed_entries = all_entries - found_entries
 
     total_detected_quotations = sum(1 for r in results if r.get("is_quotation", False))
@@ -274,9 +278,10 @@ def evaluate_report(
             # Map detected verses back to entries for this type
             found_for_type = set()
             for v in detected_set:
-                entry = verse_to_entry.get(v)
-                if entry and entry in known_entries_for_type:
-                    found_for_type.add(entry)
+                entries_for_v = verse_to_entry.get(v, set())
+                for entry in entries_for_v:
+                    if entry in known_entries_for_type:
+                        found_for_type.add(entry)
             metrics[f"{mtype}_known"] = len(known_entries_for_type)
             metrics[f"{mtype}_found"] = len(found_for_type)
             metrics[f"{mtype}_recall"] = (
