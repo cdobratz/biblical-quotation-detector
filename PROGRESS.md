@@ -4,9 +4,9 @@
 
 This document tracks the progress and roadmap for the Biblical Quotation Detector project.
 
-**Last Updated**: 2026-04-02
-**Current Phase**: Phase 5c Complete - Retrieval Improvements & Evaluation Fixes
-**Overall Completion**: ~95%
+**Last Updated**: 2026-04-03
+**Current Phase**: Phase 6 Complete - Scoring Improvements & LXX Support
+**Overall Completion**: ~97%
 
 ---
 
@@ -492,23 +492,74 @@ After re-indexing Qdrant with e5 `passage:` prefixes and running four tuning con
 
 ---
 
+### Phase 6: Scoring Improvements & LXX Support (Complete)
+
+**Status**: 100% Complete
+**Completed**: April 2, 2026
+**PR**: [#5](https://github.com/cdobratz/biblical-quotation-detector/pull/5)
+
+#### Problem Statement
+
+15 of 21 ground-truth quotations were unreachable because the correct biblical verse never appeared in search results. Root cause: many 1 Clement quotations route through the Septuagint (OT), which was absent from the NT-only database. Additionally, the scoring pipeline only evaluated the #1 candidate and ignored contextual signals from adjacent text chunks.
+
+#### Achievements
+
+- [x] **Phase 6a: LXX/Septuagint ingestion** — Created `scripts/ingest_lxx.py` to download and ingest the Rahlfs 1935 LXX edition (from `eliranwong/LXX-Rahlfs-1935`), reconstruct verse-level Greek text from word-by-word CSV data, and ingest into SQLite + Qdrant
+- [x] **Option A: Cross-reference chain matching** — Built `data/cross_references.json` with 32 parallel passage groups (126 entries) mapping NT ↔ OT parallel quotations; integrated into both detector and evaluator
+- [x] **Option B: Multi-candidate scoring** — `_heuristic_classify()` now scores top-N candidates (default 5) and selects the best multi-signal score, instead of only evaluating the #1 similarity match
+- [x] **Option C: Context-aware scoring** — `detect()` and `detect_batch()` check adjacent chunks for quotation formulas; `context_has_formula` boost adds up to 15 points to confidence
+- [x] **Expanded ground truth** — 21 → 30 entries (added 9 OT/LXX references: Genesis 4:3-8, 12:1-3, 1:26-27; Isaiah 53:1-12, 6:3, 29:13; Psalms 51:1-17; Joshua 2:18-19; Proverbs 3:34)
+- [x] **Bug fix: `_verse_to_entry` overwrite** — Changed from dict (verse → single entry) to dict (verse → set of entries) to handle overlapping cross-references correctly
+
+#### Test Results (7/7 tests passed)
+
+| Test | Result | Details |
+| ---- | ------ | ------- |
+| `_verse_to_entry` set-based fix | PASS | Overlapping entries (1 Peter 5:5 + Proverbs 3:34) both reachable |
+| Evaluate recall with overlapping cross-refs | PASS | Detecting James 4:6 credits both overlapping entries (found=2) |
+| Multi-candidate scoring | PASS | Candidate #3 selected over #1 when word overlap is better |
+| Context-aware formula boost | PASS | Score boost: 20 → 35 (+75%) with adjacent chunk formula |
+| Ground truth expansion | PASS | 30 entries (4 exact + 8 paraphrase + 18 allusions), 9 OT verified |
+| Cross-reference loading | PASS | 126 entries across 32 groups, detector.py and evaluate.py match |
+| Existing unit tests (regression) | 18/18 PASS | No regressions |
+
+#### Deliverables
+
+- `scripts/ingest_lxx.py` — LXX download, parsing, and ingestion pipeline
+- `data/cross_references.json` — 32 parallel passage groups (126 entries)
+- `data/ground_truth/i_clement_quotations.json` — Expanded to 30 entries (9 OT added)
+- `src/search/detector.py` — Multi-candidate scoring, context-aware formula detection, cross-reference loading
+- `scripts/evaluate.py` — Set-based `_verse_to_entry`, cross-reference integration in recall calculation
+
+#### Known Limitation
+
+The `_llm_verify` fallback path (error handler at line 641) does not pass `context_has_formula` when falling back to `_heuristic_classify`. This means the context-aware formula boost is lost in the LLM error path. Low priority — only affects when Claude API throws an exception.
+
+#### Next Steps After Merging
+
+1. Run LXX ingestion: `uv run python scripts/ingest_lxx.py`
+2. Re-index Qdrant with LXX data included
+3. Run fresh evaluation to measure improvement beyond the 6/21 retrieval ceiling
+4. Tune multi-candidate N and context weights based on results
+
+---
+
 ## Future Enhancements
 
-### Phase 6: Old Testament Support (Future)
+### Phase 7: Old Testament Support Expansion (Future)
 
-- [ ] Septuagint (LXX) Greek text ingestion
 - [ ] Hebrew text processing (optional)
 - [ ] Hebrew → Greek quotation detection
-- [ ] Expanded verse database
+- [ ] Additional OT text editions
 
-### Phase 7: Multi-language Support (Future)
+### Phase 8: Multi-language Support (Future)
 
 - [ ] Latin (Vulgate)
 - [ ] Syriac (Peshitta)
 - [ ] Coptic translations
 - [ ] English demonstration mode
 
-### Phase 8: Advanced Features (Future)
+### Phase 9: Advanced Features (Future)
 
 - [ ] Manuscript variant tracking
 - [ ] Textual criticism integration
@@ -527,7 +578,7 @@ After re-indexing Qdrant with e5 `passage:` prefixes and running four tuning con
 | Database Size | 83 MB | ✅ |
 | Total Verses | 77,491 | ✅ |
 | Sources Integrated | 10 | ✅ |
-| Books Covered | 27 (NT) | ✅ |
+| Books Covered | 27 NT + OT/LXX (pending ingestion) | ✅ |
 | Text Normalization | 100% | ✅ |
 | Text Lemmatization | 100% | ✅ |
 | Vector Implementation | 100% | ✅ |
@@ -639,12 +690,26 @@ After re-indexing Qdrant with e5 `passage:` prefixes and running four tuning con
 | Phase 3b | Jan 15 | Jan 15 | 1 day | ✅ Complete |
 | Phase 4 | Jan 15 | Jan 16 | 1 day | ✅ Complete |
 | Phase 5 | Jan 16 | Jan 16 | 1 day | ✅ Complete |
+| Phase 5b | Apr 2 | Apr 2 | 1 day | ✅ Complete |
+| Phase 5c | Apr 2 | Apr 2 | 1 day | ✅ Complete |
+| Phase 6 | Apr 2 | Apr 2 | 1 day | ✅ Complete |
 
 **Project Status**: Core functionality complete, ready for production use
 
 ---
 
 ## Recent Updates
+
+### April 2-3, 2026 (Phase 6 — Scoring Improvements & LXX Support)
+
+- ✅ Created LXX ingestion script (`scripts/ingest_lxx.py`) for Rahlfs 1935 Septuagint
+- ✅ Built cross-reference table: 32 parallel passage groups, 126 entries (`data/cross_references.json`)
+- ✅ Implemented multi-candidate scoring: top-5 candidates scored, best selected
+- ✅ Implemented context-aware scoring: adjacent chunks checked for quotation formulas (+75% boost)
+- ✅ Expanded ground truth: 21 → 30 entries (added 9 OT/LXX references)
+- ✅ Fixed `_verse_to_entry` bug: set-based mapping for overlapping cross-references
+- ✅ All 7 adversarial tests passed, 18 regression tests pass
+- 📝 PR [#5](https://github.com/cdobratz/biblical-quotation-detector/pull/5) merged
 
 ### April 2, 2026 (Phase 5c — Retrieval Improvements)
 
@@ -741,9 +806,9 @@ After re-indexing Qdrant with e5 `passage:` prefixes and running four tuning con
 
 See the main [README.md](./README.md) for contribution guidelines.
 
-**Current Priority**: Phase 6 - Septuagint (LXX) support to break through retrieval ceiling
+**Current Priority**: Run LXX ingestion and re-evaluate to measure improvement beyond the 6/21 retrieval ceiling
 
-**Context**: 15 of 21 ground-truth 1 Clement quotations are unreachable because they route through the OT/Septuagint, which is not in the current NT-only database
+**Context**: Phase 6 merged — LXX ingestion script, cross-references, multi-candidate scoring, and context-aware scoring are all in place. Next step is to run `ingest_lxx.py`, re-index Qdrant, and measure the new recall with 30 ground-truth entries
 
 ---
 

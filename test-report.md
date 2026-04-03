@@ -171,3 +171,47 @@ References found with fixes (conf=20): Acts 7:28, Galatians 3:6, 1 Corinthians 2
 - The embedding model retrieves semantically similar but wrong verses (e.g., same theme, different book)
 
 Improving beyond this ceiling will likely require **Septuagint/LXX support** (Phase 6) and/or cross-reference chain detection.
+
+---
+
+## Phase 6: Scoring Improvements Test Results (April 2-3, 2026)
+
+**PR**: [#5](https://github.com/cdobratz/biblical-quotation-detector/pull/5) (merged)
+**Session**: https://app.devin.ai/sessions/c98658377afe49eea5ef03bb4ae9bf50
+
+### Summary
+
+Tested all 5 new features + the `_verse_to_entry` bug fix via adversarial Python scripts. **7/7 tests passed.** All shell-based (no GUI).
+
+### Test Results
+
+- **Test 1: `_verse_to_entry` set-based fix (THE BUG FIX)** -- PASSED
+  - `_verse_to_entry["1 Peter 5:5"]` correctly maps to `{'1 Peter 5:5', 'Proverbs 3:34'}` (both entries, not just one)
+  - Both entries present in `_entries["all"]` — no overwrites
+- **Test 2: Evaluate recall with overlapping cross-references** -- PASSED
+  - Detecting "James 4:6" correctly credits BOTH "1 Peter 5:5" and "Proverbs 3:34" ground-truth entries
+  - `ground_truth_found` = 2, `ground_truth_missed` = 0
+- **Test 3: Multi-candidate scoring selects best candidate** -- PASSED
+  - With 3 candidates (high sim/no overlap, medium, low sim/high overlap), correctly selected candidate #3 (Galatians 3:6)
+  - Explanation: `best_candidate=#3`, confidence=56, match_type=`close_paraphrase`
+- **Test 4: Context-aware formula detection boosts scoring** -- PASSED
+  - Score WITHOUT context formula: 20
+  - Score WITH context formula: 35 (75% boost)
+  - Explanation correctly shows `context_formula=yes`
+- **Test 5: Ground truth expanded to 30 entries** -- PASSED
+  - 4 exact + 8 close_paraphrase + 18 allusions = 30 total
+  - All 9 OT entries verified present and correctly categorized
+- **Test 6: Cross-reference loading integrity** -- PASSED
+  - Both `_load_cross_references()` (detector.py) and `load_cross_references()` (evaluate.py) return identical 126-entry mappings across 32 groups
+  - Genesis 15:6 → {Genesis 15:6, Romans 4:3, Galatians 3:6, James 2:23}
+  - 1 Peter 5:5 → {1 Peter 5:5, Proverbs 3:34, James 4:6}
+- **Test 7: Regression -- existing unit tests** -- PASSED (18/18)
+
+### Not Tested (Out of Scope)
+
+| Feature | Reason | How to Test |
+|---|---|---|
+| LXX ingestion end-to-end | No `bible.db` on test machine | Run `uv run python scripts/ingest_lxx.py` on machine with bible.db |
+| Full detection pipeline | No populated Qdrant vector store | After LXX ingestion + re-indexing, run detection on 1 Clement |
+| LLM verification path | No Anthropic API key | Run with `ANTHROPIC_API_KEY` set |
+| `_llm_verify` fallback `context_has_formula` | Low-priority error path | Not fixed in this PR |
