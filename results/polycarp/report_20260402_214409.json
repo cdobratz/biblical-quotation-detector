@@ -1,0 +1,2335 @@
+{
+  "metadata": {
+    "source": "https://jtauber.github.io/apostolic-fathers/010-polycarp-philippians.html",
+    "date": "2026-04-02",
+    "mode": "heuristic",
+    "min_confidence": 20,
+    "chunk_method": "sentence",
+    "total_chunks": 54,
+    "greek_filter": true
+  },
+  "results": [
+    {
+      "input_text": "Polycarp to the Philippians\nΠολύκαρπος καὶ οἱ σὺν αὐτῷ πρεσβύτεροι τῇ ἐκκλησίᾳ τοῦ θεοῦ τῇ παροικούσῃ Φιλίππους",
+      "is_quotation": false,
+      "confidence": 18,
+      "match_type": "non_biblical",
+      "sources": [
+        {
+          "reference": "Philippians 1:1",
+          "book": "Philippians",
+          "chapter": 1,
+          "verse": 1,
+          "greek_text": "παυλοσ και τιμοθεοσ δουλοι ιησου χριστου πασιν τοισ αγιοισ εν χριστω ιησου τοισ ουσιν εν φιλιπποισ συν επισκοποισ και διακονοισ",
+          "similarity_score": 0.8783486545836496,
+          "source_edition": "grc_mtk"
+        },
+        {
+          "reference": "Acts 20:17",
+          "book": "Acts",
+          "chapter": 20,
+          "verse": 17,
+          "greek_text": "απο δε τησ μιλητου πεμψασ εισ εφεσον μετεκαλεσατο τουσ πρεσβυτερουσ τησ εκκλησιασ",
+          "similarity_score": 0.8783040540928394,
+          "source_edition": "grc_mtk"
+        },
+        {
+          "reference": "Philippians 1:1",
+          "book": "Philippians",
+          "chapter": 1,
+          "verse": 1,
+          "greek_text": "παυλος και τιμοθεος δουλοι χριστου ιησου πασιν τοις αγιοις εν χριστω ιησου τοις ουσιν εν φιλιπποις συν επισκοποις και διακονοις",
+          "similarity_score": 0.877586867366698,
+          "source_edition": "SR"
+        }
+      ],
+      "best_match": {
+        "reference": "Philippians 1:1",
+        "greek_text": "παυλοσ και τιμοθεοσ δουλοι ιησου χριστου πασιν τοισ αγιοισ εν χριστω ιησου τοισ ουσιν εν φιλιπποισ συν επισκοποισ και διακονοισ",
+        "similarity_score": 0.8783486545836496
+      },
+      "explanation": "Heuristic: score=0.878, shared_words=2, shared_lemmas=1, shared_ngrams=0, multi_signal=18. Top match: Philippians 1:1.",
+      "processing_time_ms": 14031,
+      "chunk_index": 0
+    },
+    {
+      "input_text": "ἔλεος ὑμῖν καὶ εἰρήνη παρὰ θεοῦ παντοκράτορος καὶ Ἰησοῦ Χριστοῦ τοῦ σωτῆρος ἡμῶν πληθυνθείη",
+      "is_quotation": true,
+      "confidence": 58,
+      "match_type": "close_paraphrase",
+      "sources": [
+        {
+          "reference": "2 Peter 1:2",
+          "book": "2 Peter",
+          "chapter": 1,
+          "verse": 2,
+          "greek_text": "χαρισ υμιν και ειρηνη πληθυνθειη εν επιγνωσει του θεου και ιησου του κυριου ημων",
+          "similarity_score": 0.8987001272438251,
+          "source_edition": "grc_mtk"
+        },
+        {
+          "reference": "Jude 1:2",
+          "book": "Jude",
+          "chapter": 1,
+          "verse": 2,
+          "greek_text": "ελεοσ υμιν και ειρηνη και αγαπη πληθυνθειη",
+          "similarity_score": 0.8984214575629037,
+          "source_edition": "grc_mtk"
+        },
+        {
+          "reference": "2 Peter 1:2",
+          "book": "2 Peter",
+          "chapter": 1,
+          "verse": 2,
+          "greek_text": "χαρις υμιν και ειρηνη πληθυνθειη εν επιγνωσει του θεου και ιησου του κυριου ημων",
+          "similarity_score": 0.897906775815242,
+          "source_edition": "grc_tcg"
+        }
+      ],
+      "best_match": {
+        "reference": "2 Peter 1:2",
+        "greek_text": "χαρισ υμιν και ειρηνη πληθυνθειη εν επιγνωσει του θεου και ιησου του κυριου ημων",
+        "similarity_score": 0.8987001272438251
+      },
+      "explanation": "Heuristic: score=0.899, shared_words=8, shared_lemmas=6, shared_ngrams=3, multi_signal=58. Top match: 2 Peter 1:2.",
+      "processing_time_ms": 162,
+      "chunk_index": 1
+    },
+    {
+      "input_text": "Ⅰ\nΣυνεχάρην ὑμῖν μεγάλως ἐν τῷ κυρίῳ ἡμῶν Ἰησοῦ Χριστῷ, δεξαμένοις τὰ μιμήματα τῆς ἀληθοῦς ἀγάπης καὶ προπέμψασιν, ὡς ἐπέβαλεν ὑμῖν, τοὺς ἐνειλημένους τοῖς ἁγιοπρεπέσιν δεσμοῖς, ἅτινά ἐστιν διαδήματα τῶν ἀληθῶς ὑπὸ θεοῦ καὶ τοῦ κυρίου ἡμῶν ἐκλελεγμένων",
+      "is_quotation": true,
+      "confidence": 45,
+      "match_type": "loose_paraphrase",
+      "sources": [
+        {
+          "reference": "Jude 1:21",
+          "book": "Jude",
+          "chapter": 1,
+          "verse": 21,
+          "greek_text": "εαυτους εν αγαπη θεου τηρησατε προσδεχομενοι το ελεος του κυριου ημων ιησου χριστου εις ζωην αιωνιον",
+          "similarity_score": 0.8818856608054347,
+          "source_edition": "grc_gtr"
+        },
+        {
+          "reference": "Jude 1:21",
+          "book": "Jude",
+          "chapter": 1,
+          "verse": 21,
+          "greek_text": "εαυτους εν αγαπη θεου τηρησατε προσδεχομενοι το ελεος του κυριου ημων ιησου χριστου εις ζωην αιωνιον",
+          "similarity_score": 0.8818856608054347,
+          "source_edition": "SR"
+        },
+        {
+          "reference": "Jude 1:21",
+          "book": "Jude",
+          "chapter": 1,
+          "verse": 21,
+          "greek_text": "εαυτους εν αγαπη θεου τηρησατε προσδεχομενοι το ελεος του κυριου ημων ιησου χριστου εις ζωην αιωνιον",
+          "similarity_score": 0.8818856608054347,
+          "source_edition": "grc_sbl"
+        }
+      ],
+      "best_match": {
+        "reference": "Jude 1:21",
+        "greek_text": "εαυτους εν αγαπη θεου τηρησατε προσδεχομενοι το ελεος του κυριου ημων ιησου χριστου εις ζωην αιωνιον",
+        "similarity_score": 0.8818856608054347
+      },
+      "explanation": "Heuristic: score=0.882, shared_words=5, shared_lemmas=5, shared_ngrams=3, multi_signal=45. Top match: Jude 1:21.",
+      "processing_time_ms": 190,
+      "chunk_index": 2
+    },
+    {
+      "input_text": "2\nκαὶ ὅτι ἡ βεβαία τῆς πίστεως ὑμῶν ῥίζα, ἐξ ἀρχαίων καταγγελλομένη χρόνων, μέχρι νῦν διαμένει καὶ καρποφορεῖ εἰς τὸν κύριον ἡμῶν Ἰησοῦν Χριστόν, ὃς ὑπέμεινεν ὑπὲρ τῶν ἁμαρτιῶν ἡμῶν ἕως θανάτου καταντῆσαι, ὃν ἤγειρεν ὁ θεός, λύσας τὰς ὠδῖνας τοῦ ᾅδου",
+      "is_quotation": true,
+      "confidence": 32,
+      "match_type": "allusion",
+      "sources": [
+        {
+          "reference": "Acts 13:48",
+          "book": "Acts",
+          "chapter": 13,
+          "verse": 48,
+          "greek_text": "ακουοντα δε τα εθνη εχαιρεν και εδοξαζον τον λογον 2του κυριου και επιστευσαν οσοι ησαν τεταγμενοι εις ζωην αιωνιον",
+          "similarity_score": 0.884178403251382,
+          "source_edition": "grc_srg"
+        },
+        {
+          "reference": "Acts 5:32",
+          "book": "Acts",
+          "chapter": 5,
+          "verse": 32,
+          "greek_text": "και ημεις εσμεν αυτου μαρτυρες των ρηματων τουτων και το πνευμα 2δε το αγιον ο εδωκεν ο θεος τοις πειθαρχουσιν αυτω",
+          "similarity_score": 0.8823220959098472,
+          "source_edition": "grc_srg"
+        },
+        {
+          "reference": "Philemon 1:6",
+          "book": "Philemon",
+          "chapter": 1,
+          "verse": 6,
+          "greek_text": "οπως η κοινωνια της πιστεως σου ενεργης γενηται εν επιγνωσει παντος αγαθου του εν ημιν εις 2χριστον ιησουν",
+          "similarity_score": 0.8762243960420103,
+          "source_edition": "grc_srg"
+        }
+      ],
+      "best_match": {
+        "reference": "Philemon 1:6",
+        "greek_text": "οπως η κοινωνια της πιστεως σου ενεργης γενηται εν επιγνωσει παντος αγαθου του εν ημιν εις 2χριστον ιησουν",
+        "similarity_score": 0.8762243960420103
+      },
+      "explanation": "Heuristic: score=0.876, shared_words=5, shared_lemmas=2, shared_ngrams=1, multi_signal=32, best_candidate=#3. Top match: Philemon 1:6.",
+      "processing_time_ms": 154,
+      "chunk_index": 3
+    },
+    {
+      "input_text": "3\nεἰς ὃν οὐκ ἰδόντες πιστεύετε χαρᾷ ἀνεκλαλήτῳ καὶ δεδοξασμένῃ, εἰς ἣν πολλοὶ ἐπιθυμοῦσιν εἰσελθεῖν, εἰδότες, ὅτι χάριτί ἐστε σεσωσμένοι, οὐκ ἐξ ἔργων, ἀλλὰ θελήματι θεοῦ διὰ Ἰησοῦ Χριστοῦ",
+      "is_quotation": true,
+      "confidence": 48,
+      "match_type": "loose_paraphrase",
+      "sources": [
+        {
+          "reference": "Ephesians 2:8",
+          "book": "Ephesians",
+          "chapter": 2,
+          "verse": 8,
+          "greek_text": "τη γαρ χαριτι εστε σεσωσμενοι δια τησ πιστεωσ και τουτο ουκ εξ υμων θεου το δωρον",
+          "similarity_score": 0.8757107557088804,
+          "source_edition": "grc_mtk"
+        },
+        {
+          "reference": "Ephesians 2:8",
+          "book": "Ephesians",
+          "chapter": 2,
+          "verse": 8,
+          "greek_text": "τη γαρ χαριτι εστε σεσωσμενοι δια πιστεως και τουτο ουκ εξ υμων θεου το δωρον",
+          "similarity_score": 0.8752108387267128,
+          "source_edition": "grc_sbl"
+        },
+        {
+          "reference": "Ephesians 2:8",
+          "book": "Ephesians",
+          "chapter": 2,
+          "verse": 8,
+          "greek_text": "τη γαρ χαριτι εστε σεσωσμενοι δια πιστεως και τουτο ουκ εξ υμων θεου το δωρον",
+          "similarity_score": 0.8752108387267128,
+          "source_edition": "SR"
+        }
+      ],
+      "best_match": {
+        "reference": "Ephesians 2:8",
+        "greek_text": "τη γαρ χαριτι εστε σεσωσμενοι δια τησ πιστεωσ και τουτο ουκ εξ υμων θεου το δωρον",
+        "similarity_score": 0.8757107557088804
+      },
+      "explanation": "Heuristic: score=0.876, shared_words=7, shared_lemmas=4, shared_ngrams=3, multi_signal=48. Top match: Ephesians 2:8.",
+      "processing_time_ms": 175,
+      "chunk_index": 4
+    },
+    {
+      "input_text": "Ⅱ\nΔιὸ ἀναζωσάμενοι τὰς ὀσφύας ὑμῶν δουλεύσατε τῷ θεῷ ἐν φόβῳ καὶ ἀληθείᾳ, ἀπολιπόντες τὴν κενὴν ματαιολογίαν καὶ τὴν τῶν πολλῶν πλάνην, πιστεύσαντες εἰς τὸν ἐγείραντα τὸν κύριον ἡμῶν Ἰησοῦν Χριστὸν ἐκ νεκρῶν καὶ δόντα αὐτῷ δόξαν καὶ θρόνον ἐκ δεξιῶν αὐτοῦ",
+      "is_quotation": true,
+      "confidence": 57,
+      "match_type": "close_paraphrase",
+      "sources": [
+        {
+          "reference": "Acts 5:32",
+          "book": "Acts",
+          "chapter": 5,
+          "verse": 32,
+          "greek_text": "και ημεις εσμεν αυτου μαρτυρες των ρηματων τουτων και το πνευμα 2δε το αγιον ο εδωκεν ο θεος τοις πειθαρχουσιν αυτω",
+          "similarity_score": 0.8720058798514378,
+          "source_edition": "grc_srg"
+        },
+        {
+          "reference": "1 Peter 1:21",
+          "book": "1 Peter",
+          "chapter": 1,
+          "verse": 21,
+          "greek_text": "τους δι αυτου πιστους εις θεον τον εγειραντα αυτον εκ νεκρων και δοξαν αυτω δοντα ωστε την πιστιν υμων και ελπιδα ειναι εις θεον",
+          "similarity_score": 0.8715201147780726,
+          "source_edition": "grc_tis"
+        },
+        {
+          "reference": "1 Peter 1:21",
+          "book": "1 Peter",
+          "chapter": 1,
+          "verse": 21,
+          "greek_text": "τους δι αυτου πιστευοντας εις θεον τον εγειραντα αυτον εκ νεκρων και δοξαν αυτω δοντα ωστε την πιστιν υμων και ελπιδα ειναι εις θεον",
+          "similarity_score": 0.871494534824786,
+          "source_edition": "grc_srg"
+        }
+      ],
+      "best_match": {
+        "reference": "1 Peter 1:21",
+        "greek_text": "τους δι αυτου πιστους εις θεον τον εγειραντα αυτον εκ νεκρων και δοξαν αυτω δοντα ωστε την πιστιν υμων και ελπιδα ειναι εις θεον",
+        "similarity_score": 0.8715201147780726
+      },
+      "explanation": "Heuristic: score=0.872, shared_words=11, shared_lemmas=7, shared_ngrams=3, multi_signal=57, best_candidate=#2. Top match: 1 Peter 1:21.",
+      "processing_time_ms": 187,
+      "chunk_index": 5
+    },
+    {
+      "input_text": "ᾧ ὑπετάγη τὰ πάντα ἐπουράνια καὶ ἐπίγεια, ᾧ πᾶσα πνοὴ λατρεύει, ὃς ἔρχεται κριτὴς ζώντων καὶ νεκρῶν, οὗ τὸ αἷμα ἐκζητήσει ὁ θεὸς ἀπὸ τῶν ἀπειθούντων αὐτῷ",
+      "is_quotation": true,
+      "confidence": 23,
+      "match_type": "allusion",
+      "sources": [
+        {
+          "reference": "Leviticus 2:8",
+          "book": "Leviticus",
+          "chapter": 2,
+          "verse": 8,
+          "greek_text": "και προσοισει την θυσιαν ην αν ποιη εκ τουτων τω κυριω και προσοισει προσ τον ιερεα και προσεγγισασ προσ το θυσιαστηριον",
+          "similarity_score": 0.8822365928001731,
+          "source_edition": "LXX"
+        },
+        {
+          "reference": "Leviticus 16:33",
+          "book": "Leviticus",
+          "chapter": 16,
+          "verse": 33,
+          "greek_text": "και εξιλασεται το αγιον του αγιου και την σκηνην του μαρτυριου και το θυσιαστηριον εξιλασεται και περι των ιερεων και περι πασησ συναγωγησ εξιλασεται",
+          "similarity_score": 0.8790994191423273,
+          "source_edition": "LXX"
+        },
+        {
+          "reference": "Psalms of Solomon 6:6",
+          "book": "Psalms of Solomon",
+          "chapter": 6,
+          "verse": 6,
+          "greek_text": "και παν αιτημα ψυχησ ελπιζουσησ προσ αυτον επιτελει ο κυριοσ ευλογητοσ κυριοσ ο ποιων ελεοσ τοισ αγαπωσιν αυτον εν αληθεια",
+          "similarity_score": 0.8789033336723084,
+          "source_edition": "LXX"
+        }
+      ],
+      "best_match": {
+        "reference": "Psalms of Solomon 4:6",
+        "greek_text": "εξαραι ο θεοσ τουσ εν υποκρισει ζωντασ μετα οσιων εν φθορα σαρκοσ αυτου και πενια την ζωην αυτου",
+        "similarity_score": 0.8788609818514626
+      },
+      "explanation": "Heuristic: score=0.879, shared_words=2, shared_lemmas=2, shared_ngrams=1, multi_signal=23, best_candidate=#4. Top match: Psalms of Solomon 4:6.",
+      "processing_time_ms": 164,
+      "chunk_index": 6
+    },
+    {
+      "input_text": "2\nὁ δὲ ἐγείρας αὐτὸν ἐκ νεκρῶν καὶ ἡμᾶς ἐγερεῖ, ἐὰν ποιῶμεν αὐτοῦ τὸ θέλημα καὶ πορευώμεθα ἐν ταῖς ἐντολαῖς αὐτοῦ καὶ ἀγαπῶμεν ἃ ἠγάπησεν, ἀπεχόμενοι πάσης ἀδικίας, πλεονεξίας, φιλαργυρίας, καταλαλιᾶς, ψευδομαρτυρίας",
+      "is_quotation": true,
+      "confidence": 32,
+      "match_type": "allusion",
+      "sources": [
+        {
+          "reference": "1 John 3:22",
+          "book": "1 John",
+          "chapter": 3,
+          "verse": 22,
+          "greek_text": "και ο εαν αιτωμεν λαμβανομεν 2παρ αυτου οτι τας εντολας αυτου τηρουμεν και τα αρεστα ενωπιον αυτου ποιουμεν",
+          "similarity_score": 0.8785250346991957,
+          "source_edition": "grc_srg"
+        },
+        {
+          "reference": "Philippians 3:10",
+          "book": "Philippians",
+          "chapter": 3,
+          "verse": 10,
+          "greek_text": "του γνωναι αυτον και την δυναμιν της αναστασεως αυτου και την κοινωνιαν των παθηματων αυτου 2συμμορφουμενος τω θανατω αυτου",
+          "similarity_score": 0.8758955667442062,
+          "source_edition": "grc_srg"
+        },
+        {
+          "reference": "Ephesians 1:20",
+          "book": "Ephesians",
+          "chapter": 1,
+          "verse": 20,
+          "greek_text": "ην ενηργησεν εν τω χριστω 2εγειρας αυτον εκ των νεκρων και εκαθισεν εν δεξια αυτου εν τοις επουρανιοις",
+          "similarity_score": 0.8756813113056462,
+          "source_edition": "grc_srg"
+        }
+      ],
+      "best_match": {
+        "reference": "Ephesians 1:20",
+        "greek_text": "ην ενηργησεν εν τω χριστω 2εγειρας αυτον εκ των νεκρων και εκαθισεν εν δεξια αυτου εν τοις επουρανιοις",
+        "similarity_score": 0.8756813113056462
+      },
+      "explanation": "Heuristic: score=0.876, shared_words=4, shared_lemmas=2, shared_ngrams=2, multi_signal=32, best_candidate=#3. Top match: Ephesians 1:20.",
+      "processing_time_ms": 184,
+      "chunk_index": 7
+    },
+    {
+      "input_text": "μὴ ἀποδιδόντες κακὸν ἀντὶ κακοῦ ἢ λοιδορίαν ἀντὶ λοιδορίας ἢ γρόνθον ἀντὶ γρόνθου ἢ κατάραν ἀντὶ κατάρας",
+      "is_quotation": true,
+      "confidence": 51,
+      "match_type": "close_paraphrase",
+      "sources": [
+        {
+          "reference": "1 Peter 3:9",
+          "book": "1 Peter",
+          "chapter": 3,
+          "verse": 9,
+          "greek_text": "μη αποδιδοντες κακον αντι κακου η λοιδοριαν αντι λοιδοριας τουναντιον δε ευλογουντες οτι εις τουτο εκληθητε ινα ευλογιαν κληρονομησητε",
+          "similarity_score": 0.8762512108171543,
+          "source_edition": "grc_sbl"
+        },
+        {
+          "reference": "1 Peter 3:9",
+          "book": "1 Peter",
+          "chapter": 3,
+          "verse": 9,
+          "greek_text": "μη αποδιδοντες κακον αντι κακου η λοιδοριαν αντι λοιδοριας τουναντιον δε ευλογουντες οτι εις τουτο εκληθητε ινα ευλογιαν κληρονομησητε",
+          "similarity_score": 0.8762512108171543,
+          "source_edition": "SR"
+        },
+        {
+          "reference": "1 Peter 3:9",
+          "book": "1 Peter",
+          "chapter": 3,
+          "verse": 9,
+          "greek_text": "μη αποδιδοντες κακον αντι κακου η λοιδοριαν αντι λοιδοριας τουναντιον δε ευλογουντες οτι εις τουτο εκληθητε ινα ευλογιαν κληρονομησητε",
+          "similarity_score": 0.8762512108171543,
+          "source_edition": "grc_tis"
+        }
+      ],
+      "best_match": {
+        "reference": "1 Peter 3:9",
+        "greek_text": "μη αποδιδοντες κακον αντι κακου η λοιδοριαν αντι λοιδοριας τουναντιον δε ευλογουντες οτι εις τουτο εκληθητε ινα ευλογιαν κληρονομησητε",
+        "similarity_score": 0.8762512108171543
+      },
+      "explanation": "Heuristic: score=0.876, shared_words=6, shared_lemmas=4, shared_ngrams=8, multi_signal=51. Top match: 1 Peter 3:9.",
+      "processing_time_ms": 151,
+      "chunk_index": 8
+    },
+    {
+      "input_text": "3\nμνημονεύοντες δὲ ὧν εἶπεν ὁ κύριος διδάσκων",
+      "is_quotation": false,
+      "confidence": 12,
+      "match_type": "non_biblical",
+      "sources": [
+        {
+          "reference": "John 8:4",
+          "book": "John",
+          "chapter": 8,
+          "verse": 4,
+          "greek_text": "ειπον αυτω  διδασκαλε 2ταυτην ευρομεν επ αυτοφωρω 3μοιχευομενην",
+          "similarity_score": 0.8978283699708487,
+          "source_edition": "grc_srg"
+        },
+        {
+          "reference": "Mark 10:10",
+          "book": "Mark",
+          "chapter": 10,
+          "verse": 10,
+          "greek_text": "και εν τη οικια παλιν οι μαθηται αυτου περι 2του αυτου 3επηρωτησαν αυτον",
+          "similarity_score": 0.8874589832602024,
+          "source_edition": "grc_srg"
+        },
+        {
+          "reference": "Luke 2:46",
+          "book": "Luke",
+          "chapter": 2,
+          "verse": 46,
+          "greek_text": "και εγενετο μετα ημερας τρεις ευρον αυτον εν τω ιερω καθεζομενον εν μεσω των διδασκαλων και ακουοντα αυτων και επερωτωντα αυτους",
+          "similarity_score": 0.8858525493129902,
+          "source_edition": "SR"
+        }
+      ],
+      "best_match": {
+        "reference": "John 8:4",
+        "greek_text": "ειπον αυτω  διδασκαλε 2ταυτην ευρομεν επ αυτοφωρω 3μοιχευομενην",
+        "similarity_score": 0.8978283699708487
+      },
+      "explanation": "Heuristic: score=0.898, shared_words=0, shared_lemmas=0, shared_ngrams=0, multi_signal=12. Top match: John 8:4.",
+      "processing_time_ms": 165,
+      "chunk_index": 9
+    },
+    {
+      "input_text": "Μὴ κρίνετε, ἵνα μὴ κριθῆτε",
+      "is_quotation": true,
+      "confidence": 41,
+      "match_type": "loose_paraphrase",
+      "sources": [
+        {
+          "reference": "Matthew 7:1",
+          "book": "Matthew",
+          "chapter": 7,
+          "verse": 1,
+          "greek_text": "μη κρινετε ινα μη κριθητε",
+          "similarity_score": 0.922528333650882,
+          "source_edition": "grc_tis"
+        },
+        {
+          "reference": "Matthew 7:1",
+          "book": "Matthew",
+          "chapter": 7,
+          "verse": 1,
+          "greek_text": "μη κρινετε ινα μη κριθητε",
+          "similarity_score": 0.922528333650882,
+          "source_edition": "grc_srg"
+        },
+        {
+          "reference": "Matthew 7:1",
+          "book": "Matthew",
+          "chapter": 7,
+          "verse": 1,
+          "greek_text": "μη κρινετε ινα μη κριθητε",
+          "similarity_score": 0.922528333650882,
+          "source_edition": "SR"
+        }
+      ],
+      "best_match": {
+        "reference": "Matthew 7:1",
+        "greek_text": "μη κρινετε ινα μη κριθητε",
+        "similarity_score": 0.922528333650882
+      },
+      "explanation": "Heuristic: score=0.923, shared_words=3, shared_lemmas=2, shared_ngrams=4, multi_signal=41. Top match: Matthew 7:1.",
+      "processing_time_ms": 159,
+      "chunk_index": 10
+    },
+    {
+      "input_text": "ἀφίετε, καὶ ἀφεθήσεται ὑμῖν",
+      "is_quotation": false,
+      "confidence": 16,
+      "match_type": "non_biblical",
+      "sources": [
+        {
+          "reference": "Sirach 7:2",
+          "book": "Sirach",
+          "chapter": 7,
+          "verse": 2,
+          "greek_text": "αποστηθι απο αδικου και εκκλινει απο σου",
+          "similarity_score": 0.8898860096704392,
+          "source_edition": "LXX"
+        },
+        {
+          "reference": "ΣΟΦΙΑ ΣΕΙΡΑΧ 7:2",
+          "book": "ΣΟΦΙΑ ΣΕΙΡΑΧ",
+          "chapter": 7,
+          "verse": 2,
+          "greek_text": "αποστηθι απο αδικου και εκκλινει απο σου",
+          "similarity_score": 0.8898860096704392,
+          "source_edition": "grc_bre"
+        },
+        {
+          "reference": "2 Corinthians 5:13",
+          "book": "2 Corinthians",
+          "chapter": 5,
+          "verse": 13,
+          "greek_text": "ειτε γαρ εξεστημεν θεω ειτε σωφρονουμεν υμιν",
+          "similarity_score": 0.8887526789415803,
+          "source_edition": "grc_srg"
+        }
+      ],
+      "best_match": {
+        "reference": "2 Corinthians 5:13",
+        "greek_text": "ειτε γαρ εξεστημεν θεω ειτε σωφρονουμεν υμιν",
+        "similarity_score": 0.8887526789415803
+      },
+      "explanation": "Heuristic: score=0.889, shared_words=1, shared_lemmas=1, shared_ngrams=0, multi_signal=16, best_candidate=#3. Top match: 2 Corinthians 5:13.",
+      "processing_time_ms": 168,
+      "chunk_index": 11
+    },
+    {
+      "input_text": "ᾧ μέτρῳ μετρεῖτε, ἀντιμετρηθήσεται ὑμῖν",
+      "is_quotation": true,
+      "confidence": 42,
+      "match_type": "loose_paraphrase",
+      "sources": [
+        {
+          "reference": "Matthew 7:2",
+          "book": "Matthew",
+          "chapter": 7,
+          "verse": 2,
+          "greek_text": "εν ω γαρ κριματι κρινετε κριθησεσθε και εν ω μετρω μετρειτε αντιμετρηθησεται υμιν",
+          "similarity_score": 0.8779790934466607,
+          "source_edition": "grc_gtr"
+        },
+        {
+          "reference": "Matthew 7:2",
+          "book": "Matthew",
+          "chapter": 7,
+          "verse": 2,
+          "greek_text": "εν ω γαρ κριματι κρινετε κριθησεσθε και εν ω μετρω μετρειτε μετρηθησεται υμιν",
+          "similarity_score": 0.871737642173418,
+          "source_edition": "grc_tcg"
+        },
+        {
+          "reference": "Matthew 7:2",
+          "book": "Matthew",
+          "chapter": 7,
+          "verse": 2,
+          "greek_text": "εν ω γαρ κριματι κρινετε κριθησεσθε και εν ω μετρω μετρειτε μετρηθησεται υμιν",
+          "similarity_score": 0.871737642173418,
+          "source_edition": "grc_f35"
+        }
+      ],
+      "best_match": {
+        "reference": "Matthew 7:2",
+        "greek_text": "εν ω γαρ κριματι κρινετε κριθησεσθε και εν ω μετρω μετρειτε αντιμετρηθησεται υμιν",
+        "similarity_score": 0.8779790934466607
+      },
+      "explanation": "Heuristic: score=0.878, shared_words=4, shared_lemmas=4, shared_ngrams=4, multi_signal=42. Top match: Matthew 7:2.",
+      "processing_time_ms": 178,
+      "chunk_index": 12
+    },
+    {
+      "input_text": "καὶ ὅτι μακάριοι οἱ πτωχοὶ καὶ οἱ διωκόμενοι ἕνεκεν δικαιοσύνης, ὅτι αὐτῶν ἐστὶν ἡ βασιλεία τοῦ θεοῦ",
+      "is_quotation": true,
+      "confidence": 55,
+      "match_type": "close_paraphrase",
+      "sources": [
+        {
+          "reference": "Isaiah 29:19",
+          "book": "Isaiah",
+          "chapter": 29,
+          "verse": 19,
+          "greek_text": "και αγαλλιασονται πτωχοι δια κυριον εν ευφροσυνη και οι απηλπισμενοι των ανθρωπων εμπλησθησονται ευφροσυνησ",
+          "similarity_score": 0.894444928635934,
+          "source_edition": "LXX"
+        },
+        {
+          "reference": "Isaiah 25:3",
+          "book": "Isaiah",
+          "chapter": 25,
+          "verse": 3,
+          "greek_text": "δια τουτο ευλογησει σε ο λαοσ ο πτωχοσ και πολεισ ανθρωπων αδικουμενων ευλογησουσιν σε",
+          "similarity_score": 0.8938551101653,
+          "source_edition": "LXX"
+        },
+        {
+          "reference": "Matthew 5:3",
+          "book": "Matthew",
+          "chapter": 5,
+          "verse": 3,
+          "greek_text": "μακαριοι οι πτωχοι τω πνευματι \nοτι αυτων εστιν η βασιλεια των ουρανων",
+          "similarity_score": 0.8935618695691682,
+          "source_edition": "grc_tcg"
+        }
+      ],
+      "best_match": {
+        "reference": "Matthew 5:3",
+        "greek_text": "μακαριοι οι πτωχοι τω πνευματι \nοτι αυτων εστιν η βασιλεια των ουρανων",
+        "similarity_score": 0.8935618695691682
+      },
+      "explanation": "Heuristic: score=0.894, shared_words=6, shared_lemmas=5, shared_ngrams=6, multi_signal=55, best_candidate=#3. Top match: Matthew 5:3.",
+      "processing_time_ms": 169,
+      "chunk_index": 13
+    },
+    {
+      "input_text": "Ⅲ\nΤαῦτα, ἀδελφοί, οὐκ ἐμαυτῷ ἐπιτρέψας γράφω ὑμῖν περὶ τῆς δικαιοσύνης, ἀλλ’ ἐπεὶ ὑμεῖς προεπεκαλέσασθέ με",
+      "is_quotation": true,
+      "confidence": 24,
+      "match_type": "allusion",
+      "sources": [
+        {
+          "reference": "Hebrews 13:22",
+          "book": "Hebrews",
+          "chapter": 13,
+          "verse": 22,
+          "greek_text": "παρακαλω δε υμας αδελφοι ανεχεσθε του λογου της παρακλησεως και γαρ δια βραχεων επεστειλα υμιν",
+          "similarity_score": 0.8821035269673414,
+          "source_edition": "grc_srg"
+        },
+        {
+          "reference": "Hebrews 13:22",
+          "book": "Hebrews",
+          "chapter": 13,
+          "verse": 22,
+          "greek_text": "παρακαλω δε υμας αδελφοι ανεχεσθε του λογου της παρακλησεως και γαρ δια βραχεων επεστειλα υμιν",
+          "similarity_score": 0.8821035269673414,
+          "source_edition": "grc_f35"
+        },
+        {
+          "reference": "Hebrews 13:22",
+          "book": "Hebrews",
+          "chapter": 13,
+          "verse": 22,
+          "greek_text": "παρακαλω δε υμας αδελφοι ανεχεσθε του λογου της παρακλησεως και γαρ δια βραχεων επεστειλα υμιν",
+          "similarity_score": 0.8821035269673414,
+          "source_edition": "grc_tis"
+        }
+      ],
+      "best_match": {
+        "reference": "Hebrews 13:22",
+        "greek_text": "παρακαλω δε υμας αδελφοι ανεχεσθε του λογου της παρακλησεως και γαρ δια βραχεων επεστειλα υμιν",
+        "similarity_score": 0.8821035269673414
+      },
+      "explanation": "Heuristic: score=0.882, shared_words=3, shared_lemmas=2, shared_ngrams=0, multi_signal=24. Top match: Hebrews 13:22.",
+      "processing_time_ms": 130,
+      "chunk_index": 14
+    },
+    {
+      "input_text": "2\nοὔτε γὰρ ἐγὼ οὔτε ἄλλος ὅμοιος ἐμοὶ δύναται κατακολουθῆσαι τῇ σοφίᾳ τοῦ μακαρίου καὶ ἐνδόξου Παύλου, ὃς γενόμενος ἐν ὑμῖν κατὰ πρόσωπον τῶν τότε ἀνθρώπων ἐδίδαξεν ἀκριβῶς καὶ βεβαίως τὸν περὶ ἀληθείας λόγον, ὃς καὶ ἀπὼν ὑμῖν ἔγραψεν ἐπιστολάς, εἰς ἃς ἐὰν ἐγκύπτητε, δυνηθήσεσθε οἰκοδομεῖσθαι εἰς τὴν δοθεῖσαν ὑμῖν πίστιν",
+      "is_quotation": true,
+      "confidence": 24,
+      "match_type": "allusion",
+      "sources": [
+        {
+          "reference": "Acts 19:15",
+          "book": "Acts",
+          "chapter": 19,
+          "verse": 15,
+          "greek_text": "αποκριθεν δε το πνευμα το πονηρον ειπεν  τον 2 ιησουν γινωσκω και τον παυλον επισταμαι υμεις δε τινες εστε",
+          "similarity_score": 0.8649256411363977,
+          "source_edition": "grc_srg"
+        },
+        {
+          "reference": "John 7:16",
+          "book": "John",
+          "chapter": 7,
+          "verse": 16,
+          "greek_text": "απεκριθη ουν αυτοις 2ο ιησους και ειπεν η εμη διδαχη ουκ εστιν εμη αλλα του πεμψαντος με",
+          "similarity_score": 0.8647877959995804,
+          "source_edition": "grc_srg"
+        },
+        {
+          "reference": "Mark 11:17",
+          "book": "Mark",
+          "chapter": 11,
+          "verse": 17,
+          "greek_text": "και εδιδασκεν λεγων αυτοις ου γεγραπται οτι ο οικος μου οικος προσευχης κληθησεται πασιν τοις εθνεσιν υμεις δε 2εποιησατε αυτον σπηλαιον ληστων",
+          "similarity_score": 0.8645362542172566,
+          "source_edition": "grc_srg"
+        }
+      ],
+      "best_match": {
+        "reference": "Galatians 1:12",
+        "greek_text": "ουδε γαρ εγω παρα ανθρωπου παρελαβον αυτο ουτε εδιδαχθην αλλα δι αποκαλυψεως 2ιησου χριστου",
+        "similarity_score": 0.8638050995468155
+      },
+      "explanation": "Heuristic: score=0.864, shared_words=3, shared_lemmas=2, shared_ngrams=1, multi_signal=24, best_candidate=#4. Top match: Galatians 1:12.",
+      "processing_time_ms": 184,
+      "chunk_index": 15
+    },
+    {
+      "input_text": "3\nἥτις ἐστὶν μήτηρ πάντων ἡμῶν, ἐπακολουθούσης τῆς ἐλπίδος, προαγούσης τῆς ἀγάπης τῆς εἰς θεὸν καὶ Χριστὸν καὶ εἰς τὸν πλησίον",
+      "is_quotation": true,
+      "confidence": 22,
+      "match_type": "allusion",
+      "sources": [
+        {
+          "reference": "Matthew 22:37",
+          "book": "Matthew",
+          "chapter": 22,
+          "verse": 37,
+          "greek_text": "ο δε ιησους 2εφη αυτω αγαπησεις κυριον τον θεον σου 3εν ολη καρδια σου και εν ολη ψυχη σου και εν ολη τη διανοια σου",
+          "similarity_score": 0.8811556506567855,
+          "source_edition": "grc_srg"
+        },
+        {
+          "reference": "1 Corinthians 10:4",
+          "book": "1 Corinthians",
+          "chapter": 10,
+          "verse": 4,
+          "greek_text": "και παντεσ το αυτο πομα πνευματικον επιον επινον γαρ εκ πνευματικησ ακολουθουσησ πετρασ η δε πετρα ην ο χριστοσ",
+          "similarity_score": 0.8789052646406476,
+          "source_edition": "grc_mtk"
+        },
+        {
+          "reference": "1 John 3:23",
+          "book": "1 John",
+          "chapter": 3,
+          "verse": 23,
+          "greek_text": "και αυτη εστιν η εντολη αυτου ινα πιστευωμεν τω ονοματι του υιου αυτου ιησου χριστου και αγαπωμεν αλληλους καθως εδωκεν εντολην ημιν",
+          "similarity_score": 0.8782344513220899,
+          "source_edition": "SR"
+        }
+      ],
+      "best_match": {
+        "reference": "Matthew 22:37",
+        "greek_text": "ο δε ιησους 2εφη αυτω αγαπησεις κυριον τον θεον σου 3εν ολη καρδια σου και εν ολη ψυχη σου και εν ολη τη διανοια σου",
+        "similarity_score": 0.8811556506567855
+      },
+      "explanation": "Heuristic: score=0.881, shared_words=3, shared_lemmas=1, shared_ngrams=0, multi_signal=22. Top match: Matthew 22:37.",
+      "processing_time_ms": 184,
+      "chunk_index": 16
+    },
+    {
+      "input_text": "ἐὰν γάρ τις τούτων ἐντὸς ᾖ, πεπλήρωκεν ἐντολὴν δικαιοσύνης",
+      "is_quotation": false,
+      "confidence": 15,
+      "match_type": "non_biblical",
+      "sources": [
+        {
+          "reference": "Psalms of Solomon 8:24",
+          "book": "Psalms of Solomon",
+          "chapter": 8,
+          "verse": 24,
+          "greek_text": "αινετοσ κυριοσ ο κρινων πασαν την γην εν δικαιοσυνη αυτου",
+          "similarity_score": 0.8791850745338847,
+          "source_edition": "LXX"
+        },
+        {
+          "reference": "Job 13:9",
+          "book": "Job",
+          "chapter": 13,
+          "verse": 9,
+          "greek_text": "καλον γε εαν εξιχνιαση υμασ ει γαρ τα παντα ποιουντεσ προστεθησεσθε αυτω",
+          "similarity_score": 0.8725338893912664,
+          "source_edition": "LXX"
+        },
+        {
+          "reference": "Proverbs 2:9",
+          "book": "Proverbs",
+          "chapter": 2,
+          "verse": 9,
+          "greek_text": "τοτε συνησεισ δικαιοσυνην και κριμα και κατορθωσεισ παντασ αξονασ αγαθουσ",
+          "similarity_score": 0.8690032247810353,
+          "source_edition": "LXX"
+        }
+      ],
+      "best_match": {
+        "reference": "Job 13:9",
+        "greek_text": "καλον γε εαν εξιχνιαση υμασ ει γαρ τα παντα ποιουντεσ προστεθησεσθε αυτω",
+        "similarity_score": 0.8725338893912664
+      },
+      "explanation": "Heuristic: score=0.873, shared_words=2, shared_lemmas=0, shared_ngrams=0, multi_signal=15, best_candidate=#2. Top match: Job 13:9.",
+      "processing_time_ms": 169,
+      "chunk_index": 17
+    },
+    {
+      "input_text": "ὁ γὰρ ἔχων ἀγάπην μακράν ἐστιν πάσης ἁμαρτίας",
+      "is_quotation": false,
+      "confidence": 18,
+      "match_type": "non_biblical",
+      "sources": [
+        {
+          "reference": "1 Peter 4:8",
+          "book": "1 Peter",
+          "chapter": 4,
+          "verse": 8,
+          "greek_text": "προ παντων δε την εις εαυτους αγαπην εκτενη εχοντες οτι η αγαπη καλυπτει πληθος αμαρτιων",
+          "similarity_score": 0.8871431749499896,
+          "source_edition": "grc_f35"
+        },
+        {
+          "reference": "1 Peter 4:8",
+          "book": "1 Peter",
+          "chapter": 4,
+          "verse": 8,
+          "greek_text": "προ παντων δε την εις εαυτους αγαπην εκτενη εχοντες οτι η αγαπη καλυψει πληθος αμαρτιων",
+          "similarity_score": 0.8869711681557844,
+          "source_edition": "grc_byz"
+        },
+        {
+          "reference": "1 Peter 4:8",
+          "book": "1 Peter",
+          "chapter": 4,
+          "verse": 8,
+          "greek_text": "προ παντων δε την εις εαυτους αγαπην εκτενη εχοντες οτι η αγαπη καλυψει πληθος αμαρτιων",
+          "similarity_score": 0.8869711681557844,
+          "source_edition": "grc_gtr"
+        }
+      ],
+      "best_match": {
+        "reference": "1 Peter 4:8",
+        "greek_text": "προ παντων δε την εις εαυτους αγαπην εκτενη εχοντες οτι η αγαπη καλυπτει πληθος αμαρτιων",
+        "similarity_score": 0.8871431749499896
+      },
+      "explanation": "Heuristic: score=0.887, shared_words=1, shared_lemmas=2, shared_ngrams=0, multi_signal=18. Top match: 1 Peter 4:8.",
+      "processing_time_ms": 174,
+      "chunk_index": 18
+    },
+    {
+      "input_text": "Ⅳ\nἈρχὴ δὲ πάντων χαλεπῶν φιλαργυρία",
+      "is_quotation": false,
+      "confidence": 9,
+      "match_type": "non_biblical",
+      "sources": [
+        {
+          "reference": "2 Corinthians 13:12",
+          "book": "2 Corinthians",
+          "chapter": 13,
+          "verse": 12,
+          "greek_text": "ασπασασθε αλληλους εν αγιω φιληματι",
+          "similarity_score": 0.8609056419398936,
+          "source_edition": "grc_gtr"
+        },
+        {
+          "reference": "2 Corinthians 13:12",
+          "book": "2 Corinthians",
+          "chapter": 13,
+          "verse": 12,
+          "greek_text": "ασπασασθε αλληλους εν αγιω φιληματι",
+          "similarity_score": 0.8609056419398936,
+          "source_edition": "grc_f35"
+        },
+        {
+          "reference": "2 Corinthians 13:12",
+          "book": "2 Corinthians",
+          "chapter": 13,
+          "verse": 12,
+          "greek_text": "ασπασασθε αλληλους εν αγιω φιληματι",
+          "similarity_score": 0.8609056419398936,
+          "source_edition": "grc_tcg"
+        }
+      ],
+      "best_match": {
+        "reference": "1 Thessalonians 5:26",
+        "greek_text": "ασπασασθε τους αδελφους παντας εν φιληματι αγιω",
+        "similarity_score": 0.8596542809231649
+      },
+      "explanation": "Heuristic: score=0.860, shared_words=0, shared_lemmas=1, shared_ngrams=0, multi_signal=9, best_candidate=#5. Top match: 1 Thessalonians 5:26.",
+      "processing_time_ms": 156,
+      "chunk_index": 19
+    },
+    {
+      "input_text": "εἰδότες οὖν ὅτι οὐδὲν εἰσηνέγκαμεν εἰς τὸν κόσμον, ἀλλ’ οὐδὲ ἐξενεγκεῖν τι ἔχομεν, ὁπλισώμεθα τοῖς ὅπλοις τῆς δικαιοσύνης καὶ διδάξωμεν ἑαυτοὺς πρῶτον πορεύεσθαι ἐν τῇ ἐντολῇ τοῦ κυριοῦ",
+      "is_quotation": true,
+      "confidence": 38,
+      "match_type": "loose_paraphrase",
+      "sources": [
+        {
+          "reference": "Luke 20:21",
+          "book": "Luke",
+          "chapter": 20,
+          "verse": 21,
+          "greek_text": "και επηρωτησαν αυτον λεγοντεσ διδασκαλε οιδαμεν οτι ορθωσ λεγεισ και διδασκεισ και ου λαμβανεισ προσωπον αλλ επ αληθειασ την οδον του θεου διδασκεισ",
+          "similarity_score": 0.8749531119536806,
+          "source_edition": "grc_mtk"
+        },
+        {
+          "reference": "2 Corinthians 5:11",
+          "book": "2 Corinthians",
+          "chapter": 5,
+          "verse": 11,
+          "greek_text": "ειδοτες ουν τον φοβον του κυριου ανθρωπους πειθομεν θεω δε πεφανερωμεθα ελπιζω δε και εν ταις συνειδησεσιν υμων πεφανερωσθαι",
+          "similarity_score": 0.8737621353265632,
+          "source_edition": "grc_tcg"
+        },
+        {
+          "reference": "2 Corinthians 5:11",
+          "book": "2 Corinthians",
+          "chapter": 5,
+          "verse": 11,
+          "greek_text": "ειδοτες ουν τον φοβον του κυριου ανθρωπους πειθομεν θεω δε πεφανερωμεθα ελπιζω δε και εν ταις συνειδησεσιν υμων πεφανερωσθαι",
+          "similarity_score": 0.8737621353265632,
+          "source_edition": "grc_tis"
+        }
+      ],
+      "best_match": {
+        "reference": "2 Corinthians 5:11",
+        "greek_text": "ειδοτες ουν τον φοβον του κυριου ανθρωπους πειθομεν θεω δε πεφανερωμεθα ελπιζω δε και εν ταις συνειδησεσιν υμων πεφανερωσθαι",
+        "similarity_score": 0.8737621353265632
+      },
+      "explanation": "Heuristic: score=0.874, shared_words=6, shared_lemmas=2, shared_ngrams=2, multi_signal=38, best_candidate=#2. Top match: 2 Corinthians 5:11.",
+      "processing_time_ms": 186,
+      "chunk_index": 20
+    },
+    {
+      "input_text": "2\nἔπειτα καὶ τὰς γυναῖκας ἡμῶν ἐν τῇ δοθείσῃ αὐταῖς πίστει καὶ ἀγάπῃ καὶ ἁγνείᾳ στεργούσας τοὺς ἑαυτῶν ἄνδρας ἐν πάσῃ ἀληθείᾳ καὶ ἀγαπώσας πάντας ἐξ ἴσου ἐν πάσῃ ἐγκρατείᾳ, καὶ τὰ τέκνα παιδεύειν τὴν παιδείαν τοῦ φόβου τοῦ θεοῦ",
+      "is_quotation": true,
+      "confidence": 24,
+      "match_type": "allusion",
+      "sources": [
+        {
+          "reference": "2 Chronicles 24:3",
+          "book": "2 Chronicles",
+          "chapter": 24,
+          "verse": 3,
+          "greek_text": "και ελαβεν αυτω ιωδαε γυναικασ δυο και εγεννησεν υιουσ και θυγατερασ",
+          "similarity_score": 0.877086492127847,
+          "source_edition": "LXX"
+        },
+        {
+          "reference": "Luke 2:40",
+          "book": "Luke",
+          "chapter": 2,
+          "verse": 40,
+          "greek_text": "το δε παιδιον ηυξανεν και εκραταιουτο πνευματι πληρουμενον σοφιας και χαρις θεου ην επ 2αυτο",
+          "similarity_score": 0.8754182643226667,
+          "source_edition": "grc_srg"
+        },
+        {
+          "reference": "Judges 3:6",
+          "book": "Judges",
+          "chapter": 3,
+          "verse": 6,
+          "greek_text": "και ελαβον τασ θυγατερασ αυτων εαυτοισ εισ γυναικασ και τασ θυγατερασ αυτων εδωκαν τοισ υιοισ αυτων και ελατρευσαν τοισ θεοισ αυτων",
+          "similarity_score": 0.8731551335672525,
+          "source_edition": "LXX"
+        }
+      ],
+      "best_match": {
+        "reference": "Judges 3:6",
+        "greek_text": "και ελαβον τασ θυγατερασ αυτων εαυτοισ εισ γυναικασ και τασ θυγατερασ αυτων εδωκαν τοισ υιοισ αυτων και ελατρευσαν τοισ θεοισ αυτων",
+        "similarity_score": 0.8731551335672525
+      },
+      "explanation": "Heuristic: score=0.873, shared_words=3, shared_lemmas=1, shared_ngrams=1, multi_signal=24, best_candidate=#3. Top match: Judges 3:6.",
+      "processing_time_ms": 206,
+      "chunk_index": 21
+    },
+    {
+      "input_text": "3\nτὰς χήρας σωφρονούσας περὶ τὴν τοῦ κυρίου πίστιν, ἐντυγχανούσας ἀδιαλείπτως περὶ πάντων, μακρὰν οὔσας πάσης διαβολῆς, καταλαλιᾶς, ψευδομαρτυρίας, φιλαργυρίας καὶ παντὸς κακοῦ, γινωσκούσας ὅτι εἰσὶ θυσιαστήριον θεοῦ καὶ ὅτι πάντα μωμοσκοπεῖται, καὶ λέληθεν αὐτὸν οὐδὲν οὔτε λογισμῶν οὔτε ἐννοιῶν οὔτε τι τῶν κρυπτῶν τῆς καρδίας",
+      "is_quotation": true,
+      "confidence": 29,
+      "match_type": "allusion",
+      "sources": [
+        {
+          "reference": "Numbers 5:25",
+          "book": "Numbers",
+          "chapter": 5,
+          "verse": 25,
+          "greek_text": "και λημψεται ο ιερευσ εκ χειροσ τησ γυναικοσ την θυσιαν τησ ζηλοτυπιασ και επιθησει την θυσιαν εναντι κυριου και προσοισει αυτην προσ το θυσιαστηριον",
+          "similarity_score": 0.8672846567333908,
+          "source_edition": "LXX"
+        },
+        {
+          "reference": "Daniel 8:25",
+          "book": "Daniel",
+          "chapter": 8,
+          "verse": 25,
+          "greek_text": "και επι τουσ αγιουσ το διανοημα αυτου και ευοδωθησεται το ψευδοσ εν ταισ χερσιν αυτου και η καρδια αυτου υψωθησεται και δολω αφανιει πολλουσ και επι απωλειασ ανδρων στησεται και ποιησει συναγωγην χειροσ και αποδωσεται",
+          "similarity_score": 0.8646174639455145,
+          "source_edition": "LXX"
+        },
+        {
+          "reference": "4 Maccabees 7:16",
+          "book": "4 Maccabees",
+          "chapter": 7,
+          "verse": 16,
+          "greek_text": "ει δη τοινυν γερων ανηρ των μεχρι θανατου βασανων περιεφρονει δι  ευσεβειαν ομολογουμενωσ ηγεμων εστιν των παθων ο ευσεβησ λογισμοσ",
+          "similarity_score": 0.8633480161200813,
+          "source_edition": "LXX"
+        }
+      ],
+      "best_match": {
+        "reference": "ΔΑΝΙΗΛ (Ελληνικά) 11:17",
+        "greek_text": "και ταξει το προσωπον αυτου εισελθειν εν ισχυι πασης της βασιλειας αυτου και ευθεια παντα μετʼ αυτου ποιησει και θυγατερα των γυναικων δωσει αυτω διαφθειραι αυτην και ου μη παραμεινη και ουκ αυτω εσται",
+        "similarity_score": 0.8611844790345056
+      },
+      "explanation": "Heuristic: score=0.861, shared_words=5, shared_lemmas=3, shared_ngrams=0, multi_signal=29, best_candidate=#4. Top match: ΔΑΝΙΗΛ (Ελληνικά) 11:17.",
+      "processing_time_ms": 205,
+      "chunk_index": 22
+    },
+    {
+      "input_text": "Ⅴ\nΕἰδότες, οὖν, ὅτι θεὸς οὐ μυκτηρίζεται, ὀφείλομεν ἀξίως τῆς ἐντολῆς αὐτοῦ καὶ δόξης περιπατεῖν",
+      "is_quotation": true,
+      "confidence": 25,
+      "match_type": "allusion",
+      "sources": [
+        {
+          "reference": "2 Corinthians 5:11",
+          "book": "2 Corinthians",
+          "chapter": 5,
+          "verse": 11,
+          "greek_text": "ειδοτες ουν τον φοβον του κυριου ανθρωπους πειθομεν θεω δε πεφανερωμεθα ελπιζω δε και εν ταις συνειδησεσιν υμων πεφανερωσθαι",
+          "similarity_score": 0.8827528480358215,
+          "source_edition": "grc_tis"
+        },
+        {
+          "reference": "2 Corinthians 5:11",
+          "book": "2 Corinthians",
+          "chapter": 5,
+          "verse": 11,
+          "greek_text": "ειδοτες ουν τον φοβον του κυριου ανθρωπους πειθομεν θεω δε πεφανερωμεθα ελπιζω δε και εν ταις συνειδησεσιν υμων πεφανερωσθαι",
+          "similarity_score": 0.8827528480358215,
+          "source_edition": "grc_gtr"
+        },
+        {
+          "reference": "2 Corinthians 5:11",
+          "book": "2 Corinthians",
+          "chapter": 5,
+          "verse": 11,
+          "greek_text": "ειδοτες ουν τον φοβον του κυριου ανθρωπους πειθομεν θεω δε πεφανερωμεθα ελπιζω δε και εν ταις συνειδησεσιν υμων πεφανερωσθαι",
+          "similarity_score": 0.8827528480358215,
+          "source_edition": "grc_tcg"
+        }
+      ],
+      "best_match": {
+        "reference": "2 Corinthians 5:11",
+        "greek_text": "ειδοτες ουν τον φοβον του κυριου ανθρωπους πειθομεν θεω δε πεφανερωμεθα ελπιζω δε και εν ταις συνειδησεσιν υμων πεφανερωσθαι",
+        "similarity_score": 0.8827528480358215
+      },
+      "explanation": "Heuristic: score=0.883, shared_words=3, shared_lemmas=1, shared_ngrams=1, multi_signal=25. Top match: 2 Corinthians 5:11.",
+      "processing_time_ms": 169,
+      "chunk_index": 23
+    },
+    {
+      "input_text": "2\nὁμοίως διάκονοι ἄμεμπτοι κατενώπιον αὐτοῦ τῆς δικαιοσύνης ὡς θεοῦ καὶ Χριστοῦ διάκονοι καὶ οὐκ ἀνθρώπων",
+      "is_quotation": true,
+      "confidence": 24,
+      "match_type": "allusion",
+      "sources": [
+        {
+          "reference": "Acts 24:16",
+          "book": "Acts",
+          "chapter": 24,
+          "verse": 16,
+          "greek_text": "εν τουτω δε αυτος ασκω απροσκοπον συνειδησιν 2εχων προς  τον θεον και τους ανθρωπους δια παντος",
+          "similarity_score": 0.8863636656711249,
+          "source_edition": "grc_srg"
+        },
+        {
+          "reference": "Luke 1:6",
+          "book": "Luke",
+          "chapter": 1,
+          "verse": 6,
+          "greek_text": "ησαν δε δικαιοι αμφοτεροι ενωπιον του θεου πορευομενοι εν πασαισ ταισ εντολαισ και δικαιωμασιν του κυριου αμεμπτοι",
+          "similarity_score": 0.8848909106058647,
+          "source_edition": "grc_mtk"
+        },
+        {
+          "reference": "Luke 1:6",
+          "book": "Luke",
+          "chapter": 1,
+          "verse": 6,
+          "greek_text": "ησαν δε δικαιοι αμφοτεροι ενωπιον του θεου πορευομενοι εν πασαις ταις εντολαις και δικαιωμασιν του κυριου αμεμπτοι",
+          "similarity_score": 0.8840845814320164,
+          "source_edition": "grc_srg"
+        }
+      ],
+      "best_match": {
+        "reference": "Luke 1:6",
+        "greek_text": "ησαν δε δικαιοι αμφοτεροι ενωπιον του θεου πορευομενοι εν πασαισ ταισ εντολαισ και δικαιωμασιν του κυριου αμεμπτοι",
+        "similarity_score": 0.8848909106058647
+      },
+      "explanation": "Heuristic: score=0.885, shared_words=3, shared_lemmas=2, shared_ngrams=0, multi_signal=24, best_candidate=#2. Top match: Luke 1:6.",
+      "processing_time_ms": 142,
+      "chunk_index": 24
+    },
+    {
+      "input_text": "μὴ διάβολοι, μὴ δίλογοι, ἀφιλάργυροι, ἐγκρατεῖς περὶ πάντα, εὔσπλαγχνοι, ἐπιμελεῖς, πορευόμενοι κατὰ τὴν ἀλήθειαν τοῦ κυρίου, ὃς ἐγένετο διάκονος πάντων",
+      "is_quotation": false,
+      "confidence": 17,
+      "match_type": "non_biblical",
+      "sources": [
+        {
+          "reference": "Exodus 34:6",
+          "book": "Exodus",
+          "chapter": 34,
+          "verse": 6,
+          "greek_text": "και παρηλθεν κυριοσ προ προσωπου αυτου και εκαλεσεν κυριοσ ο θεοσ οικτιρμων και ελεημων μακροθυμοσ και πολυελεοσ και αληθινοσ",
+          "similarity_score": 0.887970680105699,
+          "source_edition": "LXX"
+        },
+        {
+          "reference": "Titus 2:10",
+          "book": "Titus",
+          "chapter": 2,
+          "verse": 10,
+          "greek_text": "μη νοσφιζομενουσ αλλα πιστιν πασαν ενδεικνυμενουσ αγαθην ινα την διδασκαλιαν του σωτηροσ ημων θεου κοσμωσιν εν πασιν",
+          "similarity_score": 0.8849233481322781,
+          "source_edition": "grc_mtk"
+        },
+        {
+          "reference": "Wisdom of Solomon 15:1",
+          "book": "Wisdom of Solomon",
+          "chapter": 15,
+          "verse": 1,
+          "greek_text": "συ δε ο θεοσ ημων χρηστοσ και αληθησ μακροθυμοσ και ελεει διοικων τα παντα",
+          "similarity_score": 0.8842153535908027,
+          "source_edition": "LXX"
+        }
+      ],
+      "best_match": {
+        "reference": "Titus 2:10",
+        "greek_text": "μη νοσφιζομενουσ αλλα πιστιν πασαν ενδεικνυμενουσ αγαθην ινα την διδασκαλιαν του σωτηροσ ημων θεου κοσμωσιν εν πασιν",
+        "similarity_score": 0.8849233481322781
+      },
+      "explanation": "Heuristic: score=0.885, shared_words=2, shared_lemmas=0, shared_ngrams=0, multi_signal=17, best_candidate=#2. Top match: Titus 2:10.",
+      "processing_time_ms": 186,
+      "chunk_index": 25
+    },
+    {
+      "input_text": "ᾧ ἐὰν εὐαρεστήσωμεν ἐν τῷ νῦν αἰῶνι, ἀποληψόμεθα καὶ τὸν μέλλοντα, καθὼς ὑπέσχετο ἡμῖν ἐγεῖραι ἡμᾶς ἐκ νεκρῶν, καὶ ὅτι ἐὰν πολιτευσώμεθα ἀξίως αὐτοῦ, καὶ συμβασιλεύσομεν αὐτῷ, εἴγε πιστεύομεν",
+      "is_quotation": true,
+      "confidence": 29,
+      "match_type": "allusion",
+      "sources": [
+        {
+          "reference": "1 Thessalonians 4:17",
+          "book": "1 Thessalonians",
+          "chapter": 4,
+          "verse": 17,
+          "greek_text": "επειτα ημεις οι ζωντες οι περιλειπομενοι αμα συν αυτοις αρπαγησομεθα εν νεφελαις εις απαντησιν του κυριου εις αερα και ουτω παντοτε συν κυριω εσομεθα",
+          "similarity_score": 0.8792324261236141,
+          "source_edition": "grc_byz"
+        },
+        {
+          "reference": "1 Thessalonians 4:17",
+          "book": "1 Thessalonians",
+          "chapter": 4,
+          "verse": 17,
+          "greek_text": "επειτα ημεις οι ζωντες οι περιλειπομενοι αμα συν αυτοις αρπαγησομεθα εν νεφελαις εις απαντησιν του κυριου εις αερα και ουτω παντοτε συν κυριω εσομεθα",
+          "similarity_score": 0.8792324261236141,
+          "source_edition": "grc_tcg"
+        },
+        {
+          "reference": "1 Thessalonians 4:17",
+          "book": "1 Thessalonians",
+          "chapter": 4,
+          "verse": 17,
+          "greek_text": "επειτα ημεις οι ζωντες οι περιλειπομενοι αμα συν αυτοις αρπαγησομεθα εν νεφελαις εις απαντησιν του κυριου εις αερα και ουτω παντοτε συν κυριω εσομεθα",
+          "similarity_score": 0.8792324261236141,
+          "source_edition": "grc_gtr"
+        }
+      ],
+      "best_match": {
+        "reference": "Romans 4:24",
+        "greek_text": "αλλα και δι ημασ οισ μελλει λογιζεσθαι τοισ πιστευουσιν επι τον εγειραντα ιησουν τον κυριον ημων εκ νεκρων",
+        "similarity_score": 0.8772081820846724
+      },
+      "explanation": "Heuristic: score=0.877, shared_words=4, shared_lemmas=2, shared_ngrams=1, multi_signal=29, best_candidate=#5. Top match: Romans 4:24.",
+      "processing_time_ms": 138,
+      "chunk_index": 26
+    },
+    {
+      "input_text": "3\nὁμοίως καὶ νεώτεροι ἄμεμπτοι ἐν πᾶσιν, πρὸ παντὸς προνοοῦντες ἁγνείας καὶ χαλιναγωγοῦντες ἑαυτοὺς ἀπὸ παντὸς κακοῦ",
+      "is_quotation": true,
+      "confidence": 22,
+      "match_type": "allusion",
+      "sources": [
+        {
+          "reference": "1 Peter 5:5",
+          "book": "1 Peter",
+          "chapter": 5,
+          "verse": 5,
+          "greek_text": "ομοιως νεωτεροι υποταγητε πρεσβυτεροις παντες δε αλληλοις υποτασσομενοι την ταπεινοφροσυνην εγκομβωσασθε οτι ο θεος υπερηφανοις αντιτασσεται ταπεινοις δε διδωσι χαριν",
+          "similarity_score": 0.8745573770416725,
+          "source_edition": "grc_gtr"
+        },
+        {
+          "reference": "1 Peter 5:5",
+          "book": "1 Peter",
+          "chapter": 5,
+          "verse": 5,
+          "greek_text": "ομοιως νεωτεροι υποταγητε πρεσβυτεροις παντες δε αλληλοις υποτασσομενοι την ταπεινοφροσυνην εγκομβωσασθε οτι ο θεος υπερηφανοις αντιτασσεται ταπεινοις δε διδωσι χαριν",
+          "similarity_score": 0.8745573770416725,
+          "source_edition": "grc_tcg"
+        },
+        {
+          "reference": "1 Peter 5:5",
+          "book": "1 Peter",
+          "chapter": 5,
+          "verse": 5,
+          "greek_text": "ομοιως νεωτεροι υποταγητε πρεσβυτεροις παντες δε αλληλοις υποτασσομενοι την ταπεινοφροσυνην εγκομβωσασθε οτι ο θεος υπερηφανοις αντιτασσεται ταπεινοις δε διδωσι χαριν",
+          "similarity_score": 0.8745573770416725,
+          "source_edition": "grc_byz"
+        }
+      ],
+      "best_match": {
+        "reference": "1 Peter 5:5",
+        "greek_text": "ομοιως νεωτεροι υποταγητε πρεσβυτεροις παντες δε αλληλοις υποτασσομενοι την ταπεινοφροσυνην εγκομβωσασθε οτι ο θεος υπερηφανοις αντιτασσεται ταπεινοις δε διδωσι χαριν",
+        "similarity_score": 0.8745573770416725
+      },
+      "explanation": "Heuristic: score=0.875, shared_words=2, shared_lemmas=3, shared_ngrams=0, multi_signal=22. Top match: 1 Peter 5:5.",
+      "processing_time_ms": 163,
+      "chunk_index": 27
+    },
+    {
+      "input_text": "καλὸν γὰρ τὸ ἀνακόπτεσθαι ἀπὸ τῶν ἐπιθυμιῶν ἐν τῷ κόσμῳ, ὅτι πᾶσα ἐπιθυμία κατὰ τοῦ πνεύματος στρατεύεται, καὶ οὔτε πόρνοι οὔτε μαλακοὶ οὔτε ἀρσενοκοῖται βασιλείαν θεοῦ κληρονομήσουσιν, οὔτε οἱ ποιοῦντες τὰ ἄτοπα",
+      "is_quotation": true,
+      "confidence": 30,
+      "match_type": "allusion",
+      "sources": [
+        {
+          "reference": "Ephesians 5:5",
+          "book": "Ephesians",
+          "chapter": 5,
+          "verse": 5,
+          "greek_text": "τουτο γαρ εστε γινωσκοντεσ οτι πασ πορνοσ η ακαθαρτοσ η πλεονεκτησ οσ εστιν ειδωλολατρησ ουκ εχει κληρονομιαν εν τη βασιλεια του χριστου και θεου",
+          "similarity_score": 0.8805570076458384,
+          "source_edition": "grc_mtk"
+        },
+        {
+          "reference": "1 Thessalonians 4:3",
+          "book": "1 Thessalonians",
+          "chapter": 4,
+          "verse": 3,
+          "greek_text": "τουτο γαρ εστιν θελημα του θεου ο αγιασμοσ υμων απεχεσθαι υμασ απο τησ πορνειασ",
+          "similarity_score": 0.8784845967335978,
+          "source_edition": "grc_mtk"
+        },
+        {
+          "reference": "1 Corinthians 5:10",
+          "book": "1 Corinthians",
+          "chapter": 5,
+          "verse": 10,
+          "greek_text": "ου παντως τοις πορνοις του κοσμου τουτου η τοις πλεονεκταις και αρπαξιν η ειδωλολατραις επει ωφειλετε αρα εκ του κοσμου εξελθειν",
+          "similarity_score": 0.8768324726524513,
+          "source_edition": "SR"
+        }
+      ],
+      "best_match": {
+        "reference": "Ephesians 5:5",
+        "greek_text": "τουτο γαρ εστε γινωσκοντεσ οτι πασ πορνοσ η ακαθαρτοσ η πλεονεκτησ οσ εστιν ειδωλολατρησ ουκ εχει κληρονομιαν εν τη βασιλεια του χριστου και θεου",
+        "similarity_score": 0.8805570076458384
+      },
+      "explanation": "Heuristic: score=0.881, shared_words=5, shared_lemmas=2, shared_ngrams=0, multi_signal=30. Top match: Ephesians 5:5.",
+      "processing_time_ms": 125,
+      "chunk_index": 28
+    },
+    {
+      "input_text": "διὸ δέον ἀπέχεσθαι ἀπὸ πάντων τούτων, ὑποτασσομένους τοῖς πρεσβυτέροις καὶ διακόνοις ὡς θεῷ καὶ Χριστῷ",
+      "is_quotation": true,
+      "confidence": 21,
+      "match_type": "allusion",
+      "sources": [
+        {
+          "reference": "2 Corinthians 2:15",
+          "book": "2 Corinthians",
+          "chapter": 2,
+          "verse": 15,
+          "greek_text": "οτι χριστου ευωδια εσμεν τω θεω εν τοις σωζομενοις και εν τοις απολλυμενοις",
+          "similarity_score": 0.8762834464162509,
+          "source_edition": "grc_tis"
+        },
+        {
+          "reference": "2 Corinthians 2:15",
+          "book": "2 Corinthians",
+          "chapter": 2,
+          "verse": 15,
+          "greek_text": "οτι χριστου ευωδια εσμεν τω θεω εν τοις σωζομενοις και εν τοις απολλυμενοις",
+          "similarity_score": 0.8762834464162509,
+          "source_edition": "grc_srg"
+        },
+        {
+          "reference": "2 Corinthians 2:15",
+          "book": "2 Corinthians",
+          "chapter": 2,
+          "verse": 15,
+          "greek_text": "οτι χριστου ευωδια εσμεν τω θεω εν τοις σωζομενοις και εν τοις απολλυμενοις",
+          "similarity_score": 0.8762834464162509,
+          "source_edition": "grc_tcg"
+        }
+      ],
+      "best_match": {
+        "reference": "2 Corinthians 2:15",
+        "greek_text": "οτι χριστου ευωδια εσμεν τω θεω εν τοις σωζομενοις και εν τοις απολλυμενοις",
+        "similarity_score": 0.8762834464162509
+      },
+      "explanation": "Heuristic: score=0.876, shared_words=3, shared_lemmas=1, shared_ngrams=0, multi_signal=21. Top match: 2 Corinthians 2:15.",
+      "processing_time_ms": 147,
+      "chunk_index": 29
+    },
+    {
+      "input_text": "τὰς παρθένους ἐν ἀμώμῳ καὶ ἁγνῇ συνειδήσει περιπατεῖν",
+      "is_quotation": false,
+      "confidence": 13,
+      "match_type": "non_biblical",
+      "sources": [
+        {
+          "reference": "Ephesians 1:8",
+          "book": "Ephesians",
+          "chapter": 1,
+          "verse": 8,
+          "greek_text": "ης επερισσευσεν εις ημας εν παση σοφια και φρονησει",
+          "similarity_score": 0.8754941885957728,
+          "source_edition": "grc_srg"
+        },
+        {
+          "reference": "Ephesians 1:8",
+          "book": "Ephesians",
+          "chapter": 1,
+          "verse": 8,
+          "greek_text": "ης επερισσευσεν εις ημας εν παση σοφια και φρονησει",
+          "similarity_score": 0.8754941885957728,
+          "source_edition": "grc_tcg"
+        },
+        {
+          "reference": "Ephesians 1:8",
+          "book": "Ephesians",
+          "chapter": 1,
+          "verse": 8,
+          "greek_text": "ης επερισσευσεν εις ημας εν παση σοφια και φρονησει",
+          "similarity_score": 0.8754941885957728,
+          "source_edition": "grc_byz"
+        }
+      ],
+      "best_match": {
+        "reference": "Ephesians 1:8",
+        "greek_text": "ης επερισσευσεν εις ημας εν παση σοφια και φρονησει",
+        "similarity_score": 0.8754941885957728
+      },
+      "explanation": "Heuristic: score=0.875, shared_words=1, shared_lemmas=0, shared_ngrams=0, multi_signal=13. Top match: Ephesians 1:8.",
+      "processing_time_ms": 156,
+      "chunk_index": 30
+    },
+    {
+      "input_text": "Ⅵ\nΚαὶ οἱ πρεσβύτεροι δὲ εὔσπλαγχνοι, εἰς πάντας ἐλεήμονες, ἐπιστρέφοντες τὰ ἀποπεπλανημένα, ἐπισκεπτόμενοι πάντας ἀσθενεῖς, μὴ ἀμελοῦντες χήρας ἢ ὀρφανοῦ ἢ πένητος",
+      "is_quotation": true,
+      "confidence": 23,
+      "match_type": "allusion",
+      "sources": [
+        {
+          "reference": "Ezekiel 9:6",
+          "book": "Ezekiel",
+          "chapter": 9,
+          "verse": 6,
+          "greek_text": "πρεσβυτερον και νεανισκον και παρθενον και νηπια και γυναικασ αποκτεινατε εισ εξαλειψιν επι δε παντασ εφ  ουσ εστιν το σημειον μη εγγισητε και απο των αγιων μου αρξασθε και ηρξαντο απο των ανδρων των πρεσβυτερων οι ησαν εσω εν τω οικω",
+          "similarity_score": 0.8803450798586773,
+          "source_edition": "LXX"
+        },
+        {
+          "reference": "1 Esdras 1:50",
+          "book": "1 Esdras",
+          "chapter": 1,
+          "verse": 50,
+          "greek_text": "ουτοι απεκτειναν τουσ νεανισκουσ αυτων εν ρομφαια περικυκλω του αγιου αυτων ιερου και ουκ εφεισαντο νεανισκου και παρθενου και πρεσβυτου και νεωτερου αλλα παντασ παρεδωκεν εισ τασ χειρασ αυτων",
+          "similarity_score": 0.8797406823951285,
+          "source_edition": "LXX"
+        },
+        {
+          "reference": "ΕΣΔΡΑΣ. Αʹ 1:53",
+          "book": "ΕΣΔΡΑΣ. Αʹ",
+          "chapter": 1,
+          "verse": 53,
+          "greek_text": "ουτοι απεκτειναν τους νεανισκους αυτων εν ρομφαια περικυκλω του αγιου αυτων ιερου και ουκ εφεισαντο νεανισκου και παρθενου και πρεσβυτου και νεωτερου αλλα παντας παρεδωκαν εις τας χειρας αυτων",
+          "similarity_score": 0.8784145464524518,
+          "source_edition": "grc_bre"
+        }
+      ],
+      "best_match": {
+        "reference": "Ezekiel 9:6",
+        "greek_text": "πρεσβυτερον και νεανισκον και παρθενον και νηπια και γυναικασ αποκτεινατε εισ εξαλειψιν επι δε παντασ εφ  ουσ εστιν το σημειον μη εγγισητε και απο των αγιων μου αρξασθε και ηρξαντο απο των ανδρων των πρεσβυτερων οι ησαν εσω εν τω οικω",
+        "similarity_score": 0.8803450798586773
+      },
+      "explanation": "Heuristic: score=0.880, shared_words=3, shared_lemmas=2, shared_ngrams=0, multi_signal=23. Top match: Ezekiel 9:6.",
+      "processing_time_ms": 154,
+      "chunk_index": 31
+    },
+    {
+      "input_text": "ἀλλὰ προνοοῦντες ἀεὶ τοῦ καλοῦ ἐνώπιον θεοῦ καὶ ἀνθρώπων, ἀπεχόμενοι πάσης ὀργῆς, προσωποληψίας, κρίσεως ἀδίκου, μακρὰν ὄντες πάσης φιλαργυρίας, μὴ ταχέως πιστεύοντες κατά τινος, μὴ ἀπότομοι ἐν κρίσει, εἰδότες ὅτι πάντες ὀφειλέται ἐσμὲν ἁμαρτίας",
+      "is_quotation": true,
+      "confidence": 23,
+      "match_type": "allusion",
+      "sources": [
+        {
+          "reference": "1 Timothy 5:24",
+          "book": "1 Timothy",
+          "chapter": 5,
+          "verse": 24,
+          "greek_text": "τινων ανθρωπων αι αμαρτιαι προδηλοι εισι προαγουσαι εις κρισιν τισι δε και επακολουθουσιν",
+          "similarity_score": 0.8832832036038933,
+          "source_edition": "grc_gtr"
+        },
+        {
+          "reference": "1 Timothy 5:24",
+          "book": "1 Timothy",
+          "chapter": 5,
+          "verse": 24,
+          "greek_text": "τινων ανθρωπων αι αμαρτιαι προδηλοι εισι προαγουσαι εις κρισιν τισι δε και επακολουθουσιν",
+          "similarity_score": 0.8832832036038933,
+          "source_edition": "grc_tcg"
+        },
+        {
+          "reference": "1 Timothy 5:24",
+          "book": "1 Timothy",
+          "chapter": 5,
+          "verse": 24,
+          "greek_text": "τινων ανθρωπων αι αμαρτιαι προδηλοι εισι προαγουσαι εις κρισιν τισι δε και επακολουθουσιν",
+          "similarity_score": 0.8832832036038933,
+          "source_edition": "grc_byz"
+        }
+      ],
+      "best_match": {
+        "reference": "1 Timothy 5:24",
+        "greek_text": "τινων ανθρωπων αι αμαρτιαι προδηλοι εισι προαγουσαι εις κρισιν τισι δε και επακολουθουσιν",
+        "similarity_score": 0.8832832036038933
+      },
+      "explanation": "Heuristic: score=0.883, shared_words=2, shared_lemmas=3, shared_ngrams=0, multi_signal=23. Top match: 1 Timothy 5:24.",
+      "processing_time_ms": 166,
+      "chunk_index": 32
+    },
+    {
+      "input_text": "2\nεἰ οὖν δεόμεθα τοῦ κυρίου, ἵνα ἡμῖν ἀφῇ, ὀφείλομεν καὶ ἡμεῖς ἀφιέναι",
+      "is_quotation": true,
+      "confidence": 23,
+      "match_type": "allusion",
+      "sources": [
+        {
+          "reference": "Psalms 94:6",
+          "book": "Psalms",
+          "chapter": 94,
+          "verse": 6,
+          "greek_text": "δευτε προσκυνησωμεν και προσπεσωμεν αυτω και κλαυσωμεν εναντιον κυριου του ποιησαντοσ ημασ",
+          "similarity_score": 0.889703970114807,
+          "source_edition": "LXX"
+        },
+        {
+          "reference": "1 John 3:22",
+          "book": "1 John",
+          "chapter": 3,
+          "verse": 22,
+          "greek_text": "και ο εαν αιτωμεν λαμβανομεν 2παρ αυτου οτι τας εντολας αυτου τηρουμεν και τα αρεστα ενωπιον αυτου ποιουμεν",
+          "similarity_score": 0.8854921761538466,
+          "source_edition": "grc_srg"
+        },
+        {
+          "reference": "Hosea 6:1",
+          "book": "Hosea",
+          "chapter": 6,
+          "verse": 1,
+          "greek_text": "πορευθωμεν και επιστρεψωμεν προσ κυριον τον θεον ημων οτι αυτοσ ηρπακεν και ιασεται ημασ παταξει και μοτωσει ημασ",
+          "similarity_score": 0.8827053684847728,
+          "source_edition": "LXX"
+        }
+      ],
+      "best_match": {
+        "reference": "Psalms 94:6",
+        "greek_text": "δευτε προσκυνησωμεν και προσπεσωμεν αυτω και κλαυσωμεν εναντιον κυριου του ποιησαντοσ ημασ",
+        "similarity_score": 0.889703970114807
+      },
+      "explanation": "Heuristic: score=0.890, shared_words=3, shared_lemmas=1, shared_ngrams=0, multi_signal=23. Top match: Psalms 94:6.",
+      "processing_time_ms": 167,
+      "chunk_index": 33
+    },
+    {
+      "input_text": "ἀπέναντι γὰρ τῶν τοῦ κυρίου καὶ θεοῦ ἐσμὲν ὀφθαλμῶν, καὶ πάντας δεῖ παραστῆναι τῷ βήματι τοῦ Χριστοῦ καὶ ἕκαστον ὑπὲρ αὐτοῦ λόγον δοῦναι",
+      "is_quotation": true,
+      "confidence": 32,
+      "match_type": "allusion",
+      "sources": [
+        {
+          "reference": "Deuteronomy 13:5",
+          "book": "Deuteronomy",
+          "chapter": 13,
+          "verse": 5,
+          "greek_text": "οπισω κυριου του θεου υμων πορευεσθε και αυτον φοβηθησεσθε και τασ εντολασ αυτου φυλαξεσθε και τησ φωνησ αυτου ακουσεσθε και αυτω προστεθησεσθε",
+          "similarity_score": 0.8791169642613234,
+          "source_edition": "LXX"
+        },
+        {
+          "reference": "Exodus 34:6",
+          "book": "Exodus",
+          "chapter": 34,
+          "verse": 6,
+          "greek_text": "και παρηλθεν κυριοσ προ προσωπου αυτου και εκαλεσεν κυριοσ ο θεοσ οικτιρμων και ελεημων μακροθυμοσ και πολυελεοσ και αληθινοσ",
+          "similarity_score": 0.878640373762721,
+          "source_edition": "LXX"
+        },
+        {
+          "reference": "1 Peter 3:12",
+          "book": "1 Peter",
+          "chapter": 3,
+          "verse": 12,
+          "greek_text": "οτι οφθαλμοι κυριου επι δικαιους και ωτα αυτου εις δεησιν αυτων προσωπον δε κυριου επι ποιουντας κακα",
+          "similarity_score": 0.878429729621288,
+          "source_edition": "grc_srg"
+        }
+      ],
+      "best_match": {
+        "reference": "Deuteronomy 13:5",
+        "greek_text": "οπισω κυριου του θεου υμων πορευεσθε και αυτον φοβηθησεσθε και τασ εντολασ αυτου φυλαξεσθε και τησ φωνησ αυτου ακουσεσθε και αυτω προστεθησεσθε",
+        "similarity_score": 0.8791169642613234
+      },
+      "explanation": "Heuristic: score=0.879, shared_words=5, shared_lemmas=3, shared_ngrams=0, multi_signal=32. Top match: Deuteronomy 13:5.",
+      "processing_time_ms": 182,
+      "chunk_index": 34
+    },
+    {
+      "input_text": "3\nοὕτως οὖν δουλεύσωμεν αὐτῷ μετὰ φόβου καὶ πάσης εὐλαβείας, καθὼς αὐτὸς ἐνετείλατο καὶ οἱ εὐαγγελισάμενοι ἡμᾶς ἀπόστολοι καὶ οἱ προφῆται, οἱ προκηρύξαντες τὴν ἔλευσιν τοῦ κυρίου ἡμῶν",
+      "is_quotation": true,
+      "confidence": 27,
+      "match_type": "allusion",
+      "sources": [
+        {
+          "reference": "Psalms 146:11",
+          "book": "Psalms",
+          "chapter": 146,
+          "verse": 11,
+          "greek_text": "ευδοκει κυριοσ εν τοισ φοβουμενοισ αυτον και εν τοισ ελπιζουσιν επι το ελεοσ αυτου",
+          "similarity_score": 0.8891411664348683,
+          "source_edition": "LXX"
+        },
+        {
+          "reference": "1 Thessalonians 3:2",
+          "book": "1 Thessalonians",
+          "chapter": 3,
+          "verse": 2,
+          "greek_text": "και επεμψαμεν τιμοθεον τον αδελφον ημων και διακονον του θεου και συνεργον ημων εν τω ευαγγελιω του χριστου εις το 2στηριξαι υμας και παρακαλεσαι υμας 3περι της πιστεως υμων",
+          "similarity_score": 0.8827928417795924,
+          "source_edition": "grc_srg"
+        },
+        {
+          "reference": "Ezra-Nehemiah 20:33",
+          "book": "Ezra-Nehemiah",
+          "chapter": 20,
+          "verse": 33,
+          "greek_text": "και στησομεν εφ  ημασ εντολασ δουναι εφ  ημασ τριτον του διδραχμου κατ  ενιαυτον εισ δουλειαν οικου θεου ημων",
+          "similarity_score": 0.8809231357796731,
+          "source_edition": "LXX"
+        }
+      ],
+      "best_match": {
+        "reference": "Ezra-Nehemiah 20:33",
+        "greek_text": "και στησομεν εφ  ημασ εντολασ δουναι εφ  ημασ τριτον του διδραχμου κατ  ενιαυτον εισ δουλειαν οικου θεου ημων",
+        "similarity_score": 0.8809231357796731
+      },
+      "explanation": "Heuristic: score=0.881, shared_words=4, shared_lemmas=2, shared_ngrams=0, multi_signal=27, best_candidate=#3. Top match: Ezra-Nehemiah 20:33.",
+      "processing_time_ms": 156,
+      "chunk_index": 35
+    },
+    {
+      "input_text": "ζηλωταὶ περὶ τὸ καλόν, ἀπεχόμενοι τῶν σκανδάλων καὶ τῶν ψευδαδέλφων καὶ τῶν ἐν ὑποκρίσει φερόντων τὸ ὄνομα τοῦ κυρίου, οἵτινες ἀποπλανῶσι κενοὺς ἀνθρώπους",
+      "is_quotation": false,
+      "confidence": 18,
+      "match_type": "non_biblical",
+      "sources": [
+        {
+          "reference": "ΣΟΦΙΑ ΣΕΙΡΑΧ 23:8",
+          "book": "ΣΟΦΙΑ ΣΕΙΡΑΧ",
+          "chapter": 23,
+          "verse": 8,
+          "greek_text": "καταλειφθησεται αμαρτωλος και λοιδορος και υπερηφανος σκανδαλισθησονται εν αυτοις",
+          "similarity_score": 0.8955933767145673,
+          "source_edition": "grc_bre"
+        },
+        {
+          "reference": "Sirach 23:8",
+          "book": "Sirach",
+          "chapter": 23,
+          "verse": 8,
+          "greek_text": "εν τοισ χειλεσιν αυτου καταληφθησεται αμαρτωλοσ και λοιδοροσ και υπερηφανοσ σκανδαλισθησονται εν αυτοισ",
+          "similarity_score": 0.8916882647686695,
+          "source_edition": "LXX"
+        },
+        {
+          "reference": "Psalms of Solomon 4:23",
+          "book": "Psalms of Solomon",
+          "chapter": 4,
+          "verse": 23,
+          "greek_text": "μακαριοι οι φοβουμενοι τον κυριον εν ακακια αυτων ο κυριοσ ρυσεται αυτουσ απο ανθρωπων δολιων και αμαρτωλων και ρυσεται ημασ απο παντοσ σκανδαλου παρανομου",
+          "similarity_score": 0.8869764993475905,
+          "source_edition": "LXX"
+        }
+      ],
+      "best_match": {
+        "reference": "Psalms of Solomon 4:23",
+        "greek_text": "μακαριοι οι φοβουμενοι τον κυριον εν ακακια αυτων ο κυριοσ ρυσεται αυτουσ απο ανθρωπων δολιων και αμαρτωλων και ρυσεται ημασ απο παντοσ σκανδαλου παρανομου",
+        "similarity_score": 0.8869764993475905
+      },
+      "explanation": "Heuristic: score=0.887, shared_words=1, shared_lemmas=2, shared_ngrams=0, multi_signal=18, best_candidate=#3. Top match: Psalms of Solomon 4:23.",
+      "processing_time_ms": 180,
+      "chunk_index": 36
+    },
+    {
+      "input_text": "Ⅶ\nΠᾶς γὰρ ὃς ἂν μὴ ὁμολογῇ Ἰησοῦν Χριστὸν ἐν σαρκὶ ἐληλυθέναι, ἀντιχριστός ἐστιν",
+      "is_quotation": true,
+      "confidence": 44,
+      "match_type": "loose_paraphrase",
+      "sources": [
+        {
+          "reference": "1 John 4:3",
+          "book": "1 John",
+          "chapter": 4,
+          "verse": 3,
+          "greek_text": "και παν πνευμα ο μη ομολογει τον ιησουν χριστον εν σαρκι εληλυθοτα εκ του θεου ουκ εστι και τουτο εστι το του αντιχριστου ο ακηκοατε οτι ερχεται και νυν εν τω κοσμω εστιν ηδη",
+          "similarity_score": 0.8994727541805349,
+          "source_edition": "grc_byz"
+        },
+        {
+          "reference": "1 John 4:3",
+          "book": "1 John",
+          "chapter": 4,
+          "verse": 3,
+          "greek_text": "και παν πνευμα ο μη ομολογει τον ιησουν χριστον εν σαρκι εληλυθοτα εκ του θεου ουκ εστι και τουτο εστι το του αντιχριστου ο ακηκοατε οτι ερχεται και νυν εν τω κοσμω εστιν ηδη",
+          "similarity_score": 0.8994727541805349,
+          "source_edition": "grc_gtr"
+        },
+        {
+          "reference": "1 John 4:3",
+          "book": "1 John",
+          "chapter": 4,
+          "verse": 3,
+          "greek_text": "και παν πνευμα ο μη ομολογει ιησουν χριστον εν σαρκι εληλυθοτα εκ του θεου ουκ εστι και τουτο εστι το του αντιχριστου ο ακηκοατε οτι ερχεται και νυν εν τω κοσμω εστιν ηδη",
+          "similarity_score": 0.8978129479248372,
+          "source_edition": "grc_tcg"
+        }
+      ],
+      "best_match": {
+        "reference": "1 John 4:3",
+        "greek_text": "και παν πνευμα ο μη ομολογει τον ιησουν χριστον εν σαρκι εληλυθοτα εκ του θεου ουκ εστι και τουτο εστι το του αντιχριστου ο ακηκοατε οτι ερχεται και νυν εν τω κοσμω εστιν ηδη",
+        "similarity_score": 0.8994727541805349
+      },
+      "explanation": "Heuristic: score=0.899, shared_words=4, shared_lemmas=5, shared_ngrams=3, multi_signal=44. Top match: 1 John 4:3.",
+      "processing_time_ms": 163,
+      "chunk_index": 37
+    },
+    {
+      "input_text": "καὶ ὃς ἂν μὴ ὁμολογῇ τὸ μαρτύριον τοῦ σταυροῦ, ἐκ τοῦ διαβόλου ἐστίν",
+      "is_quotation": true,
+      "confidence": 28,
+      "match_type": "allusion",
+      "sources": [
+        {
+          "reference": "Proverbs 19:9",
+          "book": "Proverbs",
+          "chapter": 19,
+          "verse": 9,
+          "greek_text": "μαρτυσ ψευδησ ουκ ατιμωρητοσ εσται οσ δ  αν εκκαυση κακιαν απολειται υπ  αυτησ",
+          "similarity_score": 0.8932066894929543,
+          "source_edition": "LXX"
+        },
+        {
+          "reference": "1 Timothy 3:7",
+          "book": "1 Timothy",
+          "chapter": 3,
+          "verse": 7,
+          "greek_text": "δει δε και μαρτυριαν καλην εχειν απο των εξωθεν ινα μη εις ονειδισμον εμπεση και παγιδα του διαβολου",
+          "similarity_score": 0.8928888376267157,
+          "source_edition": "grc_sbl"
+        },
+        {
+          "reference": "1 Timothy 3:7",
+          "book": "1 Timothy",
+          "chapter": 3,
+          "verse": 7,
+          "greek_text": "δει δε και μαρτυριαν καλην εχειν απο των εξωθεν ινα μη εις ονειδισμον εμπεση και παγιδα του διαβολου",
+          "similarity_score": 0.8928888376267157,
+          "source_edition": "SR"
+        }
+      ],
+      "best_match": {
+        "reference": "1 Timothy 3:7",
+        "greek_text": "δει δε και μαρτυριαν καλην εχειν απο των εξωθεν ινα μη εις ονειδισμον εμπεση και παγιδα του διαβολου",
+        "similarity_score": 0.8928888376267157
+      },
+      "explanation": "Heuristic: score=0.893, shared_words=3, shared_lemmas=2, shared_ngrams=1, multi_signal=28, best_candidate=#2. Top match: 1 Timothy 3:7.",
+      "processing_time_ms": 160,
+      "chunk_index": 38
+    },
+    {
+      "input_text": "καὶ ὃς ἂν μεθοδεύῃ τὰ λόγια τοῦ κυρίου πρὸς τὰς ἰδίας ἐπιθυμίας καὶ λέγῃ μήτε ἀνάστασιν μήτε κρίσιν, οὗτος πρωτότοκός ἐστι τοῦ σατανᾶ",
+      "is_quotation": true,
+      "confidence": 21,
+      "match_type": "allusion",
+      "sources": [
+        {
+          "reference": "Mark 3:23",
+          "book": "Mark",
+          "chapter": 3,
+          "verse": 23,
+          "greek_text": "και προσκαλεσαμενοσ αυτουσ εν παραβολαισ ελεγεν αυτοισ πωσ δυναται σατανασ σαταναν εκβαλλειν",
+          "similarity_score": 0.8795324022214493,
+          "source_edition": "grc_mtk"
+        },
+        {
+          "reference": "Leviticus 27:26",
+          "book": "Leviticus",
+          "chapter": 27,
+          "verse": 26,
+          "greek_text": "και παν πρωτοτοκον ο αν γενηται εν τοισ κτηνεσιν σου εσται τω κυριω και ου καθαγιασει ουθεισ αυτο εαν τε μοσχον εαν τε προβατον τω κυριω εστιν",
+          "similarity_score": 0.8793834220305845,
+          "source_edition": "LXX"
+        },
+        {
+          "reference": "Leviticus 4:22",
+          "book": "Leviticus",
+          "chapter": 4,
+          "verse": 22,
+          "greek_text": "εαν δε ο αρχων αμαρτη και ποιηση μιαν απο πασων των εντολων κυριου του θεου αυτων η ου ποιηθησεται ακουσιωσ και αμαρτη και πλημμεληση",
+          "similarity_score": 0.8769178278487081,
+          "source_edition": "LXX"
+        }
+      ],
+      "best_match": {
+        "reference": "Leviticus 4:22",
+        "greek_text": "εαν δε ο αρχων αμαρτη και ποιηση μιαν απο πασων των εντολων κυριου του θεου αυτων η ου ποιηθησεται ακουσιωσ και αμαρτη και πλημμεληση",
+        "similarity_score": 0.8769178278487081
+      },
+      "explanation": "Heuristic: score=0.877, shared_words=3, shared_lemmas=1, shared_ngrams=0, multi_signal=21, best_candidate=#3. Top match: Leviticus 4:22.",
+      "processing_time_ms": 205,
+      "chunk_index": 39
+    },
+    {
+      "input_text": "2\nδιὸ ἀπολιπόντες τὴν ματαιότητα τῶν πολλῶν καὶ τὰς ψευδοδιδασκαλίας ἐπὶ τὸν ἐξ ἀρχῆς ἡμῖν παραδοθέντα λόγον ἐπιστρέψωμεν, νήφοντες πρὸς τὰς εὐχὰς καὶ προσκαρτεροῦντες νηστείαις, δεήσεσιν αἰτούμενοι τὸν παντεπόπτην θεὸν μὴ εἰσενεγκεῖν ἡμᾶς εἰς πειρασμόν, καθὼς εἶπεν ὁ κύριος",
+      "is_quotation": true,
+      "confidence": 32,
+      "match_type": "allusion",
+      "sources": [
+        {
+          "reference": "Acts 5:32",
+          "book": "Acts",
+          "chapter": 5,
+          "verse": 32,
+          "greek_text": "και ημεις εσμεν αυτου μαρτυρες των ρηματων τουτων και το πνευμα 2δε το αγιον ο εδωκεν ο θεος τοις πειθαρχουσιν αυτω",
+          "similarity_score": 0.8748402631958065,
+          "source_edition": "grc_srg"
+        },
+        {
+          "reference": "Mark 4:38",
+          "book": "Mark",
+          "chapter": 4,
+          "verse": 38,
+          "greek_text": "και ην αυτος επι τη πρυμνη επι το προσκεφαλαιον καθευδων και 2διεγειρουσιν αυτον και λεγουσιν αυτω διδασκαλε ου μελει σοι οτι απολλυμεθα",
+          "similarity_score": 0.8738104002835323,
+          "source_edition": "grc_srg"
+        },
+        {
+          "reference": "Mark 2:15",
+          "book": "Mark",
+          "chapter": 2,
+          "verse": 15,
+          "greek_text": "και εγενετο εν τω κατακεισθαι αυτον εν τη οικια αυτου και πολλοι τελωναι και αμαρτωλοι συνανεκειντο τω ιησου και τοις μαθηταις αυτου ησαν γαρ πολλοι και 2ηκολουθησαν αυτω",
+          "similarity_score": 0.8729829025313638,
+          "source_edition": "grc_srg"
+        }
+      ],
+      "best_match": {
+        "reference": "Mark 1:27",
+        "greek_text": "και εθαμβηθησαν παντες ωστε συζητειν προς 2εαυτους λεγοντας τι εστιν τουτο 3τις η διδαχη η καινη αυτη 2οτι κατ εξουσιαν και τοις πνευμασιν τοις ακαθαρτοις επιτασσει και υπακουουσιν αυτω",
+        "similarity_score": 0.872370117449354
+      },
+      "explanation": "Heuristic: score=0.872, shared_words=2, shared_lemmas=1, shared_ngrams=0, multi_signal=32, formula=yes, best_candidate=#4. Top match: Mark 1:27.",
+      "processing_time_ms": 170,
+      "chunk_index": 40
+    },
+    {
+      "input_text": "Τὸ μὲν πνεῦμα πρόθυμον, ἡ δὲ σὰρξ ἀσθενής",
+      "is_quotation": true,
+      "confidence": 21,
+      "match_type": "allusion",
+      "sources": [
+        {
+          "reference": "Proverbs 19:15",
+          "book": "Proverbs",
+          "chapter": 19,
+          "verse": 15,
+          "greek_text": "δειλια κατεχει ανδρογυναιον ψυχη δε αεργου πεινασει",
+          "similarity_score": 0.889803960257093,
+          "source_edition": "LXX"
+        },
+        {
+          "reference": "Psalms 111:7",
+          "book": "Psalms",
+          "chapter": 111,
+          "verse": 7,
+          "greek_text": "απο ακοησ πονηρασ ου φοβηθησεται ετοιμη η καρδια αυτου ελπιζειν επι κυριον",
+          "similarity_score": 0.8869875617409639,
+          "source_edition": "LXX"
+        },
+        {
+          "reference": "Sirach 19:3",
+          "book": "Sirach",
+          "chapter": 19,
+          "verse": 3,
+          "greek_text": "σηπη και σκωληκεσ κληρονομησουσιν αυτον και ψυχη τολμηρα εξαρθησεται",
+          "similarity_score": 0.8862621948278451,
+          "source_edition": "LXX"
+        }
+      ],
+      "best_match": {
+        "reference": "Psalms 77:39",
+        "greek_text": "και εμνησθη οτι σαρξ εισιν πνευμα πορευομενον και ουκ επιστρεφον",
+        "similarity_score": 0.8849496542330886
+      },
+      "explanation": "Heuristic: score=0.885, shared_words=2, shared_lemmas=2, shared_ngrams=0, multi_signal=21, best_candidate=#5. Top match: Psalms 77:39.",
+      "processing_time_ms": 161,
+      "chunk_index": 41
+    },
+    {
+      "input_text": "Ⅷ\nἈδιαλείπτως οὖν προσκαρτερῶμεν τῇ ἐλπίδι ἡμῶν καὶ τῷ ἀρραβῶνι τῆς δικαιοσύνης ἡμῶν, ὅς ἐστι Χριστὸς Ἰησοῦς, ὃς ἀνήνεγκεν ἡμῶν τὰς ἁμαρτίας τῷ ἰδίῳ σώματι ἐπὶ τὸ ξύλον, ὃς ἁμαρτίαν οὐκ ἐποίησεν, οὐδὲ εὑρέθη δόλος ἐν τῷ στόματι αὐτοῦ",
+      "is_quotation": true,
+      "confidence": 59,
+      "match_type": "close_paraphrase",
+      "sources": [
+        {
+          "reference": "1 Peter 2:24",
+          "book": "1 Peter",
+          "chapter": 2,
+          "verse": 24,
+          "greek_text": "οσ τασ αμαρτιασ ημων αυτοσ ανηνεγκεν εν τω σωματι αυτου επι το ξυλον ινα ταισ αμαρτιαισ απογενομενοι τη δικαιοσυνη ζησωμεν ου τω μωλωπι αυτου ιαθητε",
+          "similarity_score": 0.8809197868342085,
+          "source_edition": "grc_mtk"
+        },
+        {
+          "reference": "1 Peter 2:24",
+          "book": "1 Peter",
+          "chapter": 2,
+          "verse": 24,
+          "greek_text": "ος τας αμαρτιας ημων αυτος ανηνεγκεν εν τω σωματι αυτου επι το ξυλον ινα ταις αμαρτιαις απογενομενοι τη δικαιοσυνη ζησωμεν ου τω μωλωπι ιαθητε",
+          "similarity_score": 0.8799638697992027,
+          "source_edition": "grc_tis"
+        },
+        {
+          "reference": "1 Peter 2:24",
+          "book": "1 Peter",
+          "chapter": 2,
+          "verse": 24,
+          "greek_text": "ος τας αμαρτιας ημων αυτος ανηνεγκεν εν τω σωματι αυτου επι το ξυλον ινα ταις αμαρτιαις απογενομενοι τη δικαιοσυνη ζησωμεν ου τω μωλωπι ιαθητε",
+          "similarity_score": 0.8799638697992027,
+          "source_edition": "grc_sbl"
+        }
+      ],
+      "best_match": {
+        "reference": "1 Peter 2:24",
+        "greek_text": "οσ τασ αμαρτιασ ημων αυτοσ ανηνεγκεν εν τω σωματι αυτου επι το ξυλον ινα ταισ αμαρτιαισ απογενομενοι τη δικαιοσυνη ζησωμεν ου τω μωλωπι αυτου ιαθητε",
+        "similarity_score": 0.8809197868342085
+      },
+      "explanation": "Heuristic: score=0.881, shared_words=8, shared_lemmas=6, shared_ngrams=4, multi_signal=59. Top match: 1 Peter 2:24.",
+      "processing_time_ms": 186,
+      "chunk_index": 42
+    },
+    {
+      "input_text": "ἀλλὰ δι’ ἡμᾶς, ἵνα ζήσωμεν ἐν αὐτῷ, πάντα ὑπέμεινεν",
+      "is_quotation": false,
+      "confidence": 15,
+      "match_type": "non_biblical",
+      "sources": [
+        {
+          "reference": "ΜΑΚΚΑΒΑΙΩΝ Δʹ 6:20",
+          "book": "ΜΑΚΚΑΒΑΙΩΝ Δʹ",
+          "chapter": 6,
+          "verse": 20,
+          "greek_text": "αισχρον γαρ ει επιβιωσωμεν αλιγον χρονον",
+          "similarity_score": 0.8858337150877102,
+          "source_edition": "grc_bre"
+        },
+        {
+          "reference": "Psalms 113:26",
+          "book": "Psalms",
+          "chapter": 113,
+          "verse": 26,
+          "greek_text": "αλλ  ημεισ οι ζωντεσ ευλογησομεν τον κυριον απο του νυν και εωσ του αιωνοσ",
+          "similarity_score": 0.8838925123464472,
+          "source_edition": "LXX"
+        },
+        {
+          "reference": "4 Maccabees 11:5",
+          "book": "4 Maccabees",
+          "chapter": 11,
+          "verse": 5,
+          "greek_text": "οτι τον παντων κτιστην ευσεβουμεν και κατα τον εναρετον αυτου ζωμεν νομον",
+          "similarity_score": 0.8823639127076764,
+          "source_edition": "LXX"
+        }
+      ],
+      "best_match": {
+        "reference": "ΣΟΦΙΑ ΣΕΙΡΑΧ 42:23",
+        "greek_text": "παντα ταυτα ζη και μενει εις τον αιωνα εν πασαις χρειαις και παντα υπακουει",
+        "similarity_score": 0.8816758551943029
+      },
+      "explanation": "Heuristic: score=0.882, shared_words=1, shared_lemmas=1, shared_ngrams=0, multi_signal=15, best_candidate=#4. Top match: ΣΟΦΙΑ ΣΕΙΡΑΧ 42:23.",
+      "processing_time_ms": 149,
+      "chunk_index": 43
+    },
+    {
+      "input_text": "2\nμιμηταὶ οὖν γενώμεθα τῆς ὑπομονῆς αὐτοῦ, καὶ ἐὰν πάσχωμεν διὰ τὸ ὄνομα αὐτοῦ, δοξάζωμεν αὐτόν",
+      "is_quotation": true,
+      "confidence": 31,
+      "match_type": "allusion",
+      "sources": [
+        {
+          "reference": "Psalms 94:6",
+          "book": "Psalms",
+          "chapter": 94,
+          "verse": 6,
+          "greek_text": "δευτε προσκυνησωμεν και προσπεσωμεν αυτω και κλαυσωμεν εναντιον κυριου του ποιησαντοσ ημασ",
+          "similarity_score": 0.8960551203313154,
+          "source_edition": "LXX"
+        },
+        {
+          "reference": "Revelation 19:13",
+          "book": "Revelation",
+          "chapter": 19,
+          "verse": 13,
+          "greek_text": "και περιβεβλημενος ιματιον βεβαμμενον αιματι και 2καλειται το ονομα αυτου ο λογος του θεου",
+          "similarity_score": 0.8943659018508445,
+          "source_edition": "grc_srg"
+        },
+        {
+          "reference": "1 John 3:22",
+          "book": "1 John",
+          "chapter": 3,
+          "verse": 22,
+          "greek_text": "και ο εαν αιτωμεν λαμβανομεν 2παρ αυτου οτι τας εντολας αυτου τηρουμεν και τα αρεστα ενωπιον αυτου ποιουμεν",
+          "similarity_score": 0.8927184091604957,
+          "source_edition": "grc_srg"
+        }
+      ],
+      "best_match": {
+        "reference": "Revelation 19:13",
+        "greek_text": "και περιβεβλημενος ιματιον βεβαμμενον αιματι και 2καλειται το ονομα αυτου ο λογος του θεου",
+        "similarity_score": 0.8943659018508445
+      },
+      "explanation": "Heuristic: score=0.894, shared_words=3, shared_lemmas=2, shared_ngrams=2, multi_signal=31, best_candidate=#2. Top match: Revelation 19:13.",
+      "processing_time_ms": 191,
+      "chunk_index": 44
+    },
+    {
+      "input_text": "τοῦτον γὰρ ἡμῖν τὸν ὑπογραμμὸν ἔθηκε δι’ ἑαυτοῦ, καὶ ἡμεῖς τοῦτο ἐπιστεύσαμεν",
+      "is_quotation": false,
+      "confidence": 15,
+      "match_type": "non_biblical",
+      "sources": [
+        {
+          "reference": "Sirach 17:3",
+          "book": "Sirach",
+          "chapter": 17,
+          "verse": 3,
+          "greek_text": "καθ  εαυτον ενεδυσεν αυτουσ ισχυν και κατ  εικονα αυτου εποιησεν αυτουσ",
+          "similarity_score": 0.8773593526530068,
+          "source_edition": "LXX"
+        },
+        {
+          "reference": "Ephesians 3:12",
+          "book": "Ephesians",
+          "chapter": 3,
+          "verse": 12,
+          "greek_text": "εν ω εχομεν την παρρησιαν και προσαγωγην εν πεποιθησει δια της πιστεως αυτου",
+          "similarity_score": 0.8768663608309442,
+          "source_edition": "SR"
+        },
+        {
+          "reference": "Ephesians 3:12",
+          "book": "Ephesians",
+          "chapter": 3,
+          "verse": 12,
+          "greek_text": "εν ω εχομεν την παρρησιαν και προσαγωγην εν πεποιθησει δια της πιστεως αυτου",
+          "similarity_score": 0.8768663608309442,
+          "source_edition": "grc_tis"
+        }
+      ],
+      "best_match": {
+        "reference": "Sirach 17:3",
+        "greek_text": "καθ  εαυτον ενεδυσεν αυτουσ ισχυν και κατ  εικονα αυτου εποιησεν αυτουσ",
+        "similarity_score": 0.8773593526530068
+      },
+      "explanation": "Heuristic: score=0.877, shared_words=1, shared_lemmas=1, shared_ngrams=0, multi_signal=15. Top match: Sirach 17:3.",
+      "processing_time_ms": 149,
+      "chunk_index": 45
+    },
+    {
+      "input_text": "Ⅸ\nΠαρακαλῶ οὖν πάντας ὑμᾶς, πειθαρχεῖν τῷ λόγῳ τῆς δικαιοσύνης καὶ ἀσκεῖν πᾶσαν ὑπομονήν, ἣν καὶ εἴδατε κατ’ ὀφθαλμοὺς οὐ μόνον ἐν τοῖς μακαρίοις Ἰγνατίῳ καὶ Ζωσίμῳ καὶ Ῥούφῳ, ἀλλὰ καὶ ἐν ἄλλοις τοῖς ἐξ ὑμῶν καὶ ἐν αὐτῷ Παύλῳ καὶ τοῖς λοιποῖς ἀποστόλοις",
+      "is_quotation": true,
+      "confidence": 22,
+      "match_type": "allusion",
+      "sources": [
+        {
+          "reference": "Revelation 1:9",
+          "book": "Revelation",
+          "chapter": 1,
+          "verse": 9,
+          "greek_text": "εγω ιωαννης ο αδελφος υμων και κοινωνος εν τη θλιψει και βασιλεια και υπομονη εν χριστω ιησου εγενομην εν τη νησω τη καλουμενη πατμω δια τον λογον του θεου και δια την μαρτυριαν ιησου χριστου",
+          "similarity_score": 0.8620439394528161,
+          "source_edition": "grc_f35"
+        },
+        {
+          "reference": "Revelation 1:9",
+          "book": "Revelation",
+          "chapter": 1,
+          "verse": 9,
+          "greek_text": "εγω ιωαννης ο αδελφος υμων και κοινωνος εν τη θλιψει και βασιλεια και υπομονη εν χριστω ιησου εγενομην εν τη νησω τη καλουμενη πατμω δια τον λογον του θεου και δια την μαρτυριαν ιησου χριστου",
+          "similarity_score": 0.8620439394528161,
+          "source_edition": "grc_tcg"
+        },
+        {
+          "reference": "Revelation 1:9",
+          "book": "Revelation",
+          "chapter": 1,
+          "verse": 9,
+          "greek_text": "εγω ιωαννης ο και αδελφος υμων και συγκοινωνος εν τη θλιψει και εν τη βασιλεια και υπομονη ιησου χριστου εγενομην εν τη νησω τη καλουμενη πατμω δια τον λογον του θεου και δια την μαρτυριαν ιησου χριστου",
+          "similarity_score": 0.8617262171364822,
+          "source_edition": "grc_gtr"
+        }
+      ],
+      "best_match": {
+        "reference": "Revelation 1:9",
+        "greek_text": "εγω ιωαννης ο και αδελφος υμων και συγκοινωνος εν τη θλιψει και εν τη βασιλεια και υπομονη ιησου χριστου εγενομην εν τη νησω τη καλουμενη πατμω δια τον λογον του θεου και δια την μαρτυριαν ιησου χριστου",
+        "similarity_score": 0.8617262171364822
+      },
+      "explanation": "Heuristic: score=0.862, shared_words=2, shared_lemmas=1, shared_ngrams=2, multi_signal=22, best_candidate=#3. Top match: Revelation 1:9.",
+      "processing_time_ms": 169,
+      "chunk_index": 46
+    },
+    {
+      "input_text": "2\nπεπεισμένους ὅτι οὗτοι πάντες οὐκ εἰς κενὸν ἔδραμον, ἀλλ’ ἐν πίστει καὶ δικαιοσύνῃ, καὶ ὅτι εἰς τὸν ὀφειλόμενον αὐτοῖς τόπον εἰσὶ παρὰ τῷ κυρίῳ, ᾧ καὶ συνέπαθον",
+      "is_quotation": true,
+      "confidence": 22,
+      "match_type": "allusion",
+      "sources": [
+        {
+          "reference": "Acts 13:48",
+          "book": "Acts",
+          "chapter": 13,
+          "verse": 48,
+          "greek_text": "ακουοντα δε τα εθνη εχαιρεν και εδοξαζον τον λογον 2του κυριου και επιστευσαν οσοι ησαν τεταγμενοι εις ζωην αιωνιον",
+          "similarity_score": 0.8838224870834103,
+          "source_edition": "grc_srg"
+        },
+        {
+          "reference": "Colossians 2:7",
+          "book": "Colossians",
+          "chapter": 2,
+          "verse": 7,
+          "greek_text": "ερριζωμενοι και εποικοδομουμενοι εν αυτω και βεβαιουμενοι εν τη πιστει καθως εδιδαχθητε περισσευοντες 2εν αυτη εν ευχαριστια",
+          "similarity_score": 0.8749186372634727,
+          "source_edition": "grc_srg"
+        },
+        {
+          "reference": "Revelation 22:3",
+          "book": "Revelation",
+          "chapter": 22,
+          "verse": 3,
+          "greek_text": "και παν καταθεμα ουκ εσται 2ετι και ο θρονος του θεου και του αρνιου εν αυτη εσται και οι δουλοι αυτου λατρευσουσιν αυτω",
+          "similarity_score": 0.8704396570968888,
+          "source_edition": "grc_srg"
+        }
+      ],
+      "best_match": {
+        "reference": "Acts 13:48",
+        "greek_text": "ακουοντα δε τα εθνη εχαιρεν και εδοξαζον τον λογον 2του κυριου και επιστευσαν οσοι ησαν τεταγμενοι εις ζωην αιωνιον",
+        "similarity_score": 0.8838224870834103
+      },
+      "explanation": "Heuristic: score=0.884, shared_words=3, shared_lemmas=1, shared_ngrams=0, multi_signal=22. Top match: Acts 13:48.",
+      "processing_time_ms": 160,
+      "chunk_index": 47
+    },
+    {
+      "input_text": "οὐ γὰρ τὸν νῦν ἠγάπησαν αἰῶνα, ἀλλὰ τὸν ὑπὲρ ἡμῶν ἀποθανόντα καὶ δι’ ἡμᾶς ὑπὸ τοῦ θεοῦ ἀναστάντα",
+      "is_quotation": false,
+      "confidence": 19,
+      "match_type": "non_biblical",
+      "sources": [
+        {
+          "reference": "Luke 20:38",
+          "book": "Luke",
+          "chapter": 20,
+          "verse": 38,
+          "greek_text": "θεος δε ουκ εστιν νεκρων αλλα ζωντωνπαντες γαρ αυτω ζωσιν",
+          "similarity_score": 0.8831683406824964,
+          "source_edition": "grc_f35"
+        },
+        {
+          "reference": "Luke 20:38",
+          "book": "Luke",
+          "chapter": 20,
+          "verse": 38,
+          "greek_text": "θεοσ δε ουκ εστιν νεκρων αλλα ζωντων παντεσ γαρ αυτω ζωσιν",
+          "similarity_score": 0.8797869733848891,
+          "source_edition": "grc_mtk"
+        },
+        {
+          "reference": "Luke 20:38",
+          "book": "Luke",
+          "chapter": 20,
+          "verse": 38,
+          "greek_text": "θεος δε ουκ εστιν νεκρων αλλα ζωντων παντες γαρ αυτω ζωσιν",
+          "similarity_score": 0.8795155367426366,
+          "source_edition": "grc_tis"
+        }
+      ],
+      "best_match": {
+        "reference": "Luke 20:38",
+        "greek_text": "θεος δε ουκ εστιν νεκρων αλλα ζωντωνπαντες γαρ αυτω ζωσιν",
+        "similarity_score": 0.8831683406824964
+      },
+      "explanation": "Heuristic: score=0.883, shared_words=2, shared_lemmas=1, shared_ngrams=0, multi_signal=19. Top match: Luke 20:38.",
+      "processing_time_ms": 188,
+      "chunk_index": 48
+    },
+    {
+      "input_text": "ⅩⅢ\nἘγράψατέ μοι καὶ ὑμεῖς καὶ Ἰγνάτιος, ἵν’, ἐάν τις ἀπέρχηται εἰς Συρίαν, καὶ τὰ παρ’ ὑμῶν ἀποκομίσῃ γράμματα",
+      "is_quotation": true,
+      "confidence": 22,
+      "match_type": "allusion",
+      "sources": [
+        {
+          "reference": "Mark 3:14",
+          "book": "Mark",
+          "chapter": 3,
+          "verse": 14,
+          "greek_text": "και εποιησεν δωδεκα ους και αποστολους ωνομασεν ινα ωσιν μετʼ αυτου και ινα αποστελλη αυτους κηρυσσειν",
+          "similarity_score": 0.8655801129525899,
+          "source_edition": "SR"
+        },
+        {
+          "reference": "1 Chronicles 19:12",
+          "book": "1 Chronicles",
+          "chapter": 19,
+          "verse": 12,
+          "greek_text": "και ειπεν εαν κρατηση υπερ εμε συροσ και εση μοι εισ σωτηριαν και εαν υιοι αμμων κρατησωσιν υπερ σε και σωσω σε",
+          "similarity_score": 0.8618385363556543,
+          "source_edition": "LXX"
+        },
+        {
+          "reference": "Exodus 8:17",
+          "book": "Exodus",
+          "chapter": 8,
+          "verse": 17,
+          "greek_text": "εαν δε μη βουλη εξαποστειλαι τον λαον μου ιδου εγω επαποστελλω επι σε και επι τουσ θεραποντασ σου και επι τον λαον σου και επι τουσ οικουσ υμων κυνομυιαν και πλησθησονται αι οικιαι των αιγυπτιων τησ κυνομυιησ και εισ την γην εφ  ησ εισιν επ  αυτησ",
+          "similarity_score": 0.8618209105098613,
+          "source_edition": "LXX"
+        }
+      ],
+      "best_match": {
+        "reference": "Exodus 8:17",
+        "greek_text": "εαν δε μη βουλη εξαποστειλαι τον λαον μου ιδου εγω επαποστελλω επι σε και επι τουσ θεραποντασ σου και επι τον λαον σου και επι τουσ οικουσ υμων κυνομυιαν και πλησθησονται αι οικιαι των αιγυπτιων τησ κυνομυιησ και εισ την γην εφ  ησ εισιν επ  αυτησ",
+        "similarity_score": 0.8618209105098613
+      },
+      "explanation": "Heuristic: score=0.862, shared_words=4, shared_lemmas=1, shared_ngrams=0, multi_signal=22, best_candidate=#3. Top match: Exodus 8:17.",
+      "processing_time_ms": 212,
+      "chunk_index": 49
+    },
+    {
+      "input_text": "ὅπερ ποιήσω, ἐὰν λάβω καιρὸν εὔθετον, εἴτε ἐγώ, εἴτε ὃν πέμπω πρεσβεύσοντα καὶ περὶ ὑμῶν",
+      "is_quotation": true,
+      "confidence": 23,
+      "match_type": "allusion",
+      "sources": [
+        {
+          "reference": "Hosea 12:11",
+          "book": "Hosea",
+          "chapter": 12,
+          "verse": 11,
+          "greek_text": "και λαλησω προσ προφητασ και εγω ορασεισ επληθυνα και εν χερσιν προφητων ωμοιωθην",
+          "similarity_score": 0.8759934276222245,
+          "source_edition": "LXX"
+        },
+        {
+          "reference": "Jeremiah 23:31",
+          "book": "Jeremiah",
+          "chapter": 23,
+          "verse": 31,
+          "greek_text": "ιδου εγω προσ τουσ προφητασ τουσ εκβαλλοντασ προφητειασ γλωσσησ και νυσταζοντασ νυσταγμον εαυτων",
+          "similarity_score": 0.8728308861049884,
+          "source_edition": "LXX"
+        },
+        {
+          "reference": "Ezekiel 36:27",
+          "book": "Ezekiel",
+          "chapter": 36,
+          "verse": 27,
+          "greek_text": "και το πνευμα μου δωσω εν υμιν και ποιησω ινα εν τοισ δικαιωμασιν μου πορευησθε και τα κριματα μου φυλαξησθε και ποιησητε",
+          "similarity_score": 0.8726475541048055,
+          "source_edition": "LXX"
+        }
+      ],
+      "best_match": {
+        "reference": "Job 31:14",
+        "greek_text": "τι γαρ ποιησω εαν ετασιν μου ποιησηται ο κυριοσ εαν δε και επισκοπην τινα αποκρισιν ποιησομαι",
+        "similarity_score": 0.8726318513633825
+      },
+      "explanation": "Heuristic: score=0.873, shared_words=3, shared_lemmas=1, shared_ngrams=1, multi_signal=23, best_candidate=#4. Top match: Job 31:14.",
+      "processing_time_ms": 136,
+      "chunk_index": 50
+    },
+    {
+      "input_text": "2\nτὰς ἐπιστολὰς Ἰγνατίου τὰς πεμφθείσας ἡμῖν ὑπ’ αὐτοῦ καὶ ἄλλας, ὅσας εἴχομεν παρ’ ἡμῖν, ἐπέμψαμεν ὑμῖν, καθὼς ἐνετείλασθε",
+      "is_quotation": true,
+      "confidence": 30,
+      "match_type": "allusion",
+      "sources": [
+        {
+          "reference": "Acts 5:32",
+          "book": "Acts",
+          "chapter": 5,
+          "verse": 32,
+          "greek_text": "και ημεις εσμεν αυτου μαρτυρες των ρηματων τουτων και το πνευμα 2δε το αγιον ο εδωκεν ο θεος τοις πειθαρχουσιν αυτω",
+          "similarity_score": 0.8803289435758179,
+          "source_edition": "grc_srg"
+        },
+        {
+          "reference": "2 Corinthians 4:14",
+          "book": "2 Corinthians",
+          "chapter": 4,
+          "verse": 14,
+          "greek_text": "ειδοτες οτι ο εγειρας τον κυριον ιησουν 2και ημας δια ιησου εγερει και παραστησει συν υμιν",
+          "similarity_score": 0.8724291014192361,
+          "source_edition": "grc_srg"
+        },
+        {
+          "reference": "Mark 10:28",
+          "book": "Mark",
+          "chapter": 10,
+          "verse": 28,
+          "greek_text": "ηρξατο ο πετρος λεγειν αυτω ιδου ημεις αφηκαμεν παντα και 2ηκολουθησαμεν σοι",
+          "similarity_score": 0.8720726506154941,
+          "source_edition": "grc_srg"
+        }
+      ],
+      "best_match": {
+        "reference": "1 Maccabees 12:17",
+        "greek_text": "ενετειλαμεθα ουν αυτοισ και προσ υμασ πορευθηναι και ασπασασθαι υμασ και αποδουναι υμιν τασ παρ  ημων επιστολασ περι τησ ανανεωσεωσ και τησ αδελφοτητοσ ημων",
+        "similarity_score": 0.8699235038553903
+      },
+      "explanation": "Heuristic: score=0.870, shared_words=5, shared_lemmas=3, shared_ngrams=0, multi_signal=30, best_candidate=#5. Top match: 1 Maccabees 12:17.",
+      "processing_time_ms": 188,
+      "chunk_index": 51
+    },
+    {
+      "input_text": "αἵτινες ὑποτεταγμέναι εἰσὶν τῇ ἐπιστολῇ ταύτῃ, ἐξ ὧν μεγάλα ὠφεληθῆναι δυνήσεσθε",
+      "is_quotation": false,
+      "confidence": 11,
+      "match_type": "non_biblical",
+      "sources": [
+        {
+          "reference": "Psalms 20:6",
+          "book": "Psalms",
+          "chapter": 20,
+          "verse": 6,
+          "greek_text": "μεγαλη η δοξα αυτου εν τω σωτηριω σου δοξαν και μεγαλοπρεπειαν επιθησεισ επ  αυτον",
+          "similarity_score": 0.8733407514392775,
+          "source_edition": "LXX"
+        },
+        {
+          "reference": "Ezekiel 31:7",
+          "book": "Ezekiel",
+          "chapter": 31,
+          "verse": 7,
+          "greek_text": "και εγενετο καλοσ εν τω υψει αυτου δια το πληθοσ των κλαδων αυτου οτι εγενηθησαν αι ριζαι αυτου εισ υδωρ πολυ",
+          "similarity_score": 0.8694421402363588,
+          "source_edition": "LXX"
+        },
+        {
+          "reference": "Psalms 147:2",
+          "book": "Psalms",
+          "chapter": 147,
+          "verse": 2,
+          "greek_text": "οτι ενισχυσεν τουσ μοχλουσ των πυλων σου ευλογησεν τουσ υιουσ σου εν σοι",
+          "similarity_score": 0.8692746983107129,
+          "source_edition": "LXX"
+        }
+      ],
+      "best_match": {
+        "reference": "Psalms 20:6",
+        "greek_text": "μεγαλη η δοξα αυτου εν τω σωτηριω σου δοξαν και μεγαλοπρεπειαν επιθησεισ επ  αυτον",
+        "similarity_score": 0.8733407514392775
+      },
+      "explanation": "Heuristic: score=0.873, shared_words=0, shared_lemmas=1, shared_ngrams=0, multi_signal=11. Top match: Psalms 20:6.",
+      "processing_time_ms": 197,
+      "chunk_index": 52
+    },
+    {
+      "input_text": "περιέχουσι γὰρ πίστιν καὶ ὑπομονὴν καὶ πᾶσαν οἰκοδομὴν τὴν εἰς τὸν κύριον ἡμῶν ἀνήκουσαν",
+      "is_quotation": true,
+      "confidence": 25,
+      "match_type": "allusion",
+      "sources": [
+        {
+          "reference": "1 Timothy 1:19",
+          "book": "1 Timothy",
+          "chapter": 1,
+          "verse": 19,
+          "greek_text": "εχων πιστιν και αγαθην συνειδησιν ην τινες απωσαμενοι περι την πιστιν εναυαγησαν",
+          "similarity_score": 0.8828989348965424,
+          "source_edition": "grc_gtr"
+        },
+        {
+          "reference": "1 Timothy 1:19",
+          "book": "1 Timothy",
+          "chapter": 1,
+          "verse": 19,
+          "greek_text": "εχων πιστιν και αγαθην συνειδησιν ην τινες απωσαμενοι περι την πιστιν εναυαγησαν",
+          "similarity_score": 0.8828989348965424,
+          "source_edition": "grc_byz"
+        },
+        {
+          "reference": "1 Timothy 1:19",
+          "book": "1 Timothy",
+          "chapter": 1,
+          "verse": 19,
+          "greek_text": "εχων πιστιν και αγαθην συνειδησιν ην τινες απωσαμενοι περι την πιστιν εναυαγησαν",
+          "similarity_score": 0.8828989348965424,
+          "source_edition": "grc_tis"
+        }
+      ],
+      "best_match": {
+        "reference": "1 Timothy 1:19",
+        "greek_text": "εχων πιστιν και αγαθην συνειδησιν ην τινες απωσαμενοι περι την πιστιν εναυαγησαν",
+        "similarity_score": 0.8828989348965424
+      },
+      "explanation": "Heuristic: score=0.883, shared_words=3, shared_lemmas=1, shared_ngrams=1, multi_signal=25. Top match: 1 Timothy 1:19.",
+      "processing_time_ms": 133,
+      "chunk_index": 53
+    }
+  ]
+}
