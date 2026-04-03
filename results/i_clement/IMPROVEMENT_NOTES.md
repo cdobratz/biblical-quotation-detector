@@ -182,3 +182,60 @@ Best result (conf=20, FTS+top_k=20): P=4.48%, R=28.57%, F1=7.74%, 6/21 refs foun
 - Embedding model retrieves semantically similar but wrong verses
 
 **Next step**: Phase 6 — Septuagint/LXX ingestion to break through this ceiling.
+
+---
+
+## Update: Phase 6 — Scoring Improvements & LXX Support (April 2-3, 2026)
+
+### Breaking Through the Retrieval Ceiling
+
+Phase 6 attacks the retrieval ceiling from multiple angles:
+
+1. **LXX/Septuagint data** — Most 1 Clement quotations route through the Greek OT. `scripts/ingest_lxx.py` downloads and ingests the Rahlfs 1935 edition, expanding the searchable corpus beyond NT-only.
+
+2. **Cross-reference chains** — When the detector finds `1 Corinthians 12:27` instead of `Romans 12:5` (parallel passages), the evaluator now recognizes these as equivalent via 32 parallel passage groups in `data/cross_references.json`.
+
+3. **Multi-candidate scoring** — Instead of only scoring the #1 candidate from search results, the detector now scores the top-5 and selects the best multi-signal score. This catches cases where the correct verse is at position 3-5.
+
+4. **Context-aware scoring** — Quotation formulas ("γέγραπται", "λέγει κύριος", etc.) often appear in the sentence *before* the actual quotation. The detector now checks adjacent chunks and applies a +75% confidence boost when context contains a formula.
+
+### Expanded Evaluation
+
+Ground truth expanded from 21 to 30 entries with 9 OT/LXX references:
+
+| New Entry | Category | Why Added |
+|---|---|---|
+| Genesis 4:3-8 (Cain and Abel) | allusion | 1 Clement 4 retells this narrative |
+| Genesis 12:1-3 (Abraham's call) | allusion | 1 Clement 10 references Abraham's journey |
+| Genesis 1:26-27 (Creation) | allusion | 1 Clement 33 references God creating man |
+| Isaiah 53:1-12 (Suffering Servant) | allusion | 1 Clement 16 extensively quotes this passage |
+| Isaiah 6:3 (Trisagion) | allusion | 1 Clement 34 references the seraphim's praise |
+| Isaiah 29:13 (Honor with lips) | allusion | 1 Clement 15 quotes this passage |
+| Psalms 51:1-17 (David's repentance) | allusion | 1 Clement 18 references David's prayer |
+| Joshua 2:18-19 (Rahab) | allusion | 1 Clement 12 retells Rahab's story |
+| Proverbs 3:34 (God opposes proud) | allusion | 1 Clement 30 echoes this proverb |
+
+### Bug Fix: `_verse_to_entry` Overwrite
+
+A critical bug was found in the evaluation pipeline: when cross-references caused a verse to map to multiple ground-truth entries (e.g., "1 Peter 5:5" and "Proverbs 3:34" share cross-ref verses), the old `_verse_to_entry[v] = ref` assignment silently overwrote earlier entries. This made some entries permanently unreachable in recall calculations.
+
+**Fix**: Changed `_verse_to_entry` from `dict[str, str]` (verse → single entry) to `dict[str, set[str]]` (verse → set of entries). Updated all consumption sites to iterate over sets.
+
+### Comparison Across All Phases
+
+| Phase | Scoring Model | Ground Truth | Data Coverage | Best F1 | Best Recall |
+|---|---|---|---|---|---|
+| Pre-improvement | Threshold only | None | NT only | N/A | N/A |
+| Option A+D | Score + word gate | None | NT only | N/A | N/A |
+| Phase 5b | Multi-signal (5 signals) | 21 entries (NT) | NT only | 11.76% | 28.57% |
+| Phase 5c | Multi-signal + FTS | 21 entries (NT) | NT + FTS | 11.76% | 28.57% |
+| Phase 6 | Multi-candidate + context | 30 entries (NT+OT) | NT + LXX (pending) | TBD | TBD |
+
+**Note**: Phase 6 metrics are pending LXX ingestion and re-evaluation. The scoring improvements and expanded ground truth are in place, but the actual LXX data has not yet been ingested into the database.
+
+### Next Steps
+
+1. Run `uv run python scripts/ingest_lxx.py` to populate LXX data
+2. Re-index Qdrant with combined NT + LXX verses
+3. Re-run `scripts/evaluate.py` with the 30-entry ground truth
+4. Compare against Phase 5c baseline (6/21 refs found)

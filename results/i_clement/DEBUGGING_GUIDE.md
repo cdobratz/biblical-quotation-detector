@@ -162,3 +162,31 @@ All short-term, medium-term, and long-term suggestions from the original guide h
 - Fixed evaluator to handle verse ranges (`Matthew 7:1-2` matches `Matthew 7:2`)
 - Increased top_k from 10 to 20 for better candidate coverage
 - Recovered `Matthew 7:1-2` match via FTS fallback
+
+## Update: Phase 6 — Scoring Improvements & LXX Support (April 2-3, 2026)
+
+Phase 6 addresses the retrieval ceiling from the opposite direction: instead of only improving how we search the existing NT data, we expand the data itself and improve how we evaluate matches.
+
+### New Capabilities
+
+| Capability | Implementation | Impact |
+|---|---|---|
+| LXX/Septuagint ingestion | `scripts/ingest_lxx.py` — downloads Rahlfs 1935, reconstructs verse text | Unlocks OT quotations that route through Greek OT |
+| Cross-reference chains | `data/cross_references.json` — 32 groups, 126 entries | Detecting Romans 4:3 now also credits Genesis 15:6 |
+| Multi-candidate scoring | Top-5 candidates scored, best selected | Catches correct verse at position 3-5 instead of only #1 |
+| Context-aware scoring | Adjacent chunks checked for quotation formulas | +75% confidence boost when nearby text has "γέγραπται" etc. |
+| Expanded ground truth | 21 → 30 entries (9 OT/LXX added) | More comprehensive evaluation coverage |
+
+### Bug Fixed: `_verse_to_entry` Overwrite
+
+When cross-references caused a verse to map to multiple ground-truth entries (e.g., "1 Peter 5:5" and "Proverbs 3:34" share cross-ref groups), the old simple dict assignment silently overwrote earlier entries. Fixed by using set-based mapping: `_verse_to_entry[v].add(original_ref)` instead of `_verse_to_entry[v] = original_ref`.
+
+### Remaining Issue
+
+The `_llm_verify` fallback path does not pass `context_has_formula` when falling back to `_heuristic_classify`. Low priority — only affects the Claude API error path.
+
+### Next Steps
+
+1. Run `uv run python scripts/ingest_lxx.py` to populate LXX data
+2. Re-index Qdrant with LXX verses included
+3. Re-run evaluation with 30-entry ground truth to measure improvement
