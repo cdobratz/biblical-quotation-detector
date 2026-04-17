@@ -1,0 +1,1248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Biblical Quotation Detector</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,400&family=JetBrains+Mono:wght@400;500&family=Noto+Serif:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        :root {
+            --paper: #f4efe4;
+            --paper-deep: #ede6d5;
+            --paper-sunk: #e4dcc6;
+            --ink: #1c1a15;
+            --ink-muted: #6b6254;
+            --ink-faint: #9a9079;
+            --rule: #cdc3ac;
+            --rule-soft: #dcd3bd;
+            --accent: #7a3f23;
+            --accent-hover: #5e2e18;
+            --accent-tint: #e8d9c4;
+            --success-ink: #3d5a2e;
+            --success-tint: #d8e0c8;
+            --warn-ink: #8a6112;
+            --warn-tint: #ecdfc3;
+            --muted-ink: #5a544a;
+            --muted-tint: #dcd3bd;
+            --alert: #813825;
+        }
+
+        html {
+            font-feature-settings: "onum" 1, "liga" 1, "kern" 1;
+        }
+
+        body {
+            font-family: 'Fraunces', 'Iowan Old Style', Georgia, serif;
+            font-optical-sizing: auto;
+            background: var(--paper);
+            color: var(--ink);
+            min-height: 100vh;
+            line-height: 1.55;
+            font-size: 17px;
+            font-weight: 400;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            background-image:
+                radial-gradient(circle at 1px 1px, rgba(28, 26, 21, 0.035) 1px, transparent 0);
+            background-size: 28px 28px;
+        }
+
+        .greek-text {
+            font-family: 'Noto Serif', 'Palatino Linotype', 'Book Antiqua', serif;
+            font-feature-settings: "onum" 0;
+        }
+
+        .mono {
+            font-family: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+        }
+
+        .label {
+            font-family: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+            text-transform: uppercase;
+            letter-spacing: 0.14em;
+            font-size: 0.68rem;
+            font-weight: 500;
+            color: var(--ink-muted);
+        }
+
+        /* Header */
+        header {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: rgba(244, 239, 228, 0.88);
+            backdrop-filter: blur(14px) saturate(1.1);
+            -webkit-backdrop-filter: blur(14px) saturate(1.1);
+            border-bottom: 1px solid var(--rule);
+            padding: 18px 32px;
+        }
+
+        .header-content {
+            max-width: 1120px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 24px;
+        }
+
+        .logo {
+            display: flex;
+            align-items: baseline;
+            gap: 14px;
+        }
+
+        .logo-mark {
+            font-family: 'Fraunces', serif;
+            font-weight: 300;
+            font-style: italic;
+            font-size: 2rem;
+            line-height: 1;
+            color: var(--accent);
+            letter-spacing: -0.02em;
+            position: relative;
+            top: 4px;
+        }
+
+        .logo-text {
+            display: flex;
+            align-items: baseline;
+            gap: 10px;
+        }
+
+        .logo h1 {
+            font-family: 'Fraunces', serif;
+            font-size: 1.05rem;
+            font-weight: 500;
+            font-variation-settings: "opsz" 14;
+            letter-spacing: -0.005em;
+            color: var(--ink);
+        }
+
+        .logo .ver {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.68rem;
+            color: var(--ink-faint);
+            letter-spacing: 0.05em;
+        }
+
+        .header-links {
+            display: flex;
+            gap: 28px;
+        }
+
+        .header-links a {
+            font-family: 'JetBrains Mono', monospace;
+            text-transform: uppercase;
+            letter-spacing: 0.12em;
+            font-size: 0.7rem;
+            font-weight: 500;
+            color: var(--ink-muted);
+            text-decoration: none;
+            position: relative;
+            padding-bottom: 3px;
+            transition: color 0.2s ease;
+        }
+
+        .header-links a::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 0;
+            height: 1px;
+            background: var(--accent);
+            transition: width 0.3s ease;
+        }
+
+        .header-links a:hover {
+            color: var(--accent);
+        }
+
+        .header-links a:hover::after {
+            width: 100%;
+        }
+
+        /* Main */
+        main {
+            max-width: 1120px;
+            margin: 0 auto;
+            padding: 72px 32px 48px;
+        }
+
+        /* Hero */
+        .hero {
+            margin-bottom: 72px;
+            max-width: 720px;
+        }
+
+        .hero .eyebrow {
+            margin-bottom: 24px;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .hero .eyebrow::before {
+            content: '';
+            width: 28px;
+            height: 1px;
+            background: var(--accent);
+        }
+
+        .hero h2 {
+            font-family: 'Fraunces', serif;
+            font-weight: 300;
+            font-variation-settings: "opsz" 144, "SOFT" 50;
+            font-size: clamp(2.4rem, 5vw, 3.8rem);
+            line-height: 1.05;
+            letter-spacing: -0.025em;
+            color: var(--ink);
+            margin-bottom: 20px;
+        }
+
+        .hero h2 em {
+            font-style: italic;
+            color: var(--accent);
+            font-weight: 400;
+        }
+
+        .hero p {
+            font-size: 1.125rem;
+            color: var(--ink-muted);
+            line-height: 1.55;
+            max-width: 580px;
+        }
+
+        /* Section headers */
+        .section-head {
+            display: flex;
+            align-items: baseline;
+            gap: 18px;
+            margin-bottom: 20px;
+            padding-bottom: 14px;
+            border-bottom: 1px solid var(--rule);
+        }
+
+        .section-head .num {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.7rem;
+            color: var(--ink-faint);
+            letter-spacing: 0.08em;
+        }
+
+        .section-head h3 {
+            font-family: 'Fraunces', serif;
+            font-weight: 500;
+            font-variation-settings: "opsz" 24;
+            font-size: 1.1rem;
+            letter-spacing: -0.005em;
+        }
+
+        /* Upload */
+        .upload-card {
+            margin-bottom: 56px;
+        }
+
+        .upload-zone {
+            border: 1px dashed var(--rule);
+            padding: 56px 32px;
+            text-align: center;
+            cursor: pointer;
+            transition: border-color 0.25s ease, background 0.25s ease;
+            background: transparent;
+        }
+
+        .upload-zone:hover, .upload-zone.dragover {
+            border-color: var(--accent);
+            background: var(--accent-tint);
+        }
+
+        .upload-zone input {
+            display: none;
+        }
+
+        .upload-glyph {
+            font-family: 'Fraunces', serif;
+            font-weight: 300;
+            font-style: italic;
+            font-size: 2.4rem;
+            line-height: 1;
+            color: var(--ink-faint);
+            margin-bottom: 18px;
+        }
+
+        .upload-zone:hover .upload-glyph {
+            color: var(--accent);
+        }
+
+        .upload-zone p {
+            color: var(--ink);
+            font-size: 1rem;
+            margin-bottom: 8px;
+        }
+
+        .upload-zone .formats {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.72rem;
+            color: var(--ink-faint);
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+        }
+
+        .file-info {
+            display: none;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+            padding: 16px 20px;
+            margin-top: 16px;
+            border: 1px solid var(--rule);
+            background: var(--paper-deep);
+        }
+
+        .file-info.show {
+            display: flex;
+        }
+
+        .file-info .name {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.82rem;
+            color: var(--ink);
+        }
+
+        .file-info .count {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.72rem;
+            color: var(--ink-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            margin-left: auto;
+        }
+
+        .file-info .remove {
+            background: none;
+            border: 1px solid var(--rule);
+            color: var(--ink-muted);
+            cursor: pointer;
+            width: 26px;
+            height: 26px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Fraunces', serif;
+            font-size: 1rem;
+            line-height: 1;
+            transition: all 0.2s;
+        }
+
+        .file-info .remove:hover {
+            border-color: var(--alert);
+            color: var(--alert);
+        }
+
+        /* Options */
+        .options-section {
+            margin-bottom: 40px;
+        }
+
+        .options-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 0;
+            border-top: 1px solid var(--rule);
+            border-bottom: 1px solid var(--rule);
+        }
+
+        .option-group {
+            padding: 24px 28px;
+            border-right: 1px solid var(--rule);
+        }
+
+        .option-group:last-child {
+            border-right: none;
+        }
+
+        .option-group .label {
+            display: block;
+            margin-bottom: 14px;
+        }
+
+        .radio-group {
+            display: flex;
+            gap: 6px;
+            flex-wrap: wrap;
+        }
+
+        .radio-option {
+            position: relative;
+        }
+
+        .radio-option input {
+            position: absolute;
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .radio-option span {
+            display: inline-block;
+            padding: 6px 14px;
+            border: 1px solid var(--rule);
+            background: var(--paper);
+            cursor: pointer;
+            font-family: 'Fraunces', serif;
+            font-size: 0.92rem;
+            font-weight: 400;
+            color: var(--ink-muted);
+            transition: all 0.2s;
+        }
+
+        .radio-option span:hover {
+            border-color: var(--ink);
+            color: var(--ink);
+        }
+
+        .radio-option input:checked + span {
+            background: var(--ink);
+            color: var(--paper);
+            border-color: var(--ink);
+        }
+
+        select {
+            width: 100%;
+            padding: 8px 32px 8px 14px;
+            border: 1px solid var(--rule);
+            background: var(--paper);
+            color: var(--ink);
+            font-family: 'Fraunces', serif;
+            font-size: 0.95rem;
+            cursor: pointer;
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='10' fill='%236b6254' viewBox='0 0 16 16'%3E%3Cpath d='M8 11L3 6h10z'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 12px center;
+            transition: border-color 0.2s;
+        }
+
+        select:focus {
+            outline: none;
+            border-color: var(--ink);
+        }
+
+        /* Submit */
+        .submit-btn {
+            width: 100%;
+            padding: 18px 32px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.78rem;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.18em;
+            background: var(--ink);
+            color: var(--paper);
+            border: 1px solid var(--ink);
+            cursor: pointer;
+            transition: all 0.25s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .submit-btn::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: var(--accent);
+            transform: translateY(100%);
+            transition: transform 0.3s ease;
+            z-index: 0;
+        }
+
+        .submit-btn span {
+            position: relative;
+            z-index: 1;
+        }
+
+        .submit-btn:hover:not(:disabled)::before {
+            transform: translateY(0);
+        }
+
+        .submit-btn:hover:not(:disabled) {
+            border-color: var(--accent);
+        }
+
+        .submit-btn:disabled {
+            opacity: 0.35;
+            cursor: not-allowed;
+        }
+
+        /* Results */
+        .results-card {
+            display: none;
+            margin-top: 72px;
+            animation: fadeIn 0.4s ease;
+        }
+
+        .results-card.show {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(8px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .results-header {
+            display: flex;
+            align-items: flex-end;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 20px;
+            margin-bottom: 32px;
+            padding-bottom: 14px;
+            border-bottom: 1px solid var(--rule);
+        }
+
+        .results-title {
+            display: flex;
+            align-items: baseline;
+            gap: 18px;
+        }
+
+        .results-title h3 {
+            font-family: 'Fraunces', serif;
+            font-weight: 400;
+            font-style: italic;
+            font-variation-settings: "opsz" 72;
+            font-size: 2rem;
+            letter-spacing: -0.02em;
+        }
+
+        .download-buttons {
+            display: flex;
+            gap: 0;
+            border: 1px solid var(--rule);
+        }
+
+        .download-btn {
+            padding: 8px 16px;
+            background: transparent;
+            border: none;
+            border-right: 1px solid var(--rule);
+            color: var(--ink-muted);
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.7rem;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .download-btn:last-child {
+            border-right: none;
+        }
+
+        .download-btn:hover {
+            background: var(--ink);
+            color: var(--paper);
+        }
+
+        /* Stats */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+            gap: 0;
+            margin-bottom: 48px;
+            border-top: 1px solid var(--rule);
+            border-bottom: 1px solid var(--rule);
+        }
+
+        .stat-box {
+            padding: 28px 28px;
+            border-right: 1px solid var(--rule);
+        }
+
+        .stat-box:last-child {
+            border-right: none;
+        }
+
+        .stat-value {
+            font-family: 'Fraunces', serif;
+            font-weight: 300;
+            font-variation-settings: "opsz" 144;
+            font-size: 2.8rem;
+            line-height: 1;
+            letter-spacing: -0.03em;
+            color: var(--ink);
+            margin-bottom: 10px;
+            font-feature-settings: "onum" 1, "tnum" 0;
+        }
+
+        .stat-label {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.68rem;
+            color: var(--ink-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.14em;
+        }
+
+        .stat-box.quotations .stat-value {
+            color: var(--accent);
+        }
+
+        .stat-box.non-biblical .stat-value {
+            color: var(--ink-faint);
+        }
+
+        /* Results Table */
+        .results-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.95rem;
+        }
+
+        .results-table th {
+            text-align: left;
+            padding: 12px 16px;
+            font-family: 'JetBrains Mono', monospace;
+            color: var(--ink-muted);
+            font-weight: 500;
+            font-size: 0.68rem;
+            text-transform: uppercase;
+            letter-spacing: 0.12em;
+            border-bottom: 1px solid var(--ink);
+        }
+
+        .results-table td {
+            padding: 18px 16px;
+            border-bottom: 1px solid var(--rule-soft);
+            vertical-align: top;
+        }
+
+        .results-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .results-table tr:hover td {
+            background: var(--paper-deep);
+        }
+
+        .match-type-badge {
+            display: inline-block;
+            padding: 3px 10px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.68rem;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            border: 1px solid transparent;
+        }
+
+        .match-type-badge.exact {
+            background: var(--success-tint);
+            color: var(--success-ink);
+            border-color: var(--success-ink);
+        }
+
+        .match-type-badge.close_paraphrase {
+            background: var(--accent-tint);
+            color: var(--accent);
+            border-color: var(--accent);
+        }
+
+        .match-type-badge.loose_paraphrase {
+            background: var(--warn-tint);
+            color: var(--warn-ink);
+            border-color: var(--warn-ink);
+        }
+
+        .match-type-badge.allusion {
+            background: var(--paper-deep);
+            color: var(--muted-ink);
+            border-color: var(--muted-ink);
+        }
+
+        .match-type-badge.non_biblical {
+            background: transparent;
+            color: var(--ink-faint);
+            border-color: var(--rule);
+        }
+
+        .confidence-cell {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .confidence-bar {
+            width: 72px;
+            height: 2px;
+            background: var(--rule);
+            position: relative;
+        }
+
+        .confidence-fill {
+            height: 100%;
+            background: var(--ink);
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+
+        .confidence-num {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.78rem;
+            color: var(--ink-muted);
+            min-width: 32px;
+        }
+
+        .source-ref {
+            font-family: 'Fraunces', serif;
+            font-style: italic;
+            color: var(--accent);
+            font-size: 0.95rem;
+        }
+
+        /* Loading */
+        .loading {
+            display: none;
+            text-align: center;
+            padding: 80px 40px;
+        }
+
+        .loading.show {
+            display: block;
+        }
+
+        .loading-mark {
+            font-family: 'Fraunces', serif;
+            font-style: italic;
+            font-weight: 300;
+            font-size: 2.4rem;
+            color: var(--accent);
+            display: inline-block;
+            animation: breathe 1.6s ease-in-out infinite;
+            margin-bottom: 20px;
+        }
+
+        @keyframes breathe {
+            0%, 100% { opacity: 0.3; transform: scale(0.96); }
+            50% { opacity: 1; transform: scale(1); }
+        }
+
+        .loading p {
+            color: var(--ink);
+            font-size: 1rem;
+            font-style: italic;
+            margin-bottom: 6px;
+        }
+
+        #loadingStatus {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.72rem;
+            color: var(--ink-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            font-style: normal;
+        }
+
+        /* Error */
+        .error-message {
+            display: none;
+            border-left: 2px solid var(--alert);
+            padding: 16px 20px;
+            color: var(--alert);
+            background: var(--paper-deep);
+            margin-top: 20px;
+            font-size: 0.95rem;
+        }
+
+        .error-message.show {
+            display: block;
+        }
+
+        /* Footer */
+        footer {
+            max-width: 1120px;
+            margin: 0 auto;
+            padding: 48px 32px 64px;
+            border-top: 1px solid var(--rule);
+            margin-top: 80px;
+        }
+
+        footer p {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.72rem;
+            color: var(--ink-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+
+        footer a {
+            color: var(--ink);
+            text-decoration: none;
+            border-bottom: 1px solid var(--rule);
+            padding-bottom: 1px;
+            transition: border-color 0.2s;
+        }
+
+        footer a:hover {
+            border-bottom-color: var(--accent);
+            color: var(--accent);
+        }
+
+        /* Responsive */
+        @media (max-width: 720px) {
+            main { padding: 48px 24px 40px; }
+            header { padding: 14px 24px; }
+            .header-content {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 14px;
+            }
+            .hero { margin-bottom: 52px; }
+            .hero h2 { font-size: 2.2rem; }
+            .hero p { font-size: 1rem; }
+            .upload-zone { padding: 40px 20px; }
+            .options-grid {
+                grid-template-columns: 1fr;
+            }
+            .option-group {
+                border-right: none;
+                border-bottom: 1px solid var(--rule);
+            }
+            .option-group:last-child { border-bottom: none; }
+            .stats-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+            .stat-box {
+                border-right: 1px solid var(--rule);
+                border-bottom: 1px solid var(--rule);
+            }
+            .stat-box:nth-child(2n) { border-right: none; }
+            .results-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            .results-table {
+                display: block;
+                overflow-x: auto;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <div class="logo">
+                <div class="logo-mark">Ϙ</div>
+                <div class="logo-text">
+                    <h1>Biblical Quotation Detector</h1>
+                    <span class="ver">v0.1.0</span>
+                </div>
+            </div>
+            <div class="header-links">
+                <a href="https://github.com/cdobratz/biblical-quotation-detector" target="_blank" rel="noopener noreferrer">GitHub</a>
+                <a href="/docs">API</a>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <section class="hero">
+            <div class="eyebrow"><span class="label">A scholarly tool</span></div>
+            <h2>Detect biblical quotations <em>within</em> Koine Greek texts.</h2>
+            <p>Upload a file of passages and surface their biblical parallels through semantic similarity and heuristic analysis — calibrated for patristic and early Christian sources.</p>
+        </section>
+
+        <section class="upload-card">
+            <div class="section-head">
+                <span class="num">I.</span>
+                <h3>Upload source text</h3>
+            </div>
+            <div class="upload-zone" id="uploadZone">
+                <input type="file" id="fileInput" accept=".txt,.json">
+                <div class="upload-glyph">+</div>
+                <p>Drag &amp; drop a file, or click to browse</p>
+                <p class="formats">.txt &nbsp;·&nbsp; .json</p>
+            </div>
+            <div class="file-info" id="fileInfo">
+                <div class="name" id="fileName">filename.txt</div>
+                <span class="count" id="fileCount">0 texts</span>
+                <button class="remove" id="removeFile" title="Remove file">×</button>
+            </div>
+        </section>
+
+        <section class="options-section">
+            <div class="section-head">
+                <span class="num">II.</span>
+                <h3>Configure</h3>
+            </div>
+            <div class="options-grid">
+                <div class="option-group">
+                    <span class="label">Output</span>
+                    <div class="radio-group">
+                        <label class="radio-option">
+                            <input type="radio" name="format" value="json" checked>
+                            <span>JSON</span>
+                        </label>
+                        <label class="radio-option">
+                            <input type="radio" name="format" value="csv">
+                            <span>CSV</span>
+                        </label>
+                        <label class="radio-option">
+                            <input type="radio" name="format" value="markdown">
+                            <span>Markdown</span>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="option-group">
+                    <span class="label">Mode</span>
+                    <div class="radio-group">
+                        <label class="radio-option">
+                            <input type="radio" name="mode" value="heuristic" checked>
+                            <span>Heuristic</span>
+                        </label>
+                        <label class="radio-option">
+                            <input type="radio" name="mode" value="llm">
+                            <span>LLM</span>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="option-group">
+                    <span class="label">Min confidence</span>
+                    <select id="confidence">
+                        <option value="30">30%</option>
+                        <option value="50" selected>50%</option>
+                        <option value="70">70%</option>
+                        <option value="80">80%</option>
+                    </select>
+                </div>
+            </div>
+        </section>
+
+        <button class="submit-btn" id="analyzeBtn" disabled><span>Analyze texts →</span></button>
+
+        <div class="error-message" id="errorMessage"></div>
+
+        <div class="loading" id="loading">
+            <div class="loading-mark">⁂</div>
+            <p>Reading the passages…</p>
+            <p id="loadingStatus"></p>
+        </div>
+
+        <section class="results-card" id="resultsCard">
+            <div class="results-header">
+                <div class="results-title">
+                    <span class="label">§ III</span>
+                    <h3>Findings</h3>
+                </div>
+                <div class="download-buttons">
+                    <button class="download-btn" data-format="json">↓ JSON</button>
+                    <button class="download-btn" data-format="csv">↓ CSV</button>
+                    <button class="download-btn" data-format="markdown">↓ MD</button>
+                </div>
+            </div>
+
+            <div class="stats-grid">
+                <div class="stat-box">
+                    <div class="stat-value" id="totalProcessed">0</div>
+                    <div class="stat-label">Processed</div>
+                </div>
+                <div class="stat-box quotations">
+                    <div class="stat-value" id="totalQuotations">0</div>
+                    <div class="stat-label">Quotations</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-value" id="processingTime">0ms</div>
+                    <div class="stat-label">Elapsed</div>
+                </div>
+            </div>
+
+            <table class="results-table">
+                <thead>
+                    <tr>
+                        <th>Passage</th>
+                        <th>Type</th>
+                        <th>Confidence</th>
+                        <th>Reference</th>
+                    </tr>
+                </thead>
+                <tbody id="resultsBody">
+                </tbody>
+            </table>
+        </section>
+    </main>
+
+    <footer>
+        <p>Built by <a href="https://missionsynclab.com/ " target="_blank" rel="noopener noreferrer">Mission Sync Lab</a> · Use by <a href="https://greekcntr.org/home/index.html">Center for New Testament Restoration</a>, Special Thanks to <a href="https://github.com/jtauber/apostolic-fathers">Work of James Tauber</a></p>
+    </footer>
+
+    <script>
+        // State
+        let uploadedTexts = [];
+        let results = [];
+
+        // Elements
+        const uploadZone = document.getElementById('uploadZone');
+        const fileInput = document.getElementById('fileInput');
+        const fileInfo = document.getElementById('fileInfo');
+        const fileName = document.getElementById('fileName');
+        const fileCount = document.getElementById('fileCount');
+        const removeFile = document.getElementById('removeFile');
+        const analyzeBtn = document.getElementById('analyzeBtn');
+        const loading = document.getElementById('loading');
+        const loadingStatus = document.getElementById('loadingStatus');
+        const errorMessage = document.getElementById('errorMessage');
+        const resultsCard = document.getElementById('resultsCard');
+
+        // Upload handling
+        uploadZone.addEventListener('click', () => fileInput.click());
+
+        uploadZone.addEventListener('dragover', (e) => {
+            e.preventDefault();
+            uploadZone.classList.add('dragover');
+        });
+
+        uploadZone.addEventListener('dragleave', () => {
+            uploadZone.classList.remove('dragover');
+        });
+
+        uploadZone.addEventListener('drop', (e) => {
+            e.preventDefault();
+            uploadZone.classList.remove('dragover');
+            const file = e.dataTransfer.files[0];
+            if (file) handleFile(file);
+        });
+
+        fileInput.addEventListener('change', () => {
+            const file = fileInput.files[0];
+            if (file) handleFile(file);
+        });
+
+        removeFile.addEventListener('click', () => {
+            uploadedTexts = [];
+            fileInput.value = '';
+            fileInfo.classList.remove('show');
+            analyzeBtn.disabled = true;
+        });
+
+        function handleFile(file) {
+            const validTypes = ['.txt', '.json'];
+            const ext = file.name.substring(file.name.lastIndexOf('.')).toLowerCase();
+
+            if (!validTypes.includes(ext)) {
+                showError('Invalid file type. Please upload a .txt or .json file.');
+                return;
+            }
+
+            const reader = new FileReader();
+            reader.onload = (e) => {
+                try {
+                    if (ext === '.json') {
+                        const data = JSON.parse(e.target.result);
+                        if (!Array.isArray(data)) {
+                            throw new Error('JSON file must contain an array of strings');
+                        }
+                        uploadedTexts = data.filter(t => typeof t === 'string' && t.trim());
+                    } else {
+                        uploadedTexts = e.target.result
+                            .split('\n')
+                            .map(t => t.trim())
+                            .filter(t => t.length > 0);
+                    }
+
+                    if (uploadedTexts.length === 0) {
+                        throw new Error('No valid texts found in file');
+                    }
+
+                    fileName.textContent = file.name;
+                    fileCount.textContent = `${uploadedTexts.length} texts`;
+                    fileInfo.classList.add('show');
+                    analyzeBtn.disabled = false;
+                    hideError();
+                } catch (err) {
+                    showError(err.message);
+                }
+            };
+            reader.readAsText(file);
+        }
+
+        // Analysis
+        analyzeBtn.addEventListener('click', async () => {
+            const mode = document.querySelector('input[name="mode"]:checked').value;
+            const minConfidence = parseInt(document.getElementById('confidence').value);
+
+            loading.classList.add('show');
+            resultsCard.classList.remove('show');
+            hideError();
+            analyzeBtn.disabled = true;
+
+            try {
+                results = [];
+                const BATCH_SIZE = 50;
+                let quotationCount = 0;
+                const totalStartTime = Date.now();
+
+                for (let i = 0; i < uploadedTexts.length; i += BATCH_SIZE) {
+                    const batch = uploadedTexts.slice(i, i + BATCH_SIZE);
+                    const batchNum = Math.floor(i / BATCH_SIZE) + 1;
+                    const totalBatches = Math.ceil(uploadedTexts.length / BATCH_SIZE);
+
+                    loadingStatus.textContent = `Batch ${batchNum} / ${totalBatches}`;
+
+                    const response = await fetch('/api/v1/detect/batch', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({
+                            texts: batch,
+                            mode: mode,
+                            min_confidence: minConfidence
+                        })
+                    });
+
+                    if (!response.ok) {
+                        const error = await response.json();
+                        throw new Error(error.detail || 'Detection failed');
+                    }
+
+                    const data = await response.json();
+                    results.push(...data.results);
+                    quotationCount += data.total_quotations;
+                }
+
+                const totalTime = Date.now() - totalStartTime;
+                renderResults(quotationCount, totalTime);
+
+            } catch (err) {
+                showError(err.message);
+            } finally {
+                loading.classList.remove('show');
+                analyzeBtn.disabled = false;
+            }
+        });
+
+        function renderResults(quotationCount, totalTime) {
+            document.getElementById('totalProcessed').textContent = results.length;
+            document.getElementById('totalQuotations').textContent = quotationCount;
+            document.getElementById('processingTime').textContent = `${totalTime}ms`;
+
+            const tbody = document.getElementById('resultsBody');
+            tbody.innerHTML = results.map(r => {
+                const textPreview = r.input_text.length > 60
+                    ? r.input_text.substring(0, 60) + '…'
+                    : r.input_text;
+                const matchTypeClass = r.match_type.replace('_', '-');
+                const sourceRef = r.best_match ? r.best_match.reference : '—';
+
+                return `
+                    <tr>
+                        <td><span class="greek-text">${escapeHtml(textPreview)}</span></td>
+                        <td><span class="match-type-badge ${matchTypeClass}">${r.match_type.replace('_', ' ')}</span></td>
+                        <td>
+                            <div class="confidence-cell">
+                                <div class="confidence-bar">
+                                    <div class="confidence-fill" style="width: ${r.confidence}%"></div>
+                                </div>
+                                <span class="confidence-num">${r.confidence}%</span>
+                            </div>
+                        </td>
+                        <td><span class="source-ref">${escapeHtml(sourceRef)}</span></td>
+                    </tr>
+                `;
+            }).join('');
+
+            resultsCard.classList.add('show');
+        }
+
+        // Download
+        document.querySelectorAll('.download-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const format = btn.dataset.format;
+                downloadResults(format);
+            });
+        });
+
+        function downloadResults(format) {
+            if (results.length === 0) return;
+
+            let content, filename, mimeType;
+            const date = new Date().toISOString().slice(0, 10).replace(/-/g, '');
+
+            if (format === 'json') {
+                content = JSON.stringify(results, null, 2);
+                filename = `detection_results_${date}.json`;
+                mimeType = 'application/json';
+            } else if (format === 'csv') {
+                const headers = ['input_text', 'is_quotation', 'confidence', 'match_type', 'best_match_ref', 'explanation'];
+                const rows = results.map(r => [
+                    `"${escapeCsv(r.input_text)}"`,
+                    r.is_quotation,
+                    r.confidence,
+                    r.match_type,
+                    r.best_match ? `"${escapeCsv(r.best_match.reference)}"` : '',
+                    `"${escapeCsv(r.explanation)}"`
+                ].join(','));
+                content = [headers.join(','), ...rows].join('\n');
+                filename = `detection_results_${date}.csv`;
+                mimeType = 'text/csv';
+            } else {
+                const header = '# Biblical Quotation Detection Results\n\n';
+                const stats = `| Processed | Quotations | Time |\n| --- | --- | --- |\n| ${results.length} | ${results.filter(r => r.is_quotation).length} | ${document.getElementById('processingTime').textContent} |\n\n`;
+                const tableHeader = '| Text | Type | Confidence | Match |\n| --- | --- | --- | --- |\n';
+                const tableRows = results.map(r => {
+                    const textPreview = r.input_text.length > 40 ? r.input_text.substring(0, 40) + '...' : r.input_text;
+                    const ref = r.best_match ? r.best_match.reference : '—';
+                    return `| ${escapeMarkdown(textPreview)} | ${r.match_type.replace('_', ' ')} | ${r.confidence}% | ${ref} |`;
+                }).join('\n');
+                content = header + stats + tableHeader + tableRows;
+                filename = `detection_results_${date}.md`;
+                mimeType = 'text/markdown';
+            }
+
+            const blob = new Blob([content], { type: mimeType });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = filename;
+            a.click();
+            URL.revokeObjectURL(url);
+        }
+
+        function escapeHtml(str) {
+            return str
+                .replace(/&/g, '&amp;')
+                .replace(/</g, '&lt;')
+                .replace(/>/g, '&gt;')
+                .replace(/"/g, '&quot;');
+        }
+
+        function escapeCsv(str) {
+            return str.replace(/"/g, '""').replace(/\n/g, ' ');
+        }
+
+        function escapeMarkdown(str) {
+            return str.replace(/\|/g, '\\|').replace(/\n/g, ' ');
+        }
+
+        function showError(msg) {
+            errorMessage.textContent = msg;
+            errorMessage.classList.add('show');
+        }
+
+        function hideError() {
+            errorMessage.classList.remove('show');
+        }
+    </script>
+</body>
+</html>
