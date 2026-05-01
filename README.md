@@ -1,3 +1,5 @@
+![Greek Logo](assets/GreekLogo.png)
+
 # Biblical Quotation Detector
 
 > An LLM-powered RAG agent for detecting biblical quotations in ancient Koine Greek texts
