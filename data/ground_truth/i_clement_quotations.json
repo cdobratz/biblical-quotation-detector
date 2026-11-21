@@ -1,10 +1,10 @@
 {
   "metadata": {
     "source": "1 Clement (First Epistle of Clement to the Corinthians)",
-    "description": "Ground-truth biblical quotations in 1 Clement based on standard scholarly apparatus (Biblia Patristica, Lake's Loeb edition, Lightfoot commentary)",
+    "description": "Ground-truth biblical quotations in 1 Clement based on standard scholarly apparatus (Biblia Patristica, Lake's Loeb edition, Lightfoot commentary), enriched with data from Joel, Cassidy, and clement spreadsheets",
     "created": "2026-04-02",
-    "updated": "2026-04-02",
-    "notes": "Includes both NT and OT/Septuagint references. Phase 6 expanded with LXX quotations."
+    "updated": "2026-11-20",
+    "notes": "Includes both NT and OT/Septuagint references. Phase 6 expanded with LXX quotations. Phase 7 enriched from Joel.xlsx (48 entries), Cassidy.ods (30 entries), clement.ods (98 entries)."
   },
   "exact_quotations": [
     {
@@ -26,7 +26,7 @@
       "biblical_ref": "Matthew 26:24",
       "clement_text": "καλὸν ἦν αὐτῷ εἰ οὐκ ἐγεννήθη, ἢ ἕνα τῶν ἐκλεκτῶν μου σκανδαλίσαι",
       "match_type": "exact",
-      "notes": "Close to Matthew 26:24 / Mark 14:21 with Clement's addition"
+      "notes": "Close to Matthew 26:24 / Mark 14:21 with Clement's addition. Also cf. Matthew 18:6"
     },
     {
       "clement_ref": "46:8",
@@ -34,6 +34,27 @@
       "clement_text": "ἓν σῶμα ἐσμὲν ἐν Χριστῷ",
       "match_type": "exact",
       "notes": "Also cf. 1 Corinthians 12:12-13"
+    },
+    {
+      "clement_ref": "16:7-8",
+      "biblical_ref": "Acts 8:32-33",
+      "clement_text": "ὡς πρόβατον ἐπὶ σφαγὴν ἤχθη, καὶ ὡς ἀμνὸς ἐναντίον τοῦ κείραντος ἄφωνος, οὕτως οὐκ ἀνοίγει τὸ στόμα αὐτοῦ. ἐν τῇ ταπεινώσει ἡ κρίσις αὐτοῦ ἤρθη",
+      "match_type": "exact",
+      "notes": "Isaiah 53:7-8 LXX quoted via Acts 8:32-33. Cassidy confirms exact at 74%"
+    },
+    {
+      "clement_ref": "34:8",
+      "biblical_ref": "1 Corinthians 2:9",
+      "clement_text": "Ὀφθαλμὸς οὐκ εἶδεν, καὶ οὖς οὐκ ἤκουσεν, καὶ ἐπὶ καρδίαν ἀνθρώπου οὐκ ἀνέβη, ὅσα ἡτοίμασεν κύριος τοῖς ὑπομένουσιν αὐτόν",
+      "match_type": "exact",
+      "notes": "Classic quotation also found in Isaiah 64:4. Cassidy confirms exact at 71%"
+    },
+    {
+      "clement_ref": "36:3",
+      "biblical_ref": "Hebrews 1:7",
+      "clement_text": "Ὁ ποιῶν τοὺς ἀγγέλους αὐτοῦ πνεύματα καὶ τοὺς λειτουργοὺς αὐτοῦ πυρὸς φλόγα",
+      "match_type": "exact",
+      "notes": "Quoting Psalms 104:4 LXX via Hebrews 1:7. Cassidy confirms exact at 72%"
     }
   ],
   "close_paraphrases": [
@@ -56,21 +77,14 @@
       "biblical_ref": "Luke 6:36-38",
       "clement_text": "ἐλεᾶτε, ἵνα ἐλεηθῆτε· ἀφίετε, ἵνα ἀφεθῇ ὑμῖν",
       "match_type": "close_paraphrase",
-      "notes": "Sermon on the Plain material, freely quoted"
+      "notes": "Sermon on the Plain material, freely quoted. Also cf. Matthew 6:12-15; 7:2"
     },
     {
       "clement_ref": "24:5",
       "biblical_ref": "1 Corinthians 15:36",
       "clement_text": "ὁ σπείρων ἐξῆλθεν καὶ ἔβαλεν εἰς τὴν γῆν",
       "match_type": "close_paraphrase",
-      "notes": "Paraphrase of the seed/sowing metaphor"
-    },
-    {
-      "clement_ref": "34:8",
-      "biblical_ref": "1 Corinthians 2:9",
-      "clement_text": "ὀφθαλμὸς οὐκ εἶδεν καὶ οὖς οὐκ ἤκουσεν, καὶ ἐπὶ καρδίαν ἀνθρώπου οὐκ ἀνέβη",
-      "match_type": "close_paraphrase",
-      "notes": "Classic quotation also found in Isaiah 64:4"
+      "notes": "Paraphrase of the seed/sowing metaphor. Also cf. Luke 8:5"
     },
     {
       "clement_ref": "36:2-5",
@@ -82,7 +96,7 @@
     {
       "clement_ref": "49:5",
       "biblical_ref": "1 Corinthians 13:4-7",
-      "clement_text": "ἡ ἀγάπη ... πάντα στέγει, πάντα μακροθυμεῖ",
+      "clement_text": "ἀγάπη πάντα ἀνέχεται, πάντα μακροθυμεῖ",
       "match_type": "close_paraphrase",
       "notes": "Paraphrase of the love hymn"
     },
@@ -92,6 +106,83 @@
       "clement_text": "ἀναλάβετε τὴν ἐπιστολὴν τοῦ μακαρίου Παύλου τοῦ ἀποστόλου",
       "match_type": "close_paraphrase",
       "notes": "Explicit reference to 1 Corinthians with partial quotation"
+    },
+    {
+      "clement_ref": "13:1",
+      "biblical_ref": "1 Corinthians 1:31",
+      "clement_text": "ἀλλ' ἤ ὁ καυχώμενος ἐν κυρίῳ καυχάσθω",
+      "match_type": "close_paraphrase",
+      "notes": "Also OT: Jeremiah 9:23-24 LXX. Joel confirms"
+    },
+    {
+      "clement_ref": "15:2",
+      "biblical_ref": "Isaiah 29:13",
+      "clement_text": "Οὗτος ὁ λαὸς τοῖς χείλεσίν με τιμᾷ, ἡ δὲ καρδία αὐτῶν πόρρω ἄπεστιν ἀπ' ἐμοῦ",
+      "match_type": "close_paraphrase",
+      "notes": "People honor with lips from Isaiah 29:13 LXX. Also cf. Matthew 15:8, Mark 7:6"
+    },
+    {
+      "clement_ref": "17:5",
+      "biblical_ref": "Hebrews 3:5",
+      "clement_text": "Μωϋσῆς πιστὸς ἐν ὅλῳ τῷ οἴκῳ αὐτοῦ ἐκλήθη",
+      "match_type": "close_paraphrase",
+      "notes": "Moses faithful in all his house. Confirmed by both Joel and Cassidy"
+    },
+    {
+      "clement_ref": "18:1",
+      "biblical_ref": "Acts 13:22",
+      "clement_text": "Εὗρον ἄνδρα κατὰ τὴν καρδίαν μου, Δαυεὶδ τὸν τοῦ Ἰεσσαί, ἐν ἐλέει αἰωνίῳ ἔχρισα αὐτόν",
+      "match_type": "close_paraphrase",
+      "notes": "God finding David. Quoting 1 Samuel 13:14 / Psalm 89:20 LXX via Acts 13:22"
+    },
+    {
+      "clement_ref": "34:3",
+      "biblical_ref": "Revelation 22:12",
+      "clement_text": "Ἰδοὺ ὁ κύριος, καὶ ὁ μισθὸς αὐτοῦ πρὸ προσώπου αὐτοῦ, ἀποδοῦναι ἑκάστῳ κατὰ τὸ ἔργον αὐτοῦ",
+      "match_type": "close_paraphrase",
+      "notes": "Also cf. Isaiah 40:10, 62:11 LXX. Joel confirms"
+    },
+    {
+      "clement_ref": "36:4",
+      "biblical_ref": "Hebrews 1:5",
+      "clement_text": "Υἱός μου εἶ σύ, ἐγὼ σήμερον γεγέννηκά σε",
+      "match_type": "close_paraphrase",
+      "notes": "Quoting Psalm 2:7 via Hebrews 1:5. Also cf. Acts 13:33"
+    },
+    {
+      "clement_ref": "36:5",
+      "biblical_ref": "Hebrews 1:13",
+      "clement_text": "Κάθου ἐκ δεξιῶν μου, ἕως ἂν θῶ τοὺς ἐχθρούς σου ὑποπόδιον τῶν ποδῶν σου",
+      "match_type": "close_paraphrase",
+      "notes": "Quoting Psalm 110:1 via Hebrews 1:13. Also cf. Matthew 22:44"
+    },
+    {
+      "clement_ref": "10:3",
+      "biblical_ref": "Acts 7:3",
+      "clement_text": "Ἄπελθε ἐκ τῆς γῆς σου καὶ ἐκ τῆς συγγενείας σου",
+      "match_type": "close_paraphrase",
+      "notes": "God's call to Abraham. Genesis 12:1 LXX via Acts 7:3. Cassidy confirms"
+    },
+    {
+      "clement_ref": "56:4",
+      "biblical_ref": "Hebrews 12:6",
+      "clement_text": "ὃν γὰρ ἀγαπᾷ κύριος παιδεύει, μαστιγοῖ δὲ πάντα υἱὸν ὃν παραδέχεται",
+      "match_type": "close_paraphrase",
+      "notes": "Quoting Proverbs 3:12 LXX via Hebrews 12:6. Cassidy confirms at 67%"
+    },
+    {
+      "clement_ref": "22:1-7",
+      "biblical_ref": "1 Peter 3:10-12",
+      "clement_text": "ὀφθαλμοὶ κυρίου ἐπὶ δικαίους, καὶ ὦτα αὐτοῦ πρὸς δέησιν αὐτῶν",
+      "match_type": "close_paraphrase",
+      "notes": "Quoting Psalm 34:12-16 LXX via 1 Peter 3:10-12. Cassidy confirms at 63%"
+    },
+    {
+      "clement_ref": "50:6",
+      "biblical_ref": "Romans 4:7-8",
+      "clement_text": "Μακάριοι, ὧν ἀφέθησαν αἱ ἀνομίαι καὶ ὧν ἐπεκαλύφθησαν αἱ ἁμαρτίαι",
+      "match_type": "close_paraphrase",
+      "notes": "Quoting Psalm 32:1-2 LXX via Romans 4:7-8. Cassidy confirms at 58%"
     }
   ],
   "allusions": [
@@ -101,6 +192,13 @@
       "clement_text": "ὑποτασσόμενοι τοῖς ἡγουμένοις ὑμῶν",
       "match_type": "allusion",
       "notes": "Allusion to submission theme"
+    },
+    {
+      "clement_ref": "1:3",
+      "biblical_ref": "Proverbs 3:34",
+      "clement_text": "ὑποτασσόμενοι ... τιμὴν τὴν καθήκουσαν ἀπονέμοντες",
+      "match_type": "allusion",
+      "notes": "God opposes the proud / gives grace to humble from Proverbs 3:34 LXX"
     },
     {
       "clement_ref": "5:4",
@@ -156,7 +254,7 @@
       "biblical_ref": "1 Peter 4:8",
       "clement_text": "ἀγάπη καλύπτει πλῆθος ἁμαρτιῶν",
       "match_type": "allusion",
-      "notes": "Love covers a multitude of sins"
+      "notes": "Love covers a multitude of sins. Joel confirms"
     },
     {
       "clement_ref": "4:1-6",
@@ -187,20 +285,6 @@
       "notes": "Trisagion from Isaiah 6:3 LXX"
     },
     {
-      "clement_ref": "15:2",
-      "biblical_ref": "Isaiah 29:13",
-      "clement_text": "ὁ λαὸς οὗτος τοῖς χείλεσίν με τιμᾷ",
-      "match_type": "allusion",
-      "notes": "People honor with lips from Isaiah 29:13 LXX"
-    },
-    {
-      "clement_ref": "1:3",
-      "biblical_ref": "Proverbs 3:34",
-      "clement_text": "ὑποτασσόμενοι ... τιμὴν τὴν καθήκουσαν ἀπονέμοντες",
-      "match_type": "allusion",
-      "notes": "God opposes the proud / gives grace to humble from Proverbs 3:34 LXX"
-    },
-    {
       "clement_ref": "16:3-14",
       "biblical_ref": "Isaiah 53:1-12",
       "clement_text": "κύριε, τίς ἐπίστευσεν τῇ ἀκοῇ ἡμῶν",
@@ -220,6 +304,111 @@
       "clement_text": "ποιήσωμεν ἄνθρωπον κατ' εἰκόνα καὶ καθ' ὁμοίωσιν ἡμετέραν",
       "match_type": "allusion",
       "notes": "Creation of humanity from Genesis 1:26 LXX"
+    },
+    {
+      "clement_ref": "2:7",
+      "biblical_ref": "Titus 3:1",
+      "clement_text": "ἕτοιμοι εἰς πᾶν ἔργον ἀγαθόν",
+      "match_type": "allusion",
+      "notes": "Ready for every good work. Joel confirms as 'multiple'"
+    },
+    {
+      "clement_ref": "16:1",
+      "biblical_ref": "Matthew 23:11-12",
+      "clement_text": "Ταπεινοφρονούντων γάρ ἐστιν ὁ Χριστός, οὐκ ἐπαιρομένων ἐπὶ τὸ ποίμνιον αὐτοῦ",
+      "match_type": "allusion",
+      "notes": "Also cf. Mark 10:43. Joel confirms"
+    },
+    {
+      "clement_ref": "17:1",
+      "biblical_ref": "Hebrews 11:37",
+      "clement_text": "οἵτινες ἐν δέρμασιν αἰγείοις καὶ μηλωταῖς περιεπάτησαν",
+      "match_type": "allusion",
+      "notes": "They went about in sheepskins and goatskins. Joel confirms"
+    },
+    {
+      "clement_ref": "24:1",
+      "biblical_ref": "1 Corinthians 15:20",
+      "clement_text": "ἧς τὴν ἀπαρχὴν ἐποιήσατο τὸν κύριον Ἰησοῦν Χριστὸν ἐκ νεκρῶν ἀναστήσας",
+      "match_type": "allusion",
+      "notes": "Christ as firstfruits of resurrection. Joel confirms"
+    },
+    {
+      "clement_ref": "27:2",
+      "biblical_ref": "Hebrews 6:18",
+      "clement_text": "οὐδὲν γὰρ ἀδύνατον παρὰ τῷ θεῷ εἰ μὴ τὸ ψεύσασθαι",
+      "match_type": "allusion",
+      "notes": "God cannot lie. Also cf. Titus 1:2. Joel confirms"
+    },
+    {
+      "clement_ref": "27:5",
+      "biblical_ref": "Matthew 24:35",
+      "clement_text": "οὐδὲν μὴ παρέλθῃ τῶν δεδογματισμένων ὑπ' αὐτοῦ",
+      "match_type": "allusion",
+      "notes": "His words will not pass away. Joel confirms"
+    },
+    {
+      "clement_ref": "32:2",
+      "biblical_ref": "Romans 9:5",
+      "clement_text": "ἐξ αὐτοῦ ὁ κύριος Ἰησοῦς τὸ κατὰ σάρκα",
+      "match_type": "allusion",
+      "notes": "Christ according to the flesh. Joel confirms"
+    },
+    {
+      "clement_ref": "36:1",
+      "biblical_ref": "Hebrews 3:1",
+      "clement_text": "Ἰησοῦν Χριστόν, τὸν ἀρχιερέα τῶν προσφορῶν ἡμῶν",
+      "match_type": "allusion",
+      "notes": "Jesus Christ, high priest. Joel confirms"
+    },
+    {
+      "clement_ref": "36:2",
+      "biblical_ref": "2 Corinthians 3:18",
+      "clement_text": "διὰ τούτου ἐνοπτριζόμεθα τὴν ἄμωμον καὶ ὑπερτάτην ὄψιν αὐτοῦ",
+      "match_type": "allusion",
+      "notes": "Beholding as in a mirror. Joel confirms"
+    },
+    {
+      "clement_ref": "46:5",
+      "biblical_ref": "James 4:1",
+      "clement_text": "ἱνατί ἔρεις καὶ θυμοὶ καὶ διχοστασίαι καὶ σχίσματα πόλεμός τε ἐν ὑμῖν",
+      "match_type": "allusion",
+      "notes": "Quarrels and conflicts among you. Joel confirms"
+    },
+    {
+      "clement_ref": "46:6",
+      "biblical_ref": "Ephesians 4:4-6",
+      "clement_text": "ἢ οὐχὶ ἕνα θεὸν ἔχομεν καὶ ἕνα Χριστὸν καὶ ἓν πνεῦμα τῆς χάριτος",
+      "match_type": "allusion",
+      "notes": "One God, one Christ, one Spirit. Joel confirms"
+    },
+    {
+      "clement_ref": "46:7",
+      "biblical_ref": "Ephesians 4:25",
+      "clement_text": "ὅτι μέλη ἐσμὲν ἀλλήλων",
+      "match_type": "allusion",
+      "notes": "We are members of one another. Joel confirms"
+    },
+    {
+      "clement_ref": "59:2",
+      "biblical_ref": "1 Peter 2:9",
+      "clement_text": "δι' οὗ ἐκάλεσεν ἡμᾶς ἀπὸ σκότους εἰς φῶς",
+      "match_type": "allusion",
+      "notes": "Called from darkness into light. Joel confirms"
+    },
+    {
+      "clement_ref": "64:1",
+      "biblical_ref": "Titus 3:14",
+      "clement_text": "καὶ ἡμᾶς δι' αὐτοῦ εἰς λαὸν περιούσιον",
+      "match_type": "allusion",
+      "notes": "A people for his own possession. Joel confirms"
+    },
+    {
+      "clement_ref": "33:6",
+      "biblical_ref": "Mark 10:6",
+      "clement_text": "καὶ ἐποίησεν ὁ θεὸς τὸν ἄνθρωπον, ἄρσεν καὶ θῆλυ ἐποίησεν αὐτούς",
+      "match_type": "allusion",
+      "notes": "Male and female he made them. Genesis 1:27 via Mark 10:6. Cassidy confirms"
     }
   ],
   "non_biblical": [
@@ -252,6 +441,12 @@
       "clement_text": "Τοὺς δὲ ἀπεσταλμένους ἀφ' ἡμῶν Κλαύδιον Ἔφηβον",
       "match_type": "non_biblical",
       "notes": "Names of envoys — administrative content"
+    },
+    {
+      "clement_ref": "5:6",
+      "clement_text": "φυγαδευθείς ... λιθασθείς",
+      "match_type": "non_biblical",
+      "notes": "Paul's sufferings — Clement's own narrative summary, not quoting Acts 9:25 or 14:19 directly. Joel marks as 'no'"
     }
   ]
 }

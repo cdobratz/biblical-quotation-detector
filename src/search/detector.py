@@ -113,12 +113,13 @@ def _count_shared_lemmas(text_a: str, text_b: str) -> int:
     content_a = {w for w in words_a if len(w) > 3}
     content_b = {w for w in words_b if len(w) > 3}
 
-    # Simple Greek stemming: truncate to first 4 characters as a rough stem.
-    # This catches inflectional variants like θεος/θεου/θεω → θεοσ/θεου/θεω
-    # For longer words, use min(len, 5) to be slightly more discriminating.
+    # Greek stemming: strip inflectional suffixes by truncating.
+    # Short words (4-5 chars) keep 4 chars; longer words keep all but
+    # the last 2 chars, which are typically case/number endings.
     def stem(word: str) -> str:
-        cutoff = min(len(word), max(4, len(word) - 2))
-        return word[:cutoff]
+        if len(word) <= 5:
+            return word[:4]
+        return word[:len(word) - 2]
 
     stems_a = {stem(w) for w in content_a}
     stems_b = {stem(w) for w in content_b}
@@ -741,7 +742,9 @@ class QuotationDetector:
         shared_lemmas = best_signals.get("shared_lemmas", 0)
 
         # Classify based on multi-signal confidence + word overlap gate
-        if ms_confidence >= 70 and shared_words >= 5:
+        # Bypass: high word overlap alone indicates near-verbatim quotation
+        # even when embedding similarity drags ms_confidence below 70
+        if (ms_confidence >= 70 and shared_words >= 5) or shared_words >= 7:
             match_type = "exact"
             is_quotation = True
         elif ms_confidence >= 50 and shared_words >= 3:
@@ -750,7 +753,7 @@ class QuotationDetector:
         elif ms_confidence >= 35 and shared_words >= 2:
             match_type = "loose_paraphrase"
             is_quotation = True
-        elif ms_confidence >= 20 and (shared_words >= 1 or shared_lemmas >= 2):
+        elif ms_confidence >= 25 and (shared_words >= 2 or shared_lemmas >= 3):
             match_type = "allusion"
             is_quotation = True
         else:

@@ -164,6 +164,151 @@
       "group": "Heaven is my throne (Isaiah 66:1-2)",
       "refs": ["Isaiah 66:1", "Isaiah 66:2", "Acts 7:49", "Acts 7:50"],
       "notes": "Quoted in 1 Clement 52 and Acts 7"
+    },
+    {
+      "group": "Boast in the Lord (1 Corinthians 1:31)",
+      "refs": ["1 Corinthians 1:31", "2 Corinthians 10:17", "Jeremiah 9:23", "Jeremiah 9:24"],
+      "notes": "Paul quotes Jeremiah 9:23-24 LXX. 1 Clement 13:1"
+    },
+    {
+      "group": "Isaiah 53 via Acts 8 (Suffering Servant)",
+      "refs": ["Isaiah 53:7", "Isaiah 53:8", "Acts 8:32", "Acts 8:33"],
+      "notes": "Philip quotes Isaiah 53 in Acts 8. 1 Clement 16:7-8"
+    },
+    {
+      "group": "Lips honor but heart far (Isaiah 29:13)",
+      "refs": ["Isaiah 29:13", "Matthew 15:8", "Matthew 15:9", "Mark 7:6", "Mark 7:7"],
+      "notes": "Jesus quotes Isaiah 29:13 LXX. 1 Clement 15:2"
+    },
+    {
+      "group": "Moses faithful in house (Hebrews 3:5)",
+      "refs": ["Hebrews 3:5", "Numbers 12:7"],
+      "notes": "Hebrews quotes Numbers 12:7 LXX. 1 Clement 17:5, 43:1"
+    },
+    {
+      "group": "God found David (Acts 13:22)",
+      "refs": ["Acts 13:22", "1 Samuel 13:14", "Psalms 89:20"],
+      "notes": "Paul quotes 1 Samuel 13:14 / Psalm 89:20 in Acts 13. 1 Clement 18:1"
+    },
+    {
+      "group": "Christ firstfruits of resurrection (1 Corinthians 15:20)",
+      "refs": ["1 Corinthians 15:20", "1 Corinthians 15:23"],
+      "notes": "Firstfruits metaphor. 1 Clement 24:1"
+    },
+    {
+      "group": "Seed sowing (Luke 8:5)",
+      "refs": ["Luke 8:5", "Luke 8:6", "Luke 8:7", "Luke 8:8", "Matthew 13:3", "Matthew 13:4", "Mark 4:3", "Mark 4:4", "1 Corinthians 15:36", "1 Corinthians 15:37"],
+      "notes": "Parable of the sower parallels. 1 Clement 24:5"
+    },
+    {
+      "group": "God cannot lie (Hebrews 6:18)",
+      "refs": ["Hebrews 6:18", "Titus 1:2"],
+      "notes": "God's truthfulness. 1 Clement 27:2"
+    },
+    {
+      "group": "Reward according to works (Revelation 22:12)",
+      "refs": ["Revelation 22:12", "Isaiah 40:10", "Isaiah 62:11"],
+      "notes": "Coming with reward. 1 Clement 34:3"
+    },
+    {
+      "group": "My son, today I begotten you (Hebrews 1:5 / Psalms 2:7)",
+      "refs": ["Hebrews 1:5", "Acts 13:33", "Psalms 2:7"],
+      "notes": "Royal son decree. 1 Clement 36:4"
+    },
+    {
+      "group": "Sit at my right hand (Hebrews 1:13 / Psalms 110:1)",
+      "refs": ["Hebrews 1:13", "Matthew 22:44", "Mark 12:36", "Luke 20:42", "Acts 2:34", "Psalms 110:1"],
+      "notes": "Session at God's right hand. 1 Clement 36:5"
+    },
+    {
+      "group": "High priest (Hebrews 3:1)",
+      "refs": ["Hebrews 3:1", "Hebrews 2:17", "Hebrews 4:14"],
+      "notes": "Jesus as high priest. 1 Clement 36:1"
+    },
+    {
+      "group": "One God one Spirit (Ephesians 4:4-6)",
+      "refs": ["Ephesians 4:4", "Ephesians 4:5", "Ephesians 4:6", "1 Corinthians 12:13"],
+      "notes": "Unity of the Spirit. 1 Clement 46:6"
+    },
+    {
+      "group": "Members of one another (Ephesians 4:25)",
+      "refs": ["Ephesians 4:25", "Romans 12:5"],
+      "notes": "Mutual membership. 1 Clement 46:7"
+    },
+    {
+      "group": "Millstone / scandal (Matthew 18:6)",
+      "refs": ["Matthew 18:6", "Matthew 18:7", "Mark 9:42", "Luke 17:1", "Luke 17:2", "Matthew 26:24"],
+      "notes": "Woe to the one who causes stumbling. 1 Clement 46:8"
+    },
+    {
+      "group": "Called from darkness to light (1 Peter 2:9)",
+      "refs": ["1 Peter 2:9", "Acts 26:18", "Colossians 1:13"],
+      "notes": "Darkness to light transfer. 1 Clement 59:2"
+    },
+    {
+      "group": "Lord disciplines whom he loves (Hebrews 12:6)",
+      "refs": ["Hebrews 12:6", "Proverbs 3:11", "Proverbs 3:12", "Revelation 3:19"],
+      "notes": "Divine discipline. 1 Clement 56:4"
+    },
+    {
+      "group": "Eyes of Lord on righteous (1 Peter 3:10-12)",
+      "refs": ["1 Peter 3:10", "1 Peter 3:11", "1 Peter 3:12", "Psalms 34:12", "Psalms 34:13", "Psalms 34:14", "Psalms 34:15", "Psalms 34:16"],
+      "notes": "Peter quotes Psalm 34 LXX. 1 Clement 22"
+    },
+    {
+      "group": "Blessed whose sins forgiven (Romans 4:7-8)",
+      "refs": ["Romans 4:7", "Romans 4:8", "Psalms 32:1", "Psalms 32:2"],
+      "notes": "Paul quotes Psalm 32 LXX. 1 Clement 50:6"
+    },
+    {
+      "group": "Male and female (Mark 10:6)",
+      "refs": ["Mark 10:6", "Matthew 19:4", "Genesis 1:27", "Genesis 5:2"],
+      "notes": "Jesus quotes Genesis 1:27. 1 Clement 33:6"
+    },
+    {
+      "group": "God's call to Abraham (Acts 7:3)",
+      "refs": ["Acts 7:3", "Genesis 12:1", "Genesis 12:2", "Genesis 12:3"],
+      "notes": "Stephen quotes Genesis 12. 1 Clement 10:3"
+    },
+    {
+      "group": "Ready for every good work (Titus 3:1)",
+      "refs": ["Titus 3:1", "2 Timothy 2:21", "2 Timothy 3:17"],
+      "notes": "Readiness for good works. 1 Clement 2:7"
+    },
+    {
+      "group": "Sheepskins and goatskins (Hebrews 11:37)",
+      "refs": ["Hebrews 11:37", "Hebrews 11:38"],
+      "notes": "Heroes of faith. 1 Clement 17:1"
+    },
+    {
+      "group": "Heaven and earth pass away (Matthew 24:35)",
+      "refs": ["Matthew 24:35", "Mark 13:31", "Luke 21:33"],
+      "notes": "Words will not pass away. 1 Clement 27:5"
+    },
+    {
+      "group": "Christ from them according to flesh (Romans 9:5)",
+      "refs": ["Romans 9:5"],
+      "notes": "Christ's descent. 1 Clement 32:2"
+    },
+    {
+      "group": "Quarrels among you (James 4:1)",
+      "refs": ["James 4:1", "James 4:2"],
+      "notes": "Source of conflicts. 1 Clement 46:5"
+    },
+    {
+      "group": "People of his own possession (Titus 3:14)",
+      "refs": ["Titus 3:14", "Titus 2:14", "1 Peter 2:9"],
+      "notes": "Peculiar people. 1 Clement 64:1"
+    },
+    {
+      "group": "Beholding as in a mirror (2 Corinthians 3:18)",
+      "refs": ["2 Corinthians 3:18", "1 Corinthians 13:12"],
+      "notes": "Mirror metaphor. 1 Clement 36:2"
+    },
+    {
+      "group": "Be humbled to be exalted (Matthew 23:11-12)",
+      "refs": ["Matthew 23:11", "Matthew 23:12", "Mark 10:43", "Mark 10:44", "Luke 14:11", "Luke 18:14"],
+      "notes": "Humility theme. 1 Clement 16:1"
     }
   ]
 }
